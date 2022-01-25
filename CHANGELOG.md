@@ -1,11 +1,17 @@
 # Change Log
 
-## [0.3.2]
+## [0.3.2] - 2022-03-13
 ### Added
 - 'config_directory.bat' for windows
+- Half-step alignment while LSHIFT pressed
+
+### Changed
+- The application now 'll start Maximized by default
 
 ### Fixed
 - DDNet Tele layer import for infclass maps
+- The export of tiles on the Layer edges if the edge does not match that of the game layer
+- The inconsistency of export (now the same .tup exported by the same TU version with the same options will result in the same .map file)
 
 ## [0.3.1] - 2022-01-22
 ### Added
