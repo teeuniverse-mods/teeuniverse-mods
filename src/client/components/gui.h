@@ -53,6 +53,7 @@ public:
 		
 		CGraphics* Graphics() { return m_pContext->Graphics(); }
 		CInput* Input() { return m_pContext->Input(); }
+		const CInput* Input() const { return m_pContext->Input(); }
 		CTextRenderer* TextRenderer() { return m_pContext->TextRenderer(); }
 		CAssetsRenderer* AssetsRenderer() { return m_pContext->AssetsRenderer(); }
 		CBindsManager* BindsManager() { return m_pContext->BindsManager(); }
