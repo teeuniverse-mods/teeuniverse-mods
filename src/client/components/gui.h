@@ -43,21 +43,21 @@ public:
 	public:
 		CGuest(CGui* pContext) : m_pContext(pContext) { }
 		
-		inline CClientKernel* ClientKernel() { return m_pContext->ClientKernel(); }
-		inline const CClientKernel* ClientKernel() const { return m_pContext->ClientKernel(); }
+		CClientKernel* ClientKernel() { return m_pContext->ClientKernel(); }
+		const CClientKernel* ClientKernel() const { return m_pContext->ClientKernel(); }
 		
-		inline CStorage* Storage() { return m_pContext->Storage(); }
-		inline CLocalization* Localization() { return m_pContext->Localization(); }
-		inline CCommandLineInterpreter* CLI() { return m_pContext->CLI(); }
-		inline CAssetsManager* AssetsManager() { return m_pContext->AssetsManager(); }
+		CStorage* Storage() { return m_pContext->Storage(); }
+		CLocalization* Localization() { return m_pContext->Localization(); }
+		CCommandLineInterpreter* CLI() { return m_pContext->CLI(); }
+		CAssetsManager* AssetsManager() { return m_pContext->AssetsManager(); }
 		
-		inline CGraphics* Graphics() { return m_pContext->Graphics(); }
-		inline CInput* Input() { return m_pContext->Input(); }
-		inline CTextRenderer* TextRenderer() { return m_pContext->TextRenderer(); }
-		inline CAssetsRenderer* AssetsRenderer() { return m_pContext->AssetsRenderer(); }
-		inline CBindsManager* BindsManager() { return m_pContext->BindsManager(); }
+		CGraphics* Graphics() { return m_pContext->Graphics(); }
+		CInput* Input() { return m_pContext->Input(); }
+		CTextRenderer* TextRenderer() { return m_pContext->TextRenderer(); }
+		CAssetsRenderer* AssetsRenderer() { return m_pContext->AssetsRenderer(); }
+		CBindsManager* BindsManager() { return m_pContext->BindsManager(); }
 		
-		inline CGui* Context() { return m_pContext; }
+		CGui* Context() { return m_pContext; }
 	};
 
 public:
@@ -162,32 +162,32 @@ public:
 	const ivec2& GetMouseRelPos() { return m_MouseDelta; }
 	
 	//Style
-	inline CAssetPath GetLabelStyle() const { return m_LabelStyle; }
-	inline CAssetPath GetLabelHeaderStyle() const { return m_LabelHeaderStyle; }
-	inline CAssetPath GetButtonStyle() const { return m_ButtonStyle; }
-	inline CAssetPath GetIntEditStyle() const { return m_IntEditStyle; }
-	inline CAssetPath GetColorEditStyle() const { return m_ColorEditStyle; }
-	inline CAssetPath GetToggleStyle() const { return m_ToggleStyle; }
-	inline CAssetPath GetTextEntryStyle() const { return m_TextEntryStyle; }
-	inline CAssetPath GetNumericEntryStyle() const { return m_NumericEntryStyle; }
-	inline CAssetPath GetSliderStyle() const { return m_SliderStyle; }
-	inline CAssetPath GetScrollbarStyle() const { return m_ScrollbarStyle; }
-	inline CAssetPath GetTabsStyle() const { return m_TabsStyle; }
-	inline CAssetPath GetPopupStyle() const { return m_PopupStyle; }
-	inline CAssetPath GetComposeStyle() const { return m_ComposeStyle; }
-	inline CAssetPath GetTextSelectionStyle() const { return m_TextSelectionStyle; }
-	inline CAssetPath GetComboBoxStyle() const { return m_ComboBoxStyle; }
-	inline CAssetPath GetSeparatorStyle() const { return m_SeparatorStyle; }
+	CAssetPath GetLabelStyle() const { return m_LabelStyle; }
+	CAssetPath GetLabelHeaderStyle() const { return m_LabelHeaderStyle; }
+	CAssetPath GetButtonStyle() const { return m_ButtonStyle; }
+	CAssetPath GetIntEditStyle() const { return m_IntEditStyle; }
+	CAssetPath GetColorEditStyle() const { return m_ColorEditStyle; }
+	CAssetPath GetToggleStyle() const { return m_ToggleStyle; }
+	CAssetPath GetTextEntryStyle() const { return m_TextEntryStyle; }
+	CAssetPath GetNumericEntryStyle() const { return m_NumericEntryStyle; }
+	CAssetPath GetSliderStyle() const { return m_SliderStyle; }
+	CAssetPath GetScrollbarStyle() const { return m_ScrollbarStyle; }
+	CAssetPath GetTabsStyle() const { return m_TabsStyle; }
+	CAssetPath GetPopupStyle() const { return m_PopupStyle; }
+	CAssetPath GetComposeStyle() const { return m_ComposeStyle; }
+	CAssetPath GetTextSelectionStyle() const { return m_TextSelectionStyle; }
+	CAssetPath GetComboBoxStyle() const { return m_ComboBoxStyle; }
+	CAssetPath GetSeparatorStyle() const { return m_SeparatorStyle; }
 	
 	void SetCursor(gui::CWidget* pWidget, int CursorType);
 	void ShowLoadingCursor();
 	
 	//Context
-	inline float GetGuiScale() const { return static_cast<float>(m_Cfg_Scale)/GUI_DEFAULT_SCALE; }
-	inline void SetGuiScale(float Value) { m_Cfg_Scale = Value*GUI_DEFAULT_SCALE; }
-	inline int ApplyGuiScale(int Value) const { return static_cast<int>(Value*(static_cast<float>(m_Cfg_Scale)/GUI_DEFAULT_SCALE)); }
+	float GetGuiScale() const { return static_cast<float>(m_Cfg_Scale)/GUI_DEFAULT_SCALE; }
+	void SetGuiScale(float Value) { m_Cfg_Scale = Value*GUI_DEFAULT_SCALE; }
+	int ApplyGuiScale(int Value) const { return static_cast<int>(Value*(static_cast<float>(m_Cfg_Scale)/GUI_DEFAULT_SCALE)); }
 	
-	inline gui::CRect GetDrawRect() const { return m_DrawRect; }
+	gui::CRect GetDrawRect() const { return m_DrawRect; }
 };
 
 #endif
