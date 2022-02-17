@@ -889,3 +889,30 @@ const std::vector<int>* CViewMap::GetMemorizedZoneData(const CAssetPath& AssetPa
 	
 	return nullptr;
 }
+
+void CViewMap::CCursorTool::ApplyGridAlignment(vec2 *pPoint) const
+{
+	if(m_pViewMap->GetGridAlign())
+	{
+		vec2 AlignedPoint = *pPoint;
+		AlignedPoint = m_pViewMap->MapRenderer()->MapPosToTilePos(AlignedPoint);
+		AlignedPoint = m_pViewMap->MapRenderer()->TilePosToMapPos(vec2(floor(AlignedPoint.x + 0.5), floor(AlignedPoint.y + 0.5)));
+		
+//		bool HalfStepAlignment = Input()->KeyIsPressed(KEY_LSHIFT);
+//		vec2 AlignedPoint = m_pViewMap->MapRenderer()->MapPosToTilePos(*pPoint);
+//		if(HalfStepAlignment)
+//		{
+//			AlignedPoint *= 2;
+//		}
+//		// AlignedPoint = vec2(floor(AlignedPoint.x + 0.5), floor(AlignedPoint.y + 0.5));
+//		AlignedPoint = vec2(floor(AlignedPoint.x), floor(AlignedPoint.y));
+//		if(HalfStepAlignment)
+//		{
+//			AlignedPoint /= 2;
+//		}
+		
+//		AlignedPoint = m_pViewMap->MapRenderer()->TilePosToMapPos(AlignedPoint) + vec2(16.0f, 16.0f);
+		
+		*pPoint = AlignedPoint;
+	}
+}

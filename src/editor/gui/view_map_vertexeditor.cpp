@@ -392,10 +392,7 @@ void CCursorTool_MapVertexEditor::OnViewMouseMove_Objects_Impl()
 	
 	vec2 CursorPos = vec2(Context()->GetMousePos().x, Context()->GetMousePos().y);
 	vec2 CursorMapPos = ViewMap()->MapRenderer()->ScreenPosToMapPos(CursorPos - m_ClickDiff);
-	if(ViewMap()->GetGridAlign())
-	{
-		CursorMapPos = ViewMap()->MapRenderer()->RoundMapPosToTile(CursorMapPos);
-	}
+	ApplyGridAlignment(&CursorMapPos);
 	vec2 NewPos = InvTransform*(CursorMapPos - Position);
 	
 	if(m_DragType == 1)
@@ -433,11 +430,7 @@ void CCursorTool_MapVertexEditor::OnViewMouseMove()
 		
 		vec2 CursorPos = vec2(Context()->GetMousePos().x, Context()->GetMousePos().y);
 		vec2 CursorMapPos = ViewMap()->MapRenderer()->ScreenPosToMapPos(CursorPos - m_ClickDiff);
-		
-		if(ViewMap()->GetGridAlign())
-		{
-			CursorMapPos = ViewMap()->MapRenderer()->RoundMapPosToTile(CursorMapPos);
-		}
+		ApplyGridAlignment(&CursorMapPos);
 		
 		vec2 Position;
 		matrix2x2 Transform;

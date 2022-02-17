@@ -49,6 +49,7 @@ public:
 		}
 		
 		inline CViewMap* ViewMap() { return m_pViewMap; }
+		void ApplyGridAlignment(vec2 *pPoint) const;
 	};
 
 protected:
