@@ -24,6 +24,8 @@
 #include <generated/assets/maplayerquads.h>
 #include <client/gui/toggle.h>
 
+static const vec2 s_ObjectPosOffset(16, 16);
+
 /* CURSORTOOL MAP TRANSFORM *******************************************/
 
 CCursorTool_MapTransform::CCursorTool_MapTransform(CViewMap* pViewMap) :
@@ -502,13 +504,8 @@ void CCursorTool_MapTransform::OnViewMouseMove()
 		if(m_DragType == DRAGTYPE_TRANSLATION)
 		{
 			vec2 NewPosition = ViewMap()->MapRenderer()->ScreenPosToMapPos(CursorPos) - m_ClickDiff;
+			ApplyGridAlignment(&NewPosition, s_ObjectPosOffset);
 		
-			if(ViewMap()->GetGridAlign())
-			{
-				NewPosition = ViewMap()->MapRenderer()->MapPosToTilePos(NewPosition);
-				NewPosition = ViewMap()->MapRenderer()->TilePosToMapPos(vec2(floor(NewPosition.x), floor(NewPosition.y))) + vec2(16.0f, 16.0f);
-			}
-			
 			AssetsManager()->SetAssetValue<vec2>(AssetsEditor()->GetEditedAssetPath(), SelectedEntity, CAsset_MapEntities::ENTITY_POSITION, NewPosition, m_Token);
 			m_Transformed = true;
 		}
