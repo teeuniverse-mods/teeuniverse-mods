@@ -896,10 +896,20 @@ void CViewMap::CCursorTool::ApplyGridAlignment(vec2 *pPoint, const vec2 &Offset)
 	{
 		vec2 AlignedPoint = *pPoint;
 		AlignedPoint -= Offset;
+		bool HalfStepAlignment = Input()->KeyIsPressed(KEY_LSHIFT);
 		AlignedPoint = m_pViewMap->MapRenderer()->MapPosToTilePos(AlignedPoint);
+		if(HalfStepAlignment)
+		{
+			AlignedPoint *= 2;
+		}
 
 		AlignedPoint = vec2(floor(AlignedPoint.x + 0.5), floor(AlignedPoint.y + 0.5));
 		AlignedPoint = m_pViewMap->MapRenderer()->TilePosToMapPos(AlignedPoint);
+
+		if(HalfStepAlignment)
+		{
+			AlignedPoint /= 2;
+		}
 
 		AlignedPoint += Offset;
 		*pPoint = AlignedPoint;
