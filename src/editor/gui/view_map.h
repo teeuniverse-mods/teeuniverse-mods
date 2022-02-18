@@ -49,7 +49,7 @@ public:
 		}
 		
 		inline CViewMap* ViewMap() { return m_pViewMap; }
-		void ApplyGridAlignment(vec2 *pPoint) const;
+		void ApplyGridAlignment(vec2 *pPoint, const vec2 &Offset = vec2(0, 0)) const;
 	};
 
 protected:
