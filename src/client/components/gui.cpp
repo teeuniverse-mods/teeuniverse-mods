@@ -332,13 +332,13 @@ bool CGui::PreUpdate()
 	m_FocusIteratorState = TRYTOGETFOCUS_NO;
 	m_pFocusCandidate = NULL;
 	
-	Input()->Clear();
-	
 	m_LocalizationUpdated = false;
 	
 	if(Graphics()->ReadyToRender())
 		Render();
 	
+	Input()->Clear();
+
 	return !m_Quit;
 }
 
