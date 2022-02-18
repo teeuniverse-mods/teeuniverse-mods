@@ -32,6 +32,8 @@
 #include <generated/assets/mapzonetiles.h>
 #include <shared/autolayer.h>
 
+static const vec2 s_ObjectPosOffset(16, 16);
+
 /* ENTITY PALETTE *****************************************************/
 
 class CPopup_EntityPalette : public gui::CPopup
@@ -497,11 +499,7 @@ void CCursorTool_MapStamp::OnViewButtonClick(int Button)
 				{
 					vec2 CursorPos = vec2(Context()->GetMousePos().x, Context()->GetMousePos().y);
 					vec2 CursorMapPos = ViewMap()->MapRenderer()->ScreenPosToMapPos(CursorPos);
-					if(ViewMap()->GetGridAlign())
-					{
-						CursorMapPos = ViewMap()->MapRenderer()->ScreenPosToTilePos(CursorPos);
-						CursorMapPos = ViewMap()->MapRenderer()->TilePosToMapPos(vec2(floor(CursorMapPos.x), floor(CursorMapPos.y))) + vec2(16.0f, 16.0f);
-					}
+					ApplyGridAlignment(&CursorMapPos, s_ObjectPosOffset);
 					
 					m_Token = AssetsManager()->GenerateToken();
 					
@@ -550,11 +548,7 @@ void CCursorTool_MapStamp::OnViewButtonClick(int Button)
 				{
 					vec2 CursorPos = vec2(Context()->GetMousePos().x, Context()->GetMousePos().y);
 					vec2 CursorMapPos = ViewMap()->MapRenderer()->ScreenPosToMapPos(CursorPos);
-					if(ViewMap()->GetGridAlign())
-					{
-						CursorMapPos = ViewMap()->MapRenderer()->ScreenPosToTilePos(CursorPos);
-						CursorMapPos = ViewMap()->MapRenderer()->TilePosToMapPos(vec2(floor(CursorMapPos.x), floor(CursorMapPos.y))) + vec2(16.0f, 16.0f);
-					}
+					ApplyGridAlignment(&CursorMapPos, s_ObjectPosOffset);
 					
 					m_Token = AssetsManager()->GenerateToken();
 					
@@ -588,11 +582,7 @@ void CCursorTool_MapStamp::OnViewButtonClick(int Button)
 				{
 					vec2 CursorPos = vec2(Context()->GetMousePos().x, Context()->GetMousePos().y);
 					vec2 CursorMapPos = ViewMap()->MapRenderer()->ScreenPosToMapPos(CursorPos);
-					if(ViewMap()->GetGridAlign())
-					{
-						CursorMapPos = ViewMap()->MapRenderer()->ScreenPosToTilePos(CursorPos);
-						CursorMapPos = ViewMap()->MapRenderer()->TilePosToMapPos(vec2(floor(CursorMapPos.x), floor(CursorMapPos.y))) + vec2(16.0f, 16.0f);
-					}
+					ApplyGridAlignment(&CursorMapPos, s_ObjectPosOffset);
 					
 					m_Token = AssetsManager()->GenerateToken();
 					
@@ -626,11 +616,7 @@ void CCursorTool_MapStamp::OnViewButtonClick(int Button)
 				{
 					vec2 CursorPos = vec2(Context()->GetMousePos().x, Context()->GetMousePos().y);
 					vec2 CursorMapPos = ViewMap()->MapRenderer()->ScreenPosToMapPos(CursorPos);
-					if(ViewMap()->GetGridAlign())
-					{
-						CursorMapPos = ViewMap()->MapRenderer()->ScreenPosToTilePos(CursorPos);
-						CursorMapPos = ViewMap()->MapRenderer()->TilePosToMapPos(vec2(floor(CursorMapPos.x), floor(CursorMapPos.y))) + vec2(16.0f, 16.0f);
-					}
+					ApplyGridAlignment(&CursorMapPos, s_ObjectPosOffset);
 					
 					m_Token = AssetsManager()->GenerateToken();
 					
@@ -1314,11 +1300,7 @@ void CCursorTool_MapStamp::RenderView()
 		else if(AssetsEditor()->GetEditedAssetPath().GetType() == CAsset_MapLayerQuads::TypeId)
 		{
 			vec2 RenderPos = CursorMapPos;
-			if(ViewMap()->GetGridAlign())
-			{
-				RenderPos = ViewMap()->MapRenderer()->ScreenPosToTilePos(CursorPos);
-				RenderPos = ViewMap()->MapRenderer()->TilePosToMapPos(vec2(floor(RenderPos.x), floor(RenderPos.y))) + vec2(16.0f, 16.0f);
-			}
+			ApplyGridAlignment(&RenderPos, s_ObjectPosOffset);
 			
 			const CAsset_MapLayerQuads* pLayer = AssetsManager()->GetAsset<CAsset_MapLayerQuads>(AssetsEditor()->GetEditedAssetPath());
 			if(!pLayer)
@@ -1341,11 +1323,7 @@ void CCursorTool_MapStamp::RenderView()
 		else if(AssetsEditor()->GetEditedAssetPath().GetType() == CAsset_MapLayerObjects::TypeId)
 		{
 			vec2 RenderPos = CursorMapPos;
-			if(ViewMap()->GetGridAlign())
-			{
-				RenderPos = ViewMap()->MapRenderer()->ScreenPosToTilePos(CursorPos);
-				RenderPos = ViewMap()->MapRenderer()->TilePosToMapPos(vec2(floor(RenderPos.x), floor(RenderPos.y))) + vec2(16.0f, 16.0f);
-			}
+			ApplyGridAlignment(&RenderPos, s_ObjectPosOffset);
 			
 			const CAsset_MapLayerObjects* pLayer = AssetsManager()->GetAsset<CAsset_MapLayerObjects>(AssetsEditor()->GetEditedAssetPath());
 			if(!pLayer)
@@ -1370,11 +1348,7 @@ void CCursorTool_MapStamp::RenderView()
 		else if(AssetsEditor()->GetEditedAssetPath().GetType() == CAsset_MapZoneObjects::TypeId)
 		{
 			vec2 RenderPos = CursorMapPos;
-			if(ViewMap()->GetGridAlign())
-			{
-				RenderPos = ViewMap()->MapRenderer()->ScreenPosToTilePos(CursorPos);
-				RenderPos = ViewMap()->MapRenderer()->TilePosToMapPos(vec2(floor(RenderPos.x), floor(RenderPos.y))) + vec2(16.0f, 16.0f);
-			}
+			ApplyGridAlignment(&RenderPos, s_ObjectPosOffset);
 			
 			const CAsset_MapZoneObjects* pLayer = AssetsManager()->GetAsset<CAsset_MapZoneObjects>(AssetsEditor()->GetEditedAssetPath());
 			if(!pLayer)
@@ -1389,11 +1363,7 @@ void CCursorTool_MapStamp::RenderView()
 		else if(AssetsEditor()->GetEditedAssetPath().GetType() == CAsset_MapEntities::TypeId)
 		{
 			vec2 RenderPos = CursorMapPos;
-			if(ViewMap()->GetGridAlign())
-			{
-				RenderPos = ViewMap()->MapRenderer()->ScreenPosToTilePos(CursorPos);
-				RenderPos = ViewMap()->MapRenderer()->TilePosToMapPos(vec2(floor(RenderPos.x), floor(RenderPos.y))) + vec2(16.0f, 16.0f);
-			}
+			ApplyGridAlignment(&RenderPos, s_ObjectPosOffset);
 			
 			const CAsset_MapEntities* pLayer = AssetsManager()->GetAsset<CAsset_MapEntities>(AssetsEditor()->GetEditedAssetPath());
 			if(!pLayer)
