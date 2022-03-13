@@ -10,9 +10,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-latest]
+        os: [windows-2019]
         include:
-        - os: windows-latest
+        - os: windows-2019
           cmake-args: -G "Visual Studio 16 2019" -A x64 -DUSE_HARFBUZZ=OFF -DUSE_CONAN=ON
           package-file: "*-win64.zip"
           fancy: false
