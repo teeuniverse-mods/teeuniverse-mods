@@ -1666,6 +1666,7 @@ void CAssetsManager::Save_Map_Group(
 				
 				LItem.m_Version = 3;
 				LItem.m_Flags = 0;
+				LItem.m_Layer.m_Version = 0; // was previously uninitialized, do not rely on it being 0
 				LItem.m_Layer.m_Type = ddnet::LAYERTYPE_TILES;
 				LItem.m_Layer.m_Flags = (pLayer->GetLevelOfDetail() > 0 ? ddnet::LAYERFLAG_DETAIL : 0x0);
 				LItem.m_Width = Width;
@@ -1678,6 +1679,13 @@ void CAssetsManager::Save_Map_Group(
 				LItem.m_ColorEnvOffset = 0;
 				LItem.m_Image = -1;
 				LItem.m_Data = ArchiveFile.AddData(Width*Height*sizeof(ddnet::CTile), pTiles);
+
+				LItem.m_Tele = -1;
+				LItem.m_Speedup = -1;
+				LItem.m_Front = -1;
+				LItem.m_Switch = -1;
+				LItem.m_Tune = -1;
+
 				StrToInts(LItem.m_aName, sizeof(LItem.m_aName)/sizeof(int), pLayer->GetName());
 				
 				CAssetPath ImagePath;
@@ -1803,6 +1811,7 @@ void CAssetsManager::Save_Map_Group(
 			
 			ddnet::CMapItemLayerQuads LItem;
 			LItem.m_Version = 2;
+			LItem.m_Layer.m_Version = 0; // was previously uninitialized, do not rely on it being 0
 			LItem.m_Layer.m_Type = ddnet::LAYERTYPE_QUADS;
 			LItem.m_Layer.m_Flags = (pLayer->GetLevelOfDetail() > 0 ? ddnet::LAYERFLAG_DETAIL : 0x0);
 			LItem.m_Image = -1;
@@ -1896,6 +1905,7 @@ void CAssetsManager::Save_Map_Group(
 						//Image switch: save the current quads in a layer
 						ddnet::CMapItemLayerQuads LItem;
 						LItem.m_Version = 2;
+						LItem.m_Layer.m_Version = 0; // was previously uninitialized, do not rely on it being 0
 						LItem.m_Layer.m_Type = ddnet::LAYERTYPE_QUADS;
 						LItem.m_Layer.m_Flags = (pLayer->GetLevelOfDetail() > 0 ? ddnet::LAYERFLAG_DETAIL : 0x0);
 						LItem.m_Image = -1;
@@ -1956,6 +1966,7 @@ void CAssetsManager::Save_Map_Group(
 				//Save the remaning quads
 				ddnet::CMapItemLayerQuads LItem;
 				LItem.m_Version = 2;
+				LItem.m_Layer.m_Version = 0; // was previously uninitialized, do not rely on it being 0
 				LItem.m_Layer.m_Type = ddnet::LAYERTYPE_QUADS;
 				LItem.m_Layer.m_Flags = (pLayer->GetLevelOfDetail() > 0 ? ddnet::LAYERFLAG_DETAIL : 0x0);
 				LItem.m_Image = -1;
@@ -2633,6 +2644,7 @@ bool CAssetsManager::Save_Map(const char* pFileName, int StorageType, int Packag
 			ddnet::CMapItemLayerTilemap LItem;
 			LItem.m_Version = 3;
 			LItem.m_Flags = ddnet::TILESLAYERFLAG_GAME;
+			LItem.m_Layer.m_Version = 0; // was previously uninitialized, do not rely on it being 0
 			LItem.m_Layer.m_Type = ddnet::LAYERTYPE_TILES;
 			LItem.m_Layer.m_Flags = 0x0;
 			LItem.m_Width = GameWidth;
@@ -2644,6 +2656,13 @@ bool CAssetsManager::Save_Map(const char* pFileName, int StorageType, int Packag
 			LItem.m_ColorEnv = -1;
 			LItem.m_ColorEnvOffset = 0;
 			LItem.m_Image = -1;
+
+			LItem.m_Tele = -1;
+			LItem.m_Speedup = -1;
+			LItem.m_Front = -1;
+			LItem.m_Switch = -1;
+			LItem.m_Tune = -1;
+
 			LItem.m_Data = ArchiveFile.AddData(GameWidth*GameHeight*sizeof(ddnet::CTile), pGameTiles);
 			StrToInts(LItem.m_aName, sizeof(LItem.m_aName)/sizeof(int), "Game");
 			ArchiveFile.AddItem(ddnet::MAPITEMTYPE_LAYER, LayerId++, sizeof(ddnet::CMapItemLayerTilemap), &LItem);
@@ -2658,6 +2677,7 @@ bool CAssetsManager::Save_Map(const char* pFileName, int StorageType, int Packag
 			ddnet::CMapItemLayerTilemap LItem;
 			LItem.m_Version = 3;
 			LItem.m_Flags = ddnet::TILESLAYERFLAG_FRONT;
+			LItem.m_Layer.m_Version = 0; // was previously uninitialized, do not rely on it being 0
 			LItem.m_Layer.m_Type = ddnet::LAYERTYPE_TILES;
 			LItem.m_Layer.m_Flags = 0x0;
 			LItem.m_Width = GameWidth;
@@ -2669,6 +2689,13 @@ bool CAssetsManager::Save_Map(const char* pFileName, int StorageType, int Packag
 			LItem.m_ColorEnv = -1;
 			LItem.m_ColorEnvOffset = 0;
 			LItem.m_Image = -1;
+
+			LItem.m_Tele = -1;
+			LItem.m_Speedup = -1;
+			LItem.m_Front = -1;
+			LItem.m_Switch = -1;
+			LItem.m_Tune = -1;
+
 			LItem.m_Data = ArchiveFile.AddData(GameWidth*GameHeight*sizeof(ddnet::CTile), pZeroTiles);
 			LItem.m_Front = ArchiveFile.AddData(GameWidth*GameHeight*sizeof(ddnet::CTile), pFrontTiles);
 			StrToInts(LItem.m_aName, sizeof(LItem.m_aName)/sizeof(int), "Front");
@@ -2685,6 +2712,7 @@ bool CAssetsManager::Save_Map(const char* pFileName, int StorageType, int Packag
 			ddnet::CMapItemLayerTilemap LItem;
 			LItem.m_Version = 3;
 			LItem.m_Flags = ddnet::TILESLAYERFLAG_TELE;
+			LItem.m_Layer.m_Version = 0; // was previously uninitialized, do not rely on it being 0
 			LItem.m_Layer.m_Type = ddnet::LAYERTYPE_TILES;
 			LItem.m_Layer.m_Flags = 0x0;
 			LItem.m_Width = GameWidth;
@@ -2696,6 +2724,13 @@ bool CAssetsManager::Save_Map(const char* pFileName, int StorageType, int Packag
 			LItem.m_ColorEnv = -1;
 			LItem.m_ColorEnvOffset = 0;
 			LItem.m_Image = -1;
+
+			LItem.m_Tele = -1;
+			LItem.m_Speedup = -1;
+			LItem.m_Front = -1;
+			LItem.m_Switch = -1;
+			LItem.m_Tune = -1;
+
 			LItem.m_Data = ArchiveFile.AddData(GameWidth*GameHeight*sizeof(ddnet::CTile), pZeroTiles);
 			LItem.m_Tele = ArchiveFile.AddData(GameWidth*GameHeight*sizeof(ddnet::CTeleTile), pTeleTiles);
 			StrToInts(LItem.m_aName, sizeof(LItem.m_aName)/sizeof(int), "Tele");
@@ -2712,6 +2747,7 @@ bool CAssetsManager::Save_Map(const char* pFileName, int StorageType, int Packag
 			ddnet::CMapItemLayerTilemap LItem;
 			LItem.m_Version = 3;
 			LItem.m_Flags = ddnet::TILESLAYERFLAG_SWITCH;
+			LItem.m_Layer.m_Version = 0; // was previously uninitialized, do not rely on it being 0
 			LItem.m_Layer.m_Type = ddnet::LAYERTYPE_TILES;
 			LItem.m_Layer.m_Flags = 0x0;
 			LItem.m_Width = GameWidth;
@@ -2723,6 +2759,13 @@ bool CAssetsManager::Save_Map(const char* pFileName, int StorageType, int Packag
 			LItem.m_ColorEnv = -1;
 			LItem.m_ColorEnvOffset = 0;
 			LItem.m_Image = -1;
+
+			LItem.m_Tele = -1;
+			LItem.m_Speedup = -1;
+			LItem.m_Front = -1;
+			LItem.m_Switch = -1;
+			LItem.m_Tune = -1;
+
 			LItem.m_Data = ArchiveFile.AddData(GameWidth*GameHeight*sizeof(ddnet::CTile), pZeroTiles);
 			LItem.m_Switch = ArchiveFile.AddData(GameWidth*GameHeight*sizeof(ddnet::CSwitchTile), pSwitchTiles);
 			StrToInts(LItem.m_aName, sizeof(LItem.m_aName)/sizeof(int), "Switch");
@@ -2739,6 +2782,7 @@ bool CAssetsManager::Save_Map(const char* pFileName, int StorageType, int Packag
 			ddnet::CMapItemLayerTilemap LItem;
 			LItem.m_Version = 3;
 			LItem.m_Flags = ddnet::TILESLAYERFLAG_TUNE;
+			LItem.m_Layer.m_Version = 0; // was previously uninitialized, do not rely on it being 0
 			LItem.m_Layer.m_Type = ddnet::LAYERTYPE_TILES;
 			LItem.m_Layer.m_Flags = 0x0;
 			LItem.m_Width = GameWidth;
@@ -2750,6 +2794,13 @@ bool CAssetsManager::Save_Map(const char* pFileName, int StorageType, int Packag
 			LItem.m_ColorEnv = -1;
 			LItem.m_ColorEnvOffset = 0;
 			LItem.m_Image = -1;
+
+			LItem.m_Tele = -1;
+			LItem.m_Speedup = -1;
+			LItem.m_Front = -1;
+			LItem.m_Switch = -1;
+			LItem.m_Tune = -1;
+
 			LItem.m_Data = ArchiveFile.AddData(GameWidth*GameHeight*sizeof(ddnet::CTile), pZeroTiles);
 			LItem.m_Tune = ArchiveFile.AddData(GameWidth*GameHeight*sizeof(ddnet::CTuneTile), pTuneTiles);
 			StrToInts(LItem.m_aName, sizeof(LItem.m_aName)/sizeof(int), "Tune");
@@ -2819,6 +2870,7 @@ bool CAssetsManager::Save_Map(const char* pFileName, int StorageType, int Packag
 				
 				LItem.m_Version = 3;
 				LItem.m_Flags = 0;
+				LItem.m_Layer.m_Version = 0; // was previously uninitialized, do not rely on it being 0
 				LItem.m_Layer.m_Type = ddnet::LAYERTYPE_TILES;
 				LItem.m_Layer.m_Flags = ddnet::LAYERFLAG_DETAIL;
 				LItem.m_Width = GameWidth;
@@ -2830,6 +2882,13 @@ bool CAssetsManager::Save_Map(const char* pFileName, int StorageType, int Packag
 				LItem.m_ColorEnv = -1;
 				LItem.m_ColorEnvOffset = 0;
 				LItem.m_Image = -1;
+
+				LItem.m_Tele = -1;
+				LItem.m_Speedup = -1;
+				LItem.m_Front = -1;
+				LItem.m_Switch = -1;
+				LItem.m_Tune = -1;
+
 				LItem.m_Data = ArchiveFile.AddData(GameWidth*GameHeight*sizeof(ddnet::CTile), pTiles);
 				
 				{
@@ -2919,6 +2978,7 @@ bool CAssetsManager::Save_Map(const char* pFileName, int StorageType, int Packag
 				
 				ddnet::CMapItemLayerQuads LItem;
 				LItem.m_Version = 2;
+				LItem.m_Layer.m_Version = 0; // was previously uninitialized, do not rely on it being 0
 				LItem.m_Layer.m_Type = ddnet::LAYERTYPE_QUADS;
 				LItem.m_Layer.m_Flags = ddnet::LAYERFLAG_DETAIL;
 				LItem.m_Image = -1;
@@ -3093,6 +3153,7 @@ bool CAssetsManager::Save_Map(const char* pFileName, int StorageType, int Packag
 		{
 			ddnet::CMapItemLayerQuads LItem;
 			LItem.m_Version = 2;
+			LItem.m_Layer.m_Version = 0; // was previously uninitialized, do not rely on it being 0
 			LItem.m_Layer.m_Type = ddnet::LAYERTYPE_QUADS;
 			LItem.m_Layer.m_Flags = ddnet::LAYERFLAG_DETAIL;
 			LItem.m_Image = -1;
