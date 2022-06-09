@@ -30,8 +30,8 @@
 CGui::CGui(CClientKernel* pKernel) :
 	CClientKernel::CComponent(pKernel),
 	m_LocalizationUpdated(false),
-	m_pMainWidget(NULL),
-	m_pFocusedWidget(NULL)
+	m_pMainWidget(nullptr),
+	m_pFocusedWidget(nullptr)
 {
 	SetName("Gui");
 	Localization()->AddListener(this);
@@ -303,7 +303,7 @@ bool CGui::PreUpdate()
 	}
 
 	m_FocusIteratorState = (NextFocusWanted ? TRYTOGETFOCUS_SEARCHNEXT : (PrevFocusWanted ? TRYTOGETFOCUS_SEARCHPREV : TRYTOGETFOCUS_NO));
-	m_pFocusCandidate = NULL;
+	m_pFocusCandidate = nullptr;
 	
 	m_BlockedInput = 0x0;
 	if(m_pFocusedWidget)
@@ -330,7 +330,7 @@ bool CGui::PreUpdate()
 	}
 	
 	m_FocusIteratorState = TRYTOGETFOCUS_NO;
-	m_pFocusCandidate = NULL;
+	m_pFocusCandidate = nullptr;
 	
 	m_LocalizationUpdated = false;
 	
@@ -407,7 +407,7 @@ void CGui::StopFocus(gui::CWidget* pWidget)
 	if(m_pFocusedWidget)
 	{
 		m_pFocusedWidget->OnFocusStop();
-		m_pFocusedWidget = 0;
+		m_pFocusedWidget = nullptr;
 	}
 }
 

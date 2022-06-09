@@ -281,7 +281,7 @@ void CViewTilingMaterial::RenderView()
 						LString_Index.AddInteger("Index", Conditions[c].GetValue());
 					
 						Buffer.clear();
-						Localization()->Format(Buffer, NULL, LString_Index);
+						Localization()->Format(Buffer, nullptr, LString_Index);
 						
 						TextCache.SetText(Buffer.buffer());
 					}
@@ -297,7 +297,7 @@ void CViewTilingMaterial::RenderView()
 						LString_Label.AddInteger("Index", Conditions[c].GetValue());
 					
 						Buffer.clear();
-						Localization()->Format(Buffer, NULL, LString_Label);
+						Localization()->Format(Buffer, nullptr, LString_Label);
 						
 						TextCache.SetText(Buffer.buffer());
 					}
@@ -305,7 +305,7 @@ void CViewTilingMaterial::RenderView()
 				else if(Conditions[c].GetType() == CAsset_TilingMaterial::CONDITIONTYPE_NOBORDER)
 				{
 					Buffer.clear();
-					Localization()->Format(Buffer, NULL, LString_NoBorder);
+					Localization()->Format(Buffer, nullptr, LString_NoBorder);
 					TextCache.SetText(Buffer.buffer());
 				}
 				

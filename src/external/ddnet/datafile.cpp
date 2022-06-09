@@ -189,7 +189,7 @@ bool CDataFileReader::Open(class CStorage *pStorage, const char *pFilename, int 
 	{
 		io_close(pTmpDataFile->m_File);
 		delete[] (char*) pTmpDataFile;
-		pTmpDataFile = 0;
+		pTmpDataFile = nullptr;
 		debug::WarningStream("ddnet::CDataFileReader") << "couldn't load the whole thing, wanted=" << Size << " got=" << ReadSize << std::endl;
 		return false;
 	}
@@ -270,7 +270,7 @@ int CDataFileReader::GetUncompressedDataSize(int Index)
 
 void *CDataFileReader::GetDataImpl(int Index, int Swap)
 {
-	if(!m_pDataFile) { return 0; }
+	if(!m_pDataFile) { return nullptr; }
 
 	// load it if needed
 	if(!m_pDataFile->m_ppDataPtrs[Index])
@@ -338,7 +338,7 @@ void CDataFileReader::UnloadData(int Index)
 
 	//
 	delete[] (char*) m_pDataFile->m_ppDataPtrs[Index];
-	m_pDataFile->m_ppDataPtrs[Index] = 0x0;
+	m_pDataFile->m_ppDataPtrs[Index] = nullptr;
 }
 
 int CDataFileReader::GetItemSize(int Index)
@@ -351,7 +351,7 @@ int CDataFileReader::GetItemSize(int Index)
 
 void *CDataFileReader::GetItem(int Index, int *pType, int *pID)
 {
-	if(!m_pDataFile) { if(pType) *pType = 0; if(pID) *pID = 0; return 0; }
+	if(!m_pDataFile) { if(pType) *pType = 0; if(pID) *pID = 0; return nullptr; }
 
 	CDatafileItem *i = (CDatafileItem *)(m_pDataFile->m_Info.m_pItemStart+m_pDataFile->m_Info.m_pItemOffsets[Index]);
 	if(pType)
@@ -382,18 +382,18 @@ void CDataFileReader::GetType(int Type, int *pStart, int *pNum)
 
 void *CDataFileReader::FindItem(int Type, int ID)
 {
-	if(!m_pDataFile) return 0;
+	if(!m_pDataFile) return nullptr;
 
 	int Start, Num;
 	GetType(Type, &Start, &Num);
 	for(int i = 0; i < Num; i++)
 	{
 		int ItemID;
-		void *pItem = GetItem(Start+i,0, &ItemID);
+		void *pItem = GetItem(Start+i,nullptr, &ItemID);
 		if(ID == ItemID)
 			return pItem;
 	}
-	return 0;
+	return nullptr;
 }
 
 int CDataFileReader::NumItems()
@@ -414,7 +414,7 @@ bool CDataFileReader::Close()
 
 	io_close(m_pDataFile->m_File);
 	delete[] (char*) m_pDataFile;
-	m_pDataFile = 0;
+	m_pDataFile = nullptr;
 	return true;
 }
 
@@ -427,7 +427,7 @@ unsigned CDataFileReader::Crc()
 
 CDataFileWriter::CDataFileWriter()
 {
-	m_File = 0;
+	m_File = nullptr;
 	m_pItemTypes = new CItemTypeInfo[MAX_ITEM_TYPES];
 	m_pItems = new CItemInfo[MAX_ITEMS];
 	m_pDatas = new CDataInfo[MAX_DATAS];
@@ -436,18 +436,18 @@ CDataFileWriter::CDataFileWriter()
 CDataFileWriter::~CDataFileWriter()
 {
 	delete[] m_pItemTypes;
-	m_pItemTypes = 0;
+	m_pItemTypes = nullptr;
 	delete[] m_pItems;
-	m_pItems = 0;
+	m_pItems = nullptr;
 	delete[] m_pDatas;
-	m_pDatas = 0;
+	m_pDatas = nullptr;
 }
 
 bool CDataFileWriter::OpenFile(class CStorage *pStorage, int StorageType, const char *pFilename)
 {
 	assert(!m_File);
 	m_File = pStorage->OpenFile(pFilename, IOFLAG_WRITE, StorageType);
-	return m_File != 0;
+	return m_File != nullptr;
 }
 
 void CDataFileWriter::Init()
@@ -699,7 +699,7 @@ int CDataFileWriter::Finish()
 		delete[] (char*) m_pDatas[i].m_pCompressedData;
 
 	io_close(m_File);
-	m_File = 0;
+	m_File = nullptr;
 
 	return 0;
 }

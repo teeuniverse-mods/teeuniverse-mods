@@ -415,7 +415,7 @@ void CVListLayout::AddSeparator()
 CVScrollLayout::CVScrollLayout(CGui *pContext) :
 	CVListLayout(pContext),
 	m_ShowScrollBar(false),
-	m_pScrollBar(NULL)
+	m_pScrollBar(nullptr)
 {
 	m_ClipEnabled = true;
 	m_pScrollBar = new CVScrollBar(pContext);

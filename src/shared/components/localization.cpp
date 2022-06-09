@@ -31,9 +31,9 @@ CLocalization::CLanguage::CLanguage(const char* pName, const char* pFilename, co
 	m_Loaded(false),
 	m_Direction(CLocalization::DIRECTION_LTR),
 	m_Locale(pFilename),
-	m_pPluralRules(NULL),
-	m_pNumberFormater(NULL),
-	m_pPercentFormater(NULL)
+	m_pPluralRules(nullptr),
+	m_pNumberFormater(nullptr),
+	m_pPercentFormater(nullptr)
 {
 	str_copy(m_aName, pName, sizeof(m_aName));
 	str_copy(m_aFilename, pFilename, sizeof(m_aFilename));
@@ -49,7 +49,7 @@ CLocalization::CLanguage::CLanguage(const char* pName, const char* pFilename, co
 		if(m_pNumberFormater)
 		{
 			delete m_pNumberFormater;
-			m_pNumberFormater = NULL;
+			m_pNumberFormater = nullptr;
 		}
 		debug::ErrorStream("Localization") << "Can't create number formater for " << m_aFilename << " (error #" << Status << ")" << std::endl;
 	}
@@ -60,7 +60,7 @@ CLocalization::CLanguage::CLanguage(const char* pName, const char* pFilename, co
 		if(m_pPercentFormater)
 		{
 			delete m_pPercentFormater;
-			m_pPercentFormater = NULL;
+			m_pPercentFormater = nullptr;
 		}
 		debug::ErrorStream("Localization") << "Can't create percent formater for " << m_aFilename << " (error #" << Status << ")" << std::endl;
 	}
@@ -72,7 +72,7 @@ CLocalization::CLanguage::CLanguage(const char* pName, const char* pFilename, co
 		if(m_pPluralRules)
 		{
 			uplrules_close(m_pPluralRules);
-			m_pPluralRules = NULL;
+			m_pPluralRules = nullptr;
 		}
 		debug::ErrorStream("Localization") << "Can't create plural rules for " << m_aFilename << " (error #" << Status << ")" << std::endl;
 	}
@@ -121,7 +121,7 @@ bool CLocalization::CLanguage::Load(CStorage* pStorage)
 	mem_zero(&JsonSettings, sizeof(JsonSettings));
 	char aError[256];
 	json_value *pJsonData = json_parse_ex(&JsonSettings, pFileData, FileSize, aError);
-	if(pJsonData == 0)
+	if(pJsonData == nullptr)
 	{
 		debug::ErrorStream("Localization") << "Can't load the localization file " << aBuf << " (" << aError << ")" << std::endl;
 		delete[] pFileData;
@@ -216,7 +216,7 @@ const char* CLocalization::CLanguage::Localize(const char* pText) const
 {
 	const CEntry* pEntry = m_Translations.get(pText);
 	if(!pEntry)
-		return NULL;
+		return nullptr;
 	
 	return pEntry->m_apVersions[PLURALTYPE_NONE];
 }
@@ -225,14 +225,14 @@ const char* CLocalization::CLanguage::Localize_P(int Number, const char* pText) 
 {
 	const CEntry* pEntry = m_Translations.get(pText);
 	if(!pEntry)
-		return NULL;
+		return nullptr;
 	
 	UChar aPluralKeyWord[6];
 	UErrorCode Status = U_ZERO_ERROR;
 	uplrules_select(m_pPluralRules, static_cast<double>(Number), aPluralKeyWord, 6, &Status);
 	
 	if(U_FAILURE(Status))
-		return NULL;
+		return nullptr;
 	
 	int PluralCode = PLURALTYPE_NONE;
 	
@@ -259,8 +259,8 @@ const char* CLocalization::CLanguage::Localize_P(int Number, const char* pText) 
 
 CLocalization::CLocalization(CSharedKernel* pKernel) :
 	CSharedKernel::CComponent(pKernel),
-	m_pMainLanguage(NULL),
-	m_pUtf8Converter(NULL)
+	m_pMainLanguage(nullptr),
+	m_pUtf8Converter(nullptr)
 {
 	SetName("Localization");
 }
@@ -317,14 +317,14 @@ bool CLocalization::Init()
 	mem_zero(&JsonSettings, sizeof(JsonSettings));
 	char aError[256];
 	json_value *pJsonData = json_parse_ex(&JsonSettings, pFileData, FileSize, aError);
-	if(pJsonData == NULL)
+	if(pJsonData == nullptr)
 	{
 		delete[] pFileData;
 		return true; //return true because it's not a critical error
 	}
 
 	// extract data
-	m_pMainLanguage = NULL;
+	m_pMainLanguage = nullptr;
 	const json_value& rStart = (*pJsonData)["language indices"];
 	
 	if(rStart.type == json_array)
@@ -357,7 +357,7 @@ bool CLocalization::PreUpdate()
 {
 	if(!m_pMainLanguage || m_Cfg_MainLanguage != m_pMainLanguage->GetFilename())
 	{
-		CLanguage* pLanguage = 0;
+		CLanguage* pLanguage = nullptr;
 		
 		for(unsigned int i=0; i<m_pLanguages.size(); i++)
 		{
@@ -470,7 +470,7 @@ void CLocalization::AppendInteger(dynamic_string& Buffer, int& BufferIter, CLang
 	icu::UnicodeString Utf16Buffer;
 	
 	UErrorCode Status = U_ZERO_ERROR;
-	pLanguage->m_pNumberFormater->format((double) Number, Utf16Buffer, NULL, Status);
+	pLanguage->m_pNumberFormater->format((double) Number, Utf16Buffer, nullptr, Status);
 	if(U_FAILURE(Status))
 		BufferIter = Buffer.append_at(BufferIter, "{0}");
 	else
@@ -525,7 +525,7 @@ void CLocalization::AppendDouble(dynamic_string& Buffer, int& BufferIter, CLangu
 	icu::UnicodeString Utf16Buffer;
 	
 	UErrorCode Status = U_ZERO_ERROR;
-	pLanguage->m_pNumberFormater->format((double) Number, Utf16Buffer, NULL, Status);
+	pLanguage->m_pNumberFormater->format((double) Number, Utf16Buffer, nullptr, Status);
 	if(U_FAILURE(Status))
 		BufferIter = Buffer.append_at(BufferIter, "{0.0}");
 	else
@@ -580,7 +580,7 @@ void CLocalization::AppendPercent(dynamic_string& Buffer, int& BufferIter, CLang
 	icu::UnicodeString Utf16Buffer;
 	
 	UErrorCode Status = U_ZERO_ERROR;
-	pLanguage->m_pPercentFormater->format((double) Number, Utf16Buffer, NULL, Status);
+	pLanguage->m_pPercentFormater->format((double) Number, Utf16Buffer, nullptr, Status);
 	if(U_FAILURE(Status))
 		BufferIter = Buffer.append_at(BufferIter, "{0%}");
 	else

@@ -443,7 +443,7 @@ CAssetsInspector::CAssetsInspector(CGuiEditor* pAssetsEditor) :
 	m_pAssetsEditor(pAssetsEditor)
 {
 	for(int i=0; i<NUM_TABS; i++)
-		m_pTabs[TAB_IMAGE_ASSET] = 0;
+		m_pTabs[TAB_IMAGE_ASSET] = nullptr;
 	
 	//TAG_NEW_ASSET
 	m_pTabs[TAB_GENERIC_ASSET] = CreateTab_Generic_Asset();
@@ -2222,7 +2222,7 @@ protected:
 				CAssetPath ZoneType = pMaterial->GetZoneConverterZoneTypePath(*ConvIter);
 				
 				LString_ZoneConverter.ClearParameters();
-				LString_ZoneConverter.AddString("ZoneName", AssetsManager()->GetAssetValue<const char*>(ZoneType, CSubPath::Null(), CAsset_ZoneType::NAME, NULL));
+				LString_ZoneConverter.AddString("ZoneName", AssetsManager()->GetAssetValue<const char*>(ZoneType, CSubPath::Null(), CAsset_ZoneType::NAME, nullptr));
 				LString_ZoneConverter.AddInteger("OldIndex", pMaterial->GetZoneConverterOldIndex(*ConvIter));
 				LString_ZoneConverter.AddInteger("NewIndex", pMaterial->GetZoneConverterNewIndex(*ConvIter));
 				Add(new CSubItem(m_pAssetsEditor, *ConvIter, LString_ZoneConverter, m_pAssetsEditor->m_Path_Sprite_IconZoneType), false);

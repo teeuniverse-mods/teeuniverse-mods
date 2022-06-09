@@ -21,10 +21,10 @@
 
 void CreateNewImage_LoadPng(CSharedKernel* pKernel, png_t& Png, unsigned char*& pBuffer, const char* pFilename, int StorageType)
 {
-	pBuffer = 0;
+	pBuffer = nullptr;
 	
 	// open file for reading
-	png_init(0, 0);
+	png_init(nullptr, nullptr);
 
 	dynamic_string Buffer;
 	IOHANDLE File = pKernel->Storage()->OpenFile(pFilename, IOFLAG_READ, StorageType, Buffer);
@@ -71,7 +71,7 @@ void CreateNewImage_LoadPng(CSharedKernel* pKernel, png_t& Png, unsigned char*& 
 		debug::WarningStream("CreateNewImage") << "failed to get data from '" << Buffer.buffer() << "', error " << png_error_string(Error) << std::endl;
 		png_close_file(&Png);
 		delete[] pBuffer;
-		pBuffer = 0;
+		pBuffer = nullptr;
 		return;
 	}
 	png_close_file(&Png);

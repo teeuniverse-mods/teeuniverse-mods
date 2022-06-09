@@ -355,14 +355,14 @@ CViewMap::CViewMap(CGuiEditor* pAssetsEditor) :
 	m_ShowEntities(3),
 	m_ZoomLockedToUnit(false),
 	m_LoD(1),
-	m_pCursorTool_MapStamp(NULL),
-	m_pCursorTool_MapFill(NULL),
-	m_pCursorTool_MapTransform(NULL),
-	m_pCursorTool_MapEdit(NULL),
-	m_pCursorTool_MapEraser(NULL),
-	m_pCursorTool_MapCrop(NULL),
-	m_pCursorTool_MapAddVertex(NULL),
-	m_pCursorTool_MapWeightVertex(NULL)
+	m_pCursorTool_MapStamp(nullptr),
+	m_pCursorTool_MapFill(nullptr),
+	m_pCursorTool_MapTransform(nullptr),
+	m_pCursorTool_MapEdit(nullptr),
+	m_pCursorTool_MapEraser(nullptr),
+	m_pCursorTool_MapCrop(nullptr),
+	m_pCursorTool_MapAddVertex(nullptr),
+	m_pCursorTool_MapWeightVertex(nullptr)
 {
 	m_pCursorTool_MapStamp = new CCursorTool_MapStamp(this);
 	m_pToolbar->Add(m_pCursorTool_MapStamp);

@@ -158,7 +158,7 @@ void CInput::MouseModeRelative()
 	m_RelativeMode = true;
 	SDL_ShowCursor(SDL_DISABLE);
 	SDL_SetRelativeMouseMode(SDL_TRUE);
-	SDL_GetRelativeMouseState(NULL, NULL);
+	SDL_GetRelativeMouseState(nullptr, nullptr);
 }
 
 void CInput::Clear()
@@ -187,7 +187,7 @@ bool CInput::PreUpdate()
 	}
 
 	// these states must always be updated manually because they are not in the GetKeyState from SDL
-	int i = SDL_GetMouseState(NULL, NULL);
+	int i = SDL_GetMouseState(nullptr, nullptr);
 	if(i&SDL_BUTTON(1)) m_aInputState[KEY_MOUSE_1] = 1; // 1 is left
 	if(i&SDL_BUTTON(3)) m_aInputState[KEY_MOUSE_2] = 1; // 3 is right
 	if(i&SDL_BUTTON(2)) m_aInputState[KEY_MOUSE_3] = 1; // 2 is middle
@@ -286,7 +286,7 @@ bool CInput::PreUpdate()
 					m_aInputState[Scancode] = 1;
 					m_aInputCount[Key] = m_InputCounter;
 				}
-				AddEvent(0, Key, Action);
+				AddEvent(nullptr, Key, Action);
 			}
 
 		}
@@ -329,7 +329,7 @@ const char* CInput::GetEditedText() const
 	if(m_Composing)
 		return m_EditedText.buffer();
 	else
-		return 0;
+		return nullptr;
 }
 
 void CInput::StartTextEditing(int x, int y, int w, int h)

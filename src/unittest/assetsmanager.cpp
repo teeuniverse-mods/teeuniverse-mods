@@ -43,7 +43,7 @@ TEST(pKernel->Init(argc, (const char**) argv))
 	const CAsset_Sprite* pSprite2 = pKernel->AssetsManager()->GetAsset<CAsset_Sprite>(SpritePath);
 	TEST(pSprite2)
 	
-	const char* pSpriteName = pKernel->AssetsManager()->GetAssetValue<const char*>(SpritePath, CSubPath::Null(), CAsset::NAME, NULL);
+	const char* pSpriteName = pKernel->AssetsManager()->GetAssetValue<const char*>(SpritePath, CSubPath::Null(), CAsset::NAME, nullptr);
 	TEST(pSpriteName)
 	TEST_WITH_OUTPUT(str_comp(pSpriteName, "mysprite") == 0, pSpriteName);
 }

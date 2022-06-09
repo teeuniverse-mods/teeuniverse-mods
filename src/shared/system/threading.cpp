@@ -64,10 +64,10 @@ void *thread_init(void (*threadfunc)(void *), void *u)
 {
 #if defined(CONF_FAMILY_UNIX)
 	pthread_t id;
-	pthread_create(&id, NULL, (void *(*)(void*))threadfunc, u);
+	pthread_create(&id, nullptr, (void *(*)(void*))threadfunc, u);
 	return (void*)id;
 #elif defined(CONF_FAMILY_WINDOWS)
-	return CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)threadfunc, u, 0, NULL);
+	return CreateThread(nullptr, 0, (LPTHREAD_START_ROUTINE)threadfunc, u, 0, nullptr);
 #else
 	#error not implemented
 #endif
@@ -76,7 +76,7 @@ void *thread_init(void (*threadfunc)(void *), void *u)
 void thread_wait(void *thread)
 {
 #if defined(CONF_FAMILY_UNIX)
-	pthread_join((pthread_t)thread, NULL);
+	pthread_join((pthread_t)thread, nullptr);
 #elif defined(CONF_FAMILY_WINDOWS)
 	WaitForSingleObject((HANDLE)thread, INFINITE);
 #else
@@ -87,7 +87,7 @@ void thread_wait(void *thread)
 void thread_destroy(void *thread)
 {
 #if defined(CONF_FAMILY_UNIX)
-	void *r = 0;
+	void *r = nullptr;
 	pthread_join((pthread_t)thread, &r);
 #else
 	/*#error not implemented*/
@@ -143,7 +143,7 @@ LOCK lock_create()
 	LOCKINTERNAL *lock = new LOCKINTERNAL;
 
 #if defined(CONF_FAMILY_UNIX)
-	pthread_mutex_init(lock, 0x0);
+	pthread_mutex_init(lock, nullptr);
 #elif defined(CONF_FAMILY_WINDOWS)
 	InitializeCriticalSection((LPCRITICAL_SECTION)lock);
 #else
@@ -206,7 +206,7 @@ void lock_unlock(LOCK lock)
 	#elif defined(CONF_FAMILY_WINDOWS)
 	void semaphore_init(SEMAPHORE *sem) { *sem = CreateSemaphore(0, 0, 10000, 0); }
 	void semaphore_wait(SEMAPHORE *sem) { WaitForSingleObject((HANDLE)*sem, INFINITE); }
-	void semaphore_signal(SEMAPHORE *sem) { ReleaseSemaphore((HANDLE)*sem, 1, NULL); }
+	void semaphore_signal(SEMAPHORE *sem) { ReleaseSemaphore((HANDLE)*sem, 1, nullptr); }
 	void semaphore_destroy(SEMAPHORE *sem) { CloseHandle((HANDLE)*sem); }
 	#else
 		#error not implemented on this platform

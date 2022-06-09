@@ -51,9 +51,9 @@ public:
 
 CViewImage::CViewImage(CGuiEditor* pAssetsEditor) :
 	CViewManager::CView(pAssetsEditor),
-	m_pImageWidget(NULL),
-	m_pCursorTool_SpriteCreator(NULL),
-	m_pCursorTool_Eraser(NULL)
+	m_pImageWidget(nullptr),
+	m_pCursorTool_SpriteCreator(nullptr),
+	m_pCursorTool_Eraser(nullptr)
 {
 	m_pImageWidget = new CImagePicker_ImageView(AssetsEditor(), this, AssetsEditor()->GetEditedAssetPath());
 	

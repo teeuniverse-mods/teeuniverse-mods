@@ -30,7 +30,7 @@ CBoxLayout::CBoxLayout(CGui *pContext) :
 	CWidget(pContext),
 	m_BoxStylePath(CAssetPath::Null()),
 	m_ShowScrollBar(false),
-	m_pScrollBar(0)
+	m_pScrollBar(nullptr)
 {
 	m_pScrollBar = new CVScrollBar(pContext);
 }

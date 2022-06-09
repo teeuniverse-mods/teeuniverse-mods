@@ -36,7 +36,7 @@ CAbstractIntegerEdit::CEntry::CEntry(CAbstractIntegerEdit *pIntegerEdit) :
 
 void CAbstractIntegerEdit::CEntry::SaveFromTextBuffer()
 {
-	int Value = Localization()->ParseInteger(NULL, GetText());
+	int Value = Localization()->ParseInteger(nullptr, GetText());
 	m_pIntegerEdit->SetValue(Value);
 }
 
@@ -78,7 +78,7 @@ void CAbstractIntegerEdit::CIncreaseButton::MouseClickAction()
 	//Integer Edit
 CAbstractIntegerEdit::CAbstractIntegerEdit(CGui *pContext) :
 	CHListLayout(pContext),
-	m_pEntry(NULL)
+	m_pEntry(nullptr)
 {
 	m_pEntry = new CAbstractIntegerEdit::CEntry(this);
 	m_pEntry->SetLabelStyle(Context()->GetNumericEntryStyle());

@@ -52,7 +52,7 @@ void CAbstractTabs::CTabButton::MouseClickAction()
 CAbstractTabs::CAbstractTabs(CGui *pContext) :
 	CWidget(pContext),
 	m_TabsStylePath(Context()->GetTabsStyle()),
-	m_pButtonList(NULL)
+	m_pButtonList(nullptr)
 {
 	m_pButtonList = new CHListLayout(pContext);
 }
@@ -90,7 +90,7 @@ void CAbstractTabs::AddTab(CWidget* pWidget, const char* pName, const CLocalizab
 	CTab& Tab = m_Tabs.back();
 	
 	Tab.m_pWidget = pWidget;
-	Tab.m_pTabButton = 0;
+	Tab.m_pTabButton = nullptr;
 	
 	if(pName)
 		Tab.m_pTabButton = new CTabButton(Context(), this, TabId, pName, IconPath);
@@ -106,12 +106,12 @@ void CAbstractTabs::AddTab(CWidget* pWidget, const char* pName, const CLocalizab
 
 void CAbstractTabs::AddTab(CWidget* pWidget, const char* pName, CAssetPath IconPath)
 {
-	AddTab(pWidget, pName, NULL, IconPath);
+	AddTab(pWidget, pName, nullptr, IconPath);
 }
 
 void CAbstractTabs::AddTab(CWidget* pWidget, const CLocalizableString& LocalizableString, CAssetPath IconPath)
 {
-	AddTab(pWidget, NULL, &LocalizableString, IconPath);
+	AddTab(pWidget, nullptr, &LocalizableString, IconPath);
 }
 
 void CAbstractTabs::Clear()
@@ -130,8 +130,8 @@ void CAbstractTabs::UpdateBoundingSize()
 	m_BoundingSizeRect.BSNoConstraint();
 	
 	const CAsset_GuiTabsStyle* pTabsStyle = AssetsManager()->GetAsset<CAsset_GuiTabsStyle>(m_TabsStylePath);
-	const CAsset_GuiBoxStyle* pLayoutStyle = 0;
-	const CAsset_GuiBoxStyle* pContentStyle = 0;
+	const CAsset_GuiBoxStyle* pLayoutStyle = nullptr;
+	const CAsset_GuiBoxStyle* pContentStyle = nullptr;
 	if(pTabsStyle)
 	{
 		pLayoutStyle = AssetsManager()->GetAsset<CAsset_GuiBoxStyle>(pTabsStyle->GetLayoutPath());
@@ -171,8 +171,8 @@ void CAbstractTabs::UpdatePosition(const CRect& BoundingRect, const CRect& Visib
 	CWidget::UpdatePosition(BoundingRect, VisibilityRect);
 	
 	const CAsset_GuiTabsStyle* pTabsStyle = AssetsManager()->GetAsset<CAsset_GuiTabsStyle>(m_TabsStylePath);
-	const CAsset_GuiBoxStyle* pLayoutStyle = 0;
-	const CAsset_GuiBoxStyle* pContentStyle = 0;
+	const CAsset_GuiBoxStyle* pLayoutStyle = nullptr;
+	const CAsset_GuiBoxStyle* pContentStyle = nullptr;
 	if(pTabsStyle)
 	{
 		pLayoutStyle = AssetsManager()->GetAsset<CAsset_GuiBoxStyle>(pTabsStyle->GetLayoutPath());
@@ -261,8 +261,8 @@ void CAbstractTabs::Update(bool ParentEnabled)
 void CAbstractTabs::Render()
 {
 	const CAsset_GuiTabsStyle* pTabsStyle = AssetsManager()->GetAsset<CAsset_GuiTabsStyle>(m_TabsStylePath);
-	const CAsset_GuiBoxStyle* pLayoutStyle = 0;
-	const CAsset_GuiBoxStyle* pContentStyle = 0;
+	const CAsset_GuiBoxStyle* pLayoutStyle = nullptr;
+	const CAsset_GuiBoxStyle* pContentStyle = nullptr;
 	if(pTabsStyle)
 	{
 		pLayoutStyle = AssetsManager()->GetAsset<CAsset_GuiBoxStyle>(pTabsStyle->GetLayoutPath());

@@ -38,9 +38,9 @@ CAbstractFloatEdit::CAbstractFloatEdit(CGui* pContext) :
 void CAbstractFloatEdit::SaveFromTextBuffer()
 {
 	if(m_Percent)
-		SetValue(Localization()->ParsePercent(NULL, GetText()));
+		SetValue(Localization()->ParsePercent(nullptr, GetText()));
 	else
-		SetValue(Localization()->ParseDouble(NULL, GetText()));
+		SetValue(Localization()->ParseDouble(nullptr, GetText()));
 }
 
 void CAbstractFloatEdit::CopyToTextBuffer()
@@ -108,7 +108,7 @@ CAbstractDoubleEdit::CAbstractDoubleEdit(CGui* pContext) :
 
 void CAbstractDoubleEdit::SaveFromTextBuffer()
 {
-	SetValue(Localization()->ParseDouble(NULL, GetText()));
+	SetValue(Localization()->ParseDouble(nullptr, GetText()));
 }
 
 void CAbstractDoubleEdit::CopyToTextBuffer()

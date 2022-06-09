@@ -29,7 +29,7 @@ namespace gui
 CAbstractLabel::CAbstractLabel(CGui *pContext) :
 	CWidget(pContext),
 	m_IconPath(CAssetPath::Null()),
-	m_pIconWidget(NULL),
+	m_pIconWidget(nullptr),
 	m_ClipText(true),
 	m_Localize(false),
 	m_SelectionEnabled(false),
@@ -63,7 +63,7 @@ void CAbstractLabel::OnTextUpdated()
 void CAbstractLabel::ApplyLocalization()
 {
 	m_Text.clear();
-	Localization()->Format(m_Text, NULL, m_LString);
+	Localization()->Format(m_Text, nullptr, m_LString);
 }
 
 void CAbstractLabel::Update(bool ParentEnabled)
@@ -196,7 +196,7 @@ void CAbstractLabel::UpdatePosition(const CRect& BoundingRect, const CRect& Visi
 	m_IconRect.h = 0;
 	int TextWidth = 0;
 	
-	const CAsset_Sprite* pSprite = NULL;
+	const CAsset_Sprite* pSprite = nullptr;
 	if(m_pIconWidget)
 	{
 		m_IconRect.w = m_pIconWidget->GetBS().minw;

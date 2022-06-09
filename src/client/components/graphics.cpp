@@ -82,13 +82,13 @@ void CGraphics::FlushVertices()
 		return;
 
 	Cmd.m_pVertices = (CCommandBuffer::SVertex *)m_pCommandBuffer->AllocData(sizeof(CCommandBuffer::SVertex)*NumVerts);
-	if(Cmd.m_pVertices == 0x0)
+	if(Cmd.m_pVertices == nullptr)
 	{
 		// kick command buffer and try again
 		KickCommandBuffer();
 
 		Cmd.m_pVertices = (CCommandBuffer::SVertex *)m_pCommandBuffer->AllocData(sizeof(CCommandBuffer::SVertex)*NumVerts);
-		if(Cmd.m_pVertices == 0x0)
+		if(Cmd.m_pVertices == nullptr)
 		{
 			debug::ErrorStream("Graphics") << "failed to allocate data for vertices" << std::endl;
 			return;
@@ -102,7 +102,7 @@ void CGraphics::FlushVertices()
 		KickCommandBuffer();
 		
 		Cmd.m_pVertices = (CCommandBuffer::SVertex *)m_pCommandBuffer->AllocData(sizeof(CCommandBuffer::SVertex)*NumVerts);
-		if(Cmd.m_pVertices == 0x0)
+		if(Cmd.m_pVertices == nullptr)
 		{
 			debug::ErrorStream("Graphics") << "failed to allocate data for vertices" << std::endl;
 			return;
@@ -161,9 +161,9 @@ CGraphics::CGraphics(CClientKernel* pKernel) :
 	m_State.m_WrapModeV = WRAP_REPEAT;
 
 	m_CurrentCommandBuffer = 0;
-	m_pCommandBuffer = 0x0;
-	m_apCommandBuffers[0] = 0x0;
-	m_apCommandBuffers[1] = 0x0;
+	m_pCommandBuffer = nullptr;
+	m_apCommandBuffers[0] = nullptr;
+	m_apCommandBuffers[1] = nullptr;
 
 	m_NumVertices = 0;
 
@@ -1010,7 +1010,7 @@ void CGraphics::Shutdown()
 	// shutdown the backend
 	m_pBackend->Shutdown();
 	delete m_pBackend;
-	m_pBackend = 0x0;
+	m_pBackend = nullptr;
 
 	// delete the command buffers
 	for(int i = 0; i < NUM_CMDBUFFERS; i++)

@@ -299,7 +299,7 @@ IOHANDLE CStorage::OpenFile(const char *pFilename, int Flags, int Type, dynamic_
 	if(!str_check_pathname(pFilename))
 	{
 		debug::WarningStream("Storage") << "OpenFile, check failed with " << pFilename << std::endl;
-		return 0;
+		return nullptr;
 	}
 
 	// open file
@@ -336,7 +336,7 @@ IOHANDLE CStorage::OpenFile(const char *pFilename, int Flags, int Type, dynamic_
 		}
 	}
 
-	return 0;
+	return nullptr;
 }
 
 void CStorage::GetCompletePath(int Type, const char *pDir, dynamic_string& Buffer)

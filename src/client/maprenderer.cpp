@@ -501,7 +501,7 @@ void CMapRenderer::RenderZoneIntData(CAssetPath ZonePath, CAssetPath ZoneTypePat
 					vec2 TilePos = MapPosToScreenPos(vec2(i*32.0f, j*32.0f));
 					
 					dynamic_string Buffer;
-					Localization()->FormatInteger(Buffer, NULL, Value);
+					Localization()->FormatInteger(Buffer, nullptr, Value);
 					
 					CTextRenderer::CTextCache TextCache;
 					TextCache.SetText(Buffer.buffer());

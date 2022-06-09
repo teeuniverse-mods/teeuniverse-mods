@@ -321,7 +321,7 @@ CTextRenderer::CTextCache::CTextCache() :
 
 void CTextRenderer::CTextCache::SetText(const char* pText)
 {
-	if(pText == 0)
+	if(pText == nullptr)
 	{
 		m_Rendered = false;
 		m_Text.clear();
@@ -426,7 +426,7 @@ bool CTextRenderer::LoadFont(const char* pFilename)
 	}
 	
 #ifdef HARFBUZZ_ENABLED
-	pFont->m_pHBFont = hb_ft_font_create(pFont->m_FtFace, 0);
+	pFont->m_pHBFont = hb_ft_font_create(pFont->m_FtFace, nullptr);
 #endif
 
 	m_Fonts.emplace_back(pFont);
@@ -441,19 +441,19 @@ CTextRenderer::CGlyph* CTextRenderer::LoadGlyph(CGlyphCache* pCache, CGlyphId Gl
 	if(m_Fonts.size() == 0)
 	{
 		debug::ErrorStream("TextRenderer") << "No font loaded" << std::endl;
-		return 0;
+		return nullptr;
 	}
 	
 	const CFont* pFont = m_Fonts[GlyphId.m_FontId].get();
 	if(FT_Set_Pixel_Sizes(pFont->m_FtFace, 0, pCache->m_FontSize) != FT_Err_Ok)
 	{
 		debug::WarningStream("TextRenderer") << "Can't set pixel size " << pCache->m_FontSize << std::endl;
-		return 0;
+		return nullptr;
 	}
 	if(FT_Load_Glyph(pFont->m_FtFace, GlyphId.m_GlyphCode, FT_LOAD_RENDER|FT_LOAD_NO_BITMAP) != FT_Err_Ok)
 	{
 		debug::WarningStream("TextRenderer") << "Can't load glyph " << GlyphId.m_GlyphCode << std::endl;
-		return 0;
+		return nullptr;
 	}
 	
 	FT_Bitmap* pBitmap = &pFont->m_FtFace->glyph->bitmap;
@@ -549,7 +549,7 @@ void CTextRenderer::UpdateTextCache_Shaper(std::vector<CShaperGlyph>* pGlyphChai
 	hb_buffer_set_language(m_pHBBuffer, hb_language_from_string("ar", 2));
 	
 	hb_buffer_add_utf16(m_pHBBuffer, (const uint16*) pTextUTF16, Length, Start, Length);
-	hb_shape(m_Fonts[FontId]->m_pHBFont, m_pHBBuffer, 0, 0);
+	hb_shape(m_Fonts[FontId]->m_pHBFont, m_pHBBuffer, nullptr, 0);
 	
 	unsigned int GlyphCount;
 	hb_glyph_info_t* GlyphInfo = hb_buffer_get_glyph_infos(m_pHBBuffer, &GlyphCount);
@@ -654,7 +654,7 @@ void CTextRenderer::UpdateTextCache_BiDi(std::vector<CShaperGlyph>* pGlyphChain,
 	
 	//Perform the BiDi algorithm
 	//TODO: change UBIDI_DEFAULT_LTR by some variable dependend of the user config
-	ubidi_setPara(pICUBiDi, UTF16Text.getBuffer(), UTF16Text.length(), (Localization()->GetWritingDirection() == CLocalization::DIRECTION_RTL ? UBIDI_DEFAULT_RTL : UBIDI_DEFAULT_LTR), 0, &ICUError);
+	ubidi_setPara(pICUBiDi, UTF16Text.getBuffer(), UTF16Text.length(), (Localization()->GetWritingDirection() == CLocalization::DIRECTION_RTL ? UBIDI_DEFAULT_RTL : UBIDI_DEFAULT_LTR), nullptr, &ICUError);
 	
 	if(U_SUCCESS(ICUError))
 	{
@@ -709,7 +709,7 @@ void CTextRenderer::UpdateTextCache(CTextCache* pTextCache)
 	pTextCache->ResetRendering();
 	
 	//Search the appropriate cached font size to render the text
-	CGlyphCache* pGlyphCache = 0;
+	CGlyphCache* pGlyphCache = nullptr;
 	for(unsigned int i=0; i<m_GlyphCaches.size(); i++)
 	{
 		pGlyphCache = m_GlyphCaches[i].get();

@@ -57,7 +57,7 @@ void CGraphicsBackend_SDL::ThreadFunc(void *pUser)
 			#endif
 			pThis->m_pProcessor->RunBuffer(pThis->m_pBuffer);
 			sync_barrier();
-			pThis->m_pBuffer = 0x0;
+			pThis->m_pBuffer = nullptr;
 			pThis->m_BufferDone.signal();
 		}
 	}
@@ -65,9 +65,9 @@ void CGraphicsBackend_SDL::ThreadFunc(void *pUser)
 
 CGraphicsBackend_SDL::CGraphicsBackend_SDL()
 {
-	m_pBuffer = 0x0;
-	m_pProcessor = 0x0;
-	m_pThread = 0x0;
+	m_pBuffer = nullptr;
+	m_pProcessor = nullptr;
+	m_pThread = nullptr;
 }
 
 void CGraphicsBackend_SDL::StartProcessor(ICommandProcessor *pProcessor)
@@ -95,12 +95,12 @@ void CGraphicsBackend_SDL::RunBuffer(CCommandBuffer *pBuffer)
 
 bool CGraphicsBackend_SDL::IsIdle() const
 {
-	return m_pBuffer == 0x0;
+	return m_pBuffer == nullptr;
 }
 
 void CGraphicsBackend_SDL::WaitForIdle()
 {
-	while(m_pBuffer != 0x0)
+	while(m_pBuffer != nullptr)
 		m_BufferDone.wait();
 }
 
@@ -540,7 +540,7 @@ void CCommandProcessorFragment_OpenGL::Cmd_Screenshot(const CCommandBuffer::SCom
 CCommandProcessorFragment_OpenGL::CCommandProcessorFragment_OpenGL()
 {
 	mem_zero(m_aTextures, sizeof(m_aTextures));
-	m_pTextureMemoryUsage = 0;
+	m_pTextureMemoryUsage = nullptr;
 }
 
 bool CCommandProcessorFragment_OpenGL::RunCommand(const CCommandBuffer::SCommand * pBaseCommand)
@@ -600,7 +600,7 @@ void CCommandProcessorFragment_SDL::Cmd_Init(const SCommand_Init *pCommand)
 
 void CCommandProcessorFragment_SDL::Cmd_Shutdown(const SCommand_Shutdown *pCommand)
 {
-	SDL_GL_MakeCurrent(NULL, NULL);
+	SDL_GL_MakeCurrent(nullptr, nullptr);
 }
 
 void CCommandProcessorFragment_SDL::Cmd_Swap(const CCommandBuffer::SCommand_Swap *pCommand)
@@ -679,7 +679,7 @@ void CCommandProcessor_SDL_OpenGL::RunBuffer(CCommandBuffer *pBuffer)
 	while(1)
 	{
 		const CCommandBuffer::SCommand *pBaseCommand = pBuffer->GetCommand(&CmdIndex);
-		if(pBaseCommand == 0x0)
+		if(pBaseCommand == nullptr)
 			break;
 		
 		if(m_OpenGL.RunCommand(pBaseCommand))
@@ -789,7 +789,7 @@ int CGraphicsBackend_SDL::Init(const char *pName, int *pScreen, int *pWidth, int
 		*pHeight,
 		SdlFlags);
 	
-	if(m_pWindow == NULL)
+	if(m_pWindow == nullptr)
 	{
 		debug::ErrorStream("Graphics") << "unable to create window: " << SDL_GetError() << std::endl;
 		return -1;
@@ -797,7 +797,7 @@ int CGraphicsBackend_SDL::Init(const char *pName, int *pScreen, int *pWidth, int
 
 	// create gl context
 	m_GLContext = SDL_GL_CreateContext(m_pWindow);
-	if(m_GLContext == NULL)
+	if(m_GLContext == nullptr)
 	{
 		debug::ErrorStream("Graphics") << "unable to create OpenGL context: " << SDL_GetError() << std::endl;
 		return -1;
@@ -813,7 +813,7 @@ int CGraphicsBackend_SDL::Init(const char *pName, int *pScreen, int *pWidth, int
 	SDL_GetWindowSize(m_pWindow, pWidth, pHeight);
 
 	SDL_GL_SetSwapInterval(Flags & INITFLAG_VSYNC ? 1 : 0);
-	SDL_GL_MakeCurrent(NULL, NULL);
+	SDL_GL_MakeCurrent(nullptr, nullptr);
 
 	// start the command processor
 	m_pProcessor = new CCommandProcessor_SDL_OpenGL;
@@ -847,7 +847,7 @@ int CGraphicsBackend_SDL::Shutdown()
 	// stop and delete the processor
 	StopProcessor();
 	delete m_pProcessor;
-	m_pProcessor = 0;
+	m_pProcessor = nullptr;
 
 	SDL_GL_DeleteContext(m_GLContext);
 	SDL_DestroyWindow(m_pWindow);

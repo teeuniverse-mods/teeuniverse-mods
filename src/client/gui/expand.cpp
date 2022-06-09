@@ -26,7 +26,7 @@ namespace gui
 
 CExpand::CExpand(CGui* pContext) :
 	CWidget(pContext),
-	m_pTitle(0),
+	m_pTitle(nullptr),
 	m_Expanded(true)
 {
 	

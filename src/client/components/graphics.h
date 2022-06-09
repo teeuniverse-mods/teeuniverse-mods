@@ -353,7 +353,7 @@ public:
 	SCommand *GetCommand(unsigned *pIndex)
 	{
 		if(*pIndex >= m_CmdBuffer.DataUsed())
-			return NULL;
+			return nullptr;
 
 		SCommand *pCommand = (SCommand *)&m_CmdBuffer.DataPtr()[*pIndex];
 		*pIndex += pCommand->m_Size;

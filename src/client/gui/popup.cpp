@@ -27,7 +27,7 @@ namespace gui
 CPopup::CPopup(CGui* pContext, const CRect& CreatorRect, int Width, int Height, int Alignment) :
 	CWidget(pContext),
 	m_Level(LEVEL_LOWEST),
-	m_pChild(NULL),
+	m_pChild(nullptr),
 	m_IsClosed(false),
 	m_CreatorRect(CreatorRect),
 	m_BoxStylePath(Context()->GetPopupStyle()),
@@ -51,7 +51,7 @@ void CPopup::Clear()
 	if(m_pChild)
 	{
 		m_pChild->Destroy();
-		m_pChild = 0;
+		m_pChild = nullptr;
 		m_ChildWidth = 0;
 		m_ChildHeight = 0;
 	}

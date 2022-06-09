@@ -459,7 +459,7 @@ public:
 
 CCursorTool_MapStamp::CCursorTool_MapStamp(CViewMap* pViewMap) :
 	CCursorTool(pViewMap, _LSTRING("Stamp"), pViewMap->AssetsEditor()->m_Path_Sprite_IconStamp),
-	m_pOptions(NULL)
+	m_pOptions(nullptr)
 {
 	m_SelectionEnabled = false;
 	m_DragEnabled = false;

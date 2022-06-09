@@ -28,7 +28,7 @@ bool CAssetsManager::Save_Image(const char* pFilename, int StorageType, const CA
 		return false;
 	
 	// open file for reading
-	png_init(0, 0);
+	png_init(nullptr, nullptr);
 
 	dynamic_string Buffer;
 	Storage()->GetCompletePath(StorageType, pFilename, Buffer);

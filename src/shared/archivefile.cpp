@@ -33,7 +33,7 @@ CArchiveFile::CArchiveFile()
 	{
 		m_ItemTypes[i].m_ItemSize = 0;
 		m_ItemTypes[i].m_NumItems = 0;
-		m_ItemTypes[i].m_pData = NULL;
+		m_ItemTypes[i].m_pData = nullptr;
 	}
 }
 
@@ -53,7 +53,7 @@ bool CArchiveFile::Open(CStorage* pStorage, const char* pFilename, int StorageTy
 	}
 
 	//Get CRC
-	m_Crc = crc32(0L, 0x0, 0);
+	m_Crc = crc32(0L, nullptr, 0);
 	{
 		enum
 		{
@@ -120,13 +120,13 @@ bool CArchiveFile::Open(CStorage* pStorage, const char* pFilename, int StorageTy
 		{
 			m_RawDatas.back().m_pCompressedData = new uint8[m_RawDatas.back().m_CompressedSize];
 			io_read(File, m_RawDatas.back().m_pCompressedData, m_RawDatas.back().m_CompressedSize * sizeof(uint8));
-			m_RawDatas.back().m_pUncompressedData = NULL;
+			m_RawDatas.back().m_pUncompressedData = nullptr;
 		}
 		else
 		{
 			m_RawDatas.back().m_pUncompressedData = new uint8[m_RawDatas.back().m_UncompressedSize];
 			io_read(File, m_RawDatas.back().m_pUncompressedData, m_RawDatas.back().m_UncompressedSize * sizeof(uint8));
-			m_RawDatas.back().m_pCompressedData = NULL;
+			m_RawDatas.back().m_pCompressedData = nullptr;
 		}
 	}
 	
@@ -247,7 +247,7 @@ void CArchiveFile::Close()
 		if(m_ItemTypes[i].m_pData)
 		{
 			delete[] m_ItemTypes[i].m_pData;
-			m_ItemTypes[i].m_pData = NULL;
+			m_ItemTypes[i].m_pData = nullptr;
 		}
 	}
 	
@@ -285,7 +285,7 @@ uint8* CArchiveFile::GetData(tua_dataid StoredDataId)
 	if(DataId >= (uint32)m_RawDatas.size())
 	{
 		debug::ErrorStream("ArchiveFile") << "can't read the data #" << DataId << std::endl;
-		return NULL;
+		return nullptr;
 	}
 	
 	if(m_RawDatas[DataId].m_pUncompressedData)
@@ -319,7 +319,7 @@ tua_dataid CArchiveFile::AddData(uint8* pData, uint32 Size)
 	unsigned long CompressedSize = compressBound(Size);
 	m_RawDatas.emplace_back();
 	m_RawDatas.back().m_UncompressedSize = Size;
-	m_RawDatas.back().m_pUncompressedData = NULL;
+	m_RawDatas.back().m_pUncompressedData = nullptr;
 	
 	m_RawDatas.back().m_pCompressedData = new uint8[CompressedSize];
 	
@@ -331,7 +331,7 @@ tua_dataid CArchiveFile::AddData(uint8* pData, uint32 Size)
 	{
 		m_RawDatas.back().m_CompressedSize = 0;
 		delete[] m_RawDatas.back().m_pCompressedData;
-		m_RawDatas.back().m_pCompressedData = NULL;
+		m_RawDatas.back().m_pCompressedData = nullptr;
 		
 		m_RawDatas.back().m_pUncompressedData = new uint8[Size];
 		mem_copy(m_RawDatas.back().m_pUncompressedData, pData, Size);
@@ -347,11 +347,11 @@ tua_dataid CArchiveFile::AddData(uint8* pData, uint32 Size)
 const char* CArchiveFile::GetString(tua_stringid StoredStringId)
 {
 	if(StoredStringId == std::numeric_limits<tua_stringid>::max())
-		return NULL;
+		return nullptr;
 	
 	uint32 StringId = ReadStringId(StoredStringId);
 	if(StringId >= (tua_stringid)m_Strings.size())
-		return NULL;
+		return nullptr;
 	else
 		return m_Strings[StringId].m_pText;
 }

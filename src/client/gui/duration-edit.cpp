@@ -34,7 +34,7 @@ CAbstractDurationEdit::CAbstractDurationEdit(CGui* pContext) :
 
 void CAbstractDurationEdit::SaveFromTextBuffer()
 {
-	SetValue(Localization()->ParseDuration(NULL, GetText()));
+	SetValue(Localization()->ParseDuration(nullptr, GetText()));
 }
 
 void CAbstractDurationEdit::CopyToTextBuffer()

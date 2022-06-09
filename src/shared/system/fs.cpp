@@ -100,7 +100,7 @@ IOHANDLE io_open(const char *filename, int flags)
 	}
 	if(flags == IOFLAG_WRITE)
 		return (IOHANDLE)fopen(filename, "wb");
-	return 0x0;
+	return nullptr;
 }
 
 unsigned io_read(IOHANDLE io, void *buffer, unsigned size)
@@ -236,7 +236,7 @@ public:
 			return false;
 		
 		m_DirEntry = readdir(m_pDir);
-		return (m_DirEntry != NULL);
+		return (m_DirEntry != nullptr);
 	}
 	
 	virtual const char* get_filename()
@@ -385,7 +385,7 @@ int fs_chdir(const char *path)
 bool fs_getcwd(dynamic_string& result)
 {
 	char aBuf[512];
-	if(GETCWD(aBuf, sizeof(aBuf)) == NULL)
+	if(GETCWD(aBuf, sizeof(aBuf)) == nullptr)
 	{
 		result.clear();
 		return false;
@@ -397,7 +397,7 @@ bool fs_getcwd(dynamic_string& result)
 
 int fs_parent_dir(char *path)
 {
-	char *parent = 0;
+	char *parent = nullptr;
 	for(; *path; ++path)
 	{
 		if(*path == '/' || *path == '\\')

@@ -774,7 +774,7 @@ protected:
 COpenSavePackageDialog::COpenSavePackageDialog(CGuiEditor* pAssetsEditor, int Mode, int Format) :
 	gui::CPopup(pAssetsEditor, pAssetsEditor->GetDrawRect(), 600, 450, gui::CPopup::ALIGNMENT_INNER),
 	m_pAssetsEditor(pAssetsEditor),
-	m_pFilelist(NULL),
+	m_pFilelist(nullptr),
 	m_Format(Format),
 	m_Mode(Mode),
 	m_RefreshList(true),
@@ -1337,7 +1337,7 @@ class CPopup_Menu* m_pPopup;
 public:
 	CMenuBar(CGuiEditor* pAssetsEditor) :
 		gui::CHListLayout(pAssetsEditor),
-		m_pPopup(NULL)
+		m_pPopup(nullptr)
 	{
 		
 	}
@@ -2199,10 +2199,10 @@ CGuiEditor::CGuiEditor(CEditorKernel* pEditorKernel) :
 	m_TimeSpeed(1),
 	m_NeedRefreshPackageTree(false),
 	m_NeedRefreshAssetsTree(false),
-	m_pAssetsTree(NULL),
-	m_pPackagesTree(NULL),
-	m_pHintLabel(NULL),
-	m_pCoordinatesLabel(NULL)
+	m_pAssetsTree(nullptr),
+	m_pPackagesTree(nullptr),
+	m_pHintLabel(nullptr),
+	m_pCoordinatesLabel(nullptr)
 {
 	SetName("GuiEditor");
 }
@@ -2718,11 +2718,11 @@ CAssetPath CGuiEditor::GetItemIcon(const CAssetPath& AssetPath, const CSubPath& 
 const char* CGuiEditor::GetItemName(const CAssetPath& AssetPath, const CSubPath& SubPath)
 {
 	if(SubPath.IsNull())
-		return AssetsManager()->GetAssetValue<const char*>(AssetPath, SubPath, CAsset::NAME, NULL);
+		return AssetsManager()->GetAssetValue<const char*>(AssetPath, SubPath, CAsset::NAME, nullptr);
 	else if(AssetPath.GetType() == CAsset_Character::TypeId)
-		return AssetsManager()->GetAssetValue<const char*>(AssetPath, SubPath, CAsset_Character::PART_NAME, NULL);
+		return AssetsManager()->GetAssetValue<const char*>(AssetPath, SubPath, CAsset_Character::PART_NAME, nullptr);
 	else
-		return NULL;
+		return nullptr;
 }
 
 void CGuiEditor::SetEditedPackage(int PackageId)

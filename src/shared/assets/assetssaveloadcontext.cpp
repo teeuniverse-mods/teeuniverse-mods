@@ -34,7 +34,7 @@ CAssetsSaveLoadContext::CAssetsSaveLoadContext(CAssetsManager* pAssetsManager, C
 		
 void CAssetsSaveLoadContext::WriteAssetPath(const CAssetPath& SysType, CAssetPath::CTuaType& TuaType)
 {
-	const char* pAssetName = m_pAssetsManager->GetAssetValue<const char*>(SysType, CSubPath::Null(), CAsset::NAME, NULL);
+	const char* pAssetName = m_pAssetsManager->GetAssetValue<const char*>(SysType, CSubPath::Null(), CAsset::NAME, nullptr);
 	if(!pAssetName)
 	{
 		if(SysType.IsNotNull())
@@ -44,7 +44,7 @@ void CAssetsSaveLoadContext::WriteAssetPath(const CAssetPath& SysType, CAssetPat
 		
 		TuaType.m_PackageId = m_pArchiveFile->WriteUInt16(0);
 		TuaType.m_Type = m_pArchiveFile->WriteUInt16(CAssetPath::Null().GetRawType());
-		TuaType.m_Name = m_pArchiveFile->AddString(NULL);
+		TuaType.m_Name = m_pArchiveFile->AddString(nullptr);
 		return;
 	}
 	

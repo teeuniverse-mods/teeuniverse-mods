@@ -361,14 +361,14 @@ public:
 	inline const CSegment* GetNextSegment() const
 	{
 		if(!m_Segments.size())
-			return NULL;
+			return nullptr;
 		
 		if(m_Closed)
 			return &m_Segments[(m_CurrSegment+1)%m_Segments.size()];
 		else if(m_CurrSegment+1 < static_cast<int>(m_Segments.size()))
 			return &m_Segments[m_CurrSegment+1];
 		else
-			return NULL;
+			return nullptr;
 	}
 	
 	inline float GetSegmentLength() const

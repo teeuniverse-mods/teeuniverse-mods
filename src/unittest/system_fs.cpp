@@ -31,7 +31,7 @@ int Counter = 0;
 while(pIter->next())
 {
 	const char* pFilename = pIter->get_filename();
-	TEST(pFilename != NULL)
+	TEST(pFilename != nullptr)
 	TEST_WITH_OUTPUT(
 		str_comp(pFilename, "__unittestdir__/test1") == 0 ||
 		str_comp(pFilename, "__unittestdir__/test2") == 0 ||

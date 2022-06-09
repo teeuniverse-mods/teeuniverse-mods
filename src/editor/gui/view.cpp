@@ -65,7 +65,7 @@ void CViewManager::CView::CCursorTool::OnUse(bool Used)
 CViewManager::CView::CView(CGuiEditor* pAssetsEditor) :
 	gui::CWidget(pAssetsEditor),
 	m_pAssetsEditor(pAssetsEditor),
-	m_pCursorTool(NULL)
+	m_pCursorTool(nullptr)
 {
 	m_pToolbar = new gui::CHListLayout(Context());
 	m_pToolbar->SetBoxStyle(m_pAssetsEditor->m_Path_Box_Panel);
@@ -178,14 +178,14 @@ CViewManager::CViewManager(CGuiEditor* pAssetsEditor) :
 	gui::CWidget(pAssetsEditor),
 	m_pAssetsEditor(pAssetsEditor),
 	m_BoxStylePath(pAssetsEditor->m_Path_Box_View),
-	m_pCurrentView(NULL),
-	m_pViewImage(NULL),
-	m_pViewSprite(NULL),
-	m_pViewMap(NULL),
-	m_pViewSkeleton(NULL),
-	m_pViewMaterial(NULL),
-	m_pViewTilingMaterial(NULL),
-	m_pViewGui(NULL)
+	m_pCurrentView(nullptr),
+	m_pViewImage(nullptr),
+	m_pViewSprite(nullptr),
+	m_pViewMap(nullptr),
+	m_pViewSkeleton(nullptr),
+	m_pViewMaterial(nullptr),
+	m_pViewTilingMaterial(nullptr),
+	m_pViewGui(nullptr)
 {
 	m_pViewImage = new CViewImage(AssetsEditor());
 	m_pViewSprite = new CViewSprite(AssetsEditor());
@@ -249,7 +249,7 @@ void CViewManager::Update(bool ParentEnabled)
 			m_pCurrentView = m_pViewGui;
 			break;
 		default:
-			m_pCurrentView = 0;
+			m_pCurrentView = nullptr;
 	}
 	
 	if(m_pCurrentView)

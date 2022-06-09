@@ -890,7 +890,7 @@ protected:
 			if(!pLayer)
 				return;
 			
-			const CAsset_Map* pMap = NULL;
+			const CAsset_Map* pMap = nullptr;
 			
 			if(m_AssetPath.GetType() == CAsset_MapZoneTiles::TypeId)
 			{
@@ -1438,7 +1438,7 @@ public:
 		m_pAssetsEditor(pAssetsEditor),
 		m_AssetPath(AssetPath),
 		m_SubPath(SubPath),
-		m_pTitle(NULL)
+		m_pTitle(nullptr)
 	{
 		CAssetState* pState = AssetsManager()->GetAssetState(m_AssetPath);
 		if(pState)

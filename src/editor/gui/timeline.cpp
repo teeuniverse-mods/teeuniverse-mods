@@ -1123,7 +1123,7 @@ public:
 			if(m_Mode == ANIMMODE_TIME)
 			{
 				dynamic_string Buffer;
-				Localization()->FormatDouble(Buffer, NULL, TimeIter/1000.0);
+				Localization()->FormatDouble(Buffer, nullptr, TimeIter/1000.0);
 				
 				CTextRenderer::CTextCache TextCache;
 				TextCache.SetText(Buffer.buffer());

@@ -68,7 +68,7 @@ protected:
 			m_pAssetsEditor->GetEditedAssetPath(),
 			CSubPath::Null(),
 			CAsset::NAME,
-			NULL
+			nullptr
 		);
 		
 		if(pName)
@@ -136,7 +136,7 @@ protected:
 			m_pAssetsEditor->GetEditedAssetPath(),
 			m_pAssetsEditor->GetFirstEditedSubPath(),
 			m_Member,
-			NULL
+			nullptr
 		);
 		
 		if(pName)

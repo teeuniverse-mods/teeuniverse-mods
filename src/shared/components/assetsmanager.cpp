@@ -576,7 +576,7 @@ int CAssetsManager::Load_AssetsFile_Core(const char* pPackageName, CErrorStack* 
 	}
 	
 	int PackageId = -1;
-	CAssetsPackage* pPackage = NULL;
+	CAssetsPackage* pPackage = nullptr;
 	
 	CArchiveFile ArchiveFile;
 	if(!ArchiveFile.Open(Storage(), FullPath.buffer(), CStorage::TYPE_ABSOLUTE))
@@ -605,7 +605,7 @@ int CAssetsManager::Load_AssetsFile_Core(const char* pPackageName, CErrorStack* 
 	
 	if(!pPackage)
 	{
-		PackageId = NewPackage(NULL);
+		PackageId = NewPackage(nullptr);
 		pPackage = m_pPackages[PackageId].get();
 		pPackage->SetName(PurePackageName.buffer());
 		pPackage->SetDirectory(Directory.buffer());
@@ -620,7 +620,7 @@ int CAssetsManager::Load_AssetsFile_Core(const char* pPackageName, CErrorStack* 
 	{
 		CAssetsPackage::CTuaType_Dependency* pItem = (CAssetsPackage::CTuaType_Dependency*) ArchiveFile.GetItem(1, i);
 		const char* pPackageName = ArchiveFile.GetString(pItem->m_PackageName);
-		if(pPackageName != NULL)
+		if(pPackageName != nullptr)
 		{
 			SaveLoadContext.AddDependency(Load_AssetsFile_Core(pPackageName, pErrorStack));
 		}
@@ -1265,7 +1265,7 @@ CAssetState* CAssetsManager::GetAssetState(CAssetPath Path)
 		
 		#undef MACRO_ASSETTYPE
 	}
-	return 0;
+	return nullptr;
 }
 
 void CAssetsManager::InitAssetState(int PackageId, const CAssetState& State)

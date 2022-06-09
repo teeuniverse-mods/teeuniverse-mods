@@ -427,19 +427,19 @@ const char* CCommandLineInterpreter::Description(const char* pCommandLine)
 	if(ppCommand)
 		return (*ppCommand)->Description();
 	
-	return 0;
+	return nullptr;
 }
 
 const char* CCommandLineInterpreter::Usage(const char* pCommandLine)
 {
 	if(!str_utf8_check(pCommandLine))
-		return 0;
+		return nullptr;
 	
 	pCommandLine = str_skip_whitespaces((char*) pCommandLine);
 	
 	//Skip comments
 	if(*pCommandLine == '#')
-		return 0;
+		return nullptr;
 	
 	//Get the command in the commandlist
 	char aCommand[64];
@@ -450,7 +450,7 @@ const char* CCommandLineInterpreter::Usage(const char* pCommandLine)
 	if(ppCommand)
 		return (*ppCommand)->Usage();
 	
-	return 0;
+	return nullptr;
 }
 
 int CCommandLineInterpreter::ExecuteImpl(const char* pCommandLine, CCLI_Output* pOutput, bool Help)

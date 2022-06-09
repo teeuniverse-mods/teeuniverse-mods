@@ -61,23 +61,23 @@ public:
 		m_pAssetsManager(pAssetsManager),
 		m_pMap(pMap),
 		m_MapPath(MapPath),
-		m_pTeeWorldsZone(NULL),
-		m_pDDGameZone(NULL),
-		m_pDDFrontZone(NULL),
-		m_pDDTeleZone(NULL),
-		m_pDDSwitchZone(NULL),
-		m_pDDTuneZone(NULL),
-		m_pOpenFNGZone(NULL),
-		m_pNinslashZone(NULL),
-		m_pSportZone(NULL),
-		m_pUnknownZone(NULL)
+		m_pTeeWorldsZone(nullptr),
+		m_pDDGameZone(nullptr),
+		m_pDDFrontZone(nullptr),
+		m_pDDTeleZone(nullptr),
+		m_pDDSwitchZone(nullptr),
+		m_pDDTuneZone(nullptr),
+		m_pOpenFNGZone(nullptr),
+		m_pNinslashZone(nullptr),
+		m_pSportZone(nullptr),
+		m_pUnknownZone(nullptr)
 	{
 		
 	}
 	
 	void CreateZone(CAsset_MapZoneTiles** ppZone, CAssetPath& ZonePath, const char* pName, CAssetPath ZoneType, int Width, int Height)
 	{
-		if(*ppZone != NULL)
+		if(*ppZone != nullptr)
 			return;
 			
 		*ppZone = m_pAssetsManager->NewAsset_Hard<CAsset_MapZoneTiles>(&ZonePath, m_MapPath.GetPackageId());
@@ -208,7 +208,7 @@ int CAssetsManager::Load_Map(const char* pFileName, int StorageType, int Format)
 
 		for(int i = 0; i < Num; i++)
 		{
-			ddnet::CMapItemImage *pItem = (ddnet::CMapItemImage *) ArchiveFile.GetItem(Start+i, 0, 0);
+			ddnet::CMapItemImage *pItem = (ddnet::CMapItemImage *) ArchiveFile.GetItem(Start+i, nullptr, nullptr);
 			
 			//Image data
 			if(pItem->m_External)
@@ -443,14 +443,14 @@ int CAssetsManager::Load_Map(const char* pFileName, int StorageType, int Format)
 		
 		ddnet::CEnvPoint* pPoints = nullptr;
 		if(PointNum)
-			pPoints = (ddnet::CEnvPoint*) ArchiveFile.GetItem(PointStart, 0, 0);
+			pPoints = (ddnet::CEnvPoint*) ArchiveFile.GetItem(PointStart, nullptr, nullptr);
 
 		int EnvStart, EnvNum;
 		ArchiveFile.GetType(ddnet::MAPITEMTYPE_ENVELOPE, &EnvStart, &EnvNum);
 		
 		for(int e=0; e<EnvNum; e++)
 		{
-			ddnet::CMapItemEnvelope *pEnv = (ddnet::CMapItemEnvelope *)ArchiveFile.GetItem(EnvStart+e, 0, 0);
+			ddnet::CMapItemEnvelope *pEnv = (ddnet::CMapItemEnvelope *)ArchiveFile.GetItem(EnvStart+e, nullptr, nullptr);
 			
 			if(!pPoints)
 			{
@@ -570,7 +570,7 @@ int CAssetsManager::Load_Map(const char* pFileName, int StorageType, int Format)
 		ArchiveFile.GetType(ddnet::MAPITEMTYPE_GROUP, &Start, &Num);
 		for(int g = 0; g < Num; g++)
 		{
-			ddnet::CMapItemGroup *pGItem = (ddnet::CMapItemGroup *)ArchiveFile.GetItem(Start+g, 0, 0);
+			ddnet::CMapItemGroup *pGItem = (ddnet::CMapItemGroup *)ArchiveFile.GetItem(Start+g, nullptr, nullptr);
 
 			if(pGItem->m_Version < 1 || pGItem->m_Version > ddnet::CMapItemGroup::CURRENT_VERSION)
 				continue;
@@ -588,7 +588,7 @@ int CAssetsManager::Load_Map(const char* pFileName, int StorageType, int Format)
 			{
 				for(int l = 0; l < pGItem->m_NumLayers; l++)
 				{
-					ddnet::CMapItemLayer *pLayerItem = (ddnet::CMapItemLayer *) ArchiveFile.GetItem(LayersStart+pGItem->m_StartLayer+l, 0, 0);
+					ddnet::CMapItemLayer *pLayerItem = (ddnet::CMapItemLayer *) ArchiveFile.GetItem(LayersStart+pGItem->m_StartLayer+l, nullptr, nullptr);
 					if(!pLayerItem)
 						continue;
 					
@@ -644,7 +644,7 @@ int CAssetsManager::Load_Map(const char* pFileName, int StorageType, int Format)
 			{
 				for(int l = 0; l < pGItem->m_NumLayers; l++)
 				{
-					ddnet::CMapItemLayer *pLayerItem = (ddnet::CMapItemLayer *) ArchiveFile.GetItem(LayersStart+pGItem->m_StartLayer+l, 0, 0);
+					ddnet::CMapItemLayer *pLayerItem = (ddnet::CMapItemLayer *) ArchiveFile.GetItem(LayersStart+pGItem->m_StartLayer+l, nullptr, nullptr);
 					if(!pLayerItem)
 						continue;
 					
@@ -796,7 +796,7 @@ int CAssetsManager::Load_Map(const char* pFileName, int StorageType, int Format)
 
 				for(int l = 0; l < pGItem->m_NumLayers; l++)
 				{
-					ddnet::CMapItemLayer *pLayerItem = (ddnet::CMapItemLayer *) ArchiveFile.GetItem(LayersStart+pGItem->m_StartLayer+l, 0, 0);
+					ddnet::CMapItemLayer *pLayerItem = (ddnet::CMapItemLayer *) ArchiveFile.GetItem(LayersStart+pGItem->m_StartLayer+l, nullptr, nullptr);
 					if(!pLayerItem)
 						continue;
 
@@ -2247,7 +2247,7 @@ bool CAssetsManager::Save_Map(const char* pFileName, int StorageType, int Packag
 			}
 		}
 			
-		ddnet::CTile* pFrontTiles = NULL;
+		ddnet::CTile* pFrontTiles = nullptr;
 		if(FrontEnabled)
 		{
 			pFrontTiles = new ddnet::CTile[GameWidth*GameHeight];	
@@ -2264,7 +2264,7 @@ bool CAssetsManager::Save_Map(const char* pFileName, int StorageType, int Packag
 			}
 		}
 			
-		ddnet::CTeleTile* pTeleTiles = NULL;
+		ddnet::CTeleTile* pTeleTiles = nullptr;
 		if(TeleEnabled)
 		{
 			pTeleTiles = new ddnet::CTeleTile[GameWidth*GameHeight];	
@@ -2279,7 +2279,7 @@ bool CAssetsManager::Save_Map(const char* pFileName, int StorageType, int Packag
 			}
 		}
 			
-		ddnet::CSwitchTile* pSwitchTiles = NULL;
+		ddnet::CSwitchTile* pSwitchTiles = nullptr;
 		if(SwitchEnabled)
 		{
 			pSwitchTiles = new ddnet::CSwitchTile[GameWidth*GameHeight];	
@@ -2295,7 +2295,7 @@ bool CAssetsManager::Save_Map(const char* pFileName, int StorageType, int Packag
 			}
 		}
 			
-		ddnet::CTuneTile* pTuneTiles = NULL;
+		ddnet::CTuneTile* pTuneTiles = nullptr;
 		if(TuneEnabled)
 		{
 			pTuneTiles = new ddnet::CTuneTile[GameWidth*GameHeight];	
@@ -2892,7 +2892,7 @@ bool CAssetsManager::Save_Map(const char* pFileName, int StorageType, int Packag
 				LItem.m_Data = ArchiveFile.AddData(GameWidth*GameHeight*sizeof(ddnet::CTile), pTiles);
 				
 				{
-					const char* pZoneName = GetAssetValue<const char*>(pZone->GetZoneTypePath(), CSubPath::Null(), CAsset_ZoneType::NAME, NULL);
+					const char* pZoneName = GetAssetValue<const char*>(pZone->GetZoneTypePath(), CSubPath::Null(), CAsset_ZoneType::NAME, nullptr);
 					if(pZoneName)
 						StrToInts(LItem.m_aName, sizeof(LItem.m_aName)/sizeof(int), pZoneName);
 					else
@@ -2986,7 +2986,7 @@ bool CAssetsManager::Save_Map(const char* pFileName, int StorageType, int Packag
 				LItem.m_Data = ArchiveFile.AddDataSwapped(Quads.size()*sizeof(ddnet::CQuad), &Quads[0]);
 				
 				{
-					const char* pZoneName = GetAssetValue<const char*>(pZone->GetZoneTypePath(), CSubPath::Null(), CAsset_ZoneType::NAME, NULL);
+					const char* pZoneName = GetAssetValue<const char*>(pZone->GetZoneTypePath(), CSubPath::Null(), CAsset_ZoneType::NAME, nullptr);
 					if(pZoneName)
 						StrToInts(LItem.m_aName, sizeof(LItem.m_aName)/sizeof(int), pZoneName);
 					else
@@ -3160,7 +3160,7 @@ bool CAssetsManager::Save_Map(const char* pFileName, int StorageType, int Packag
 			LItem.m_NumQuads = EntityQuads[eId].size();
 			LItem.m_Data = ArchiveFile.AddDataSwapped(EntityQuads[eId].size()*sizeof(ddnet::CQuad), &EntityQuads[eId][0]);
 			{
-				const char* pEntityName = GetAssetValue<const char*>(EntityTypeList[eId], CSubPath::Null(), CAsset_EntityType::NAME, NULL);
+				const char* pEntityName = GetAssetValue<const char*>(EntityTypeList[eId], CSubPath::Null(), CAsset_EntityType::NAME, nullptr);
 				if(pEntityName)
 					StrToInts(LItem.m_aName, sizeof(LItem.m_aName)/sizeof(int), pEntityName);
 				else

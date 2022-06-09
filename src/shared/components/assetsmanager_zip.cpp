@@ -65,7 +65,7 @@ bool CAssetsManager::Save_ZipWithDependencies(const char* pFilename, int Storage
 		{
 			CAssetsPackage::CTuaType_Dependency* pItem = (CAssetsPackage::CTuaType_Dependency*) ArchiveFile.GetItem(1, i);
 			const char* pPackageName = ArchiveFile.GetString(pItem->m_PackageName);
-			if(pPackageName != NULL)
+			if(pPackageName != nullptr)
 			{
 				int PackageFound = -1;
 				for(int p=0; p<static_cast<int>(m_pPackages.size()); p++)
