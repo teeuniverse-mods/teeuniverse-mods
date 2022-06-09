@@ -321,15 +321,18 @@ if(SDL2_FOUND AND OPENGL_FOUND AND FREETYPE_FOUND)
   )
 
   # Build Editor
-  add_executable(${TU_EXECNAME_EDITOR} "${PROJECT_SOURCE_DIR}/src/editor.cpp" ${teeuniverse_editor_src})
-  target_link_libraries (${TU_EXECNAME_EDITOR} ${teeuniverse_editor_libraries})
+  add_executable(teeuniverse_editor "${PROJECT_SOURCE_DIR}/src/editor.cpp" ${teeuniverse_editor_src})
+  set_property(TARGET teeuniverse_editor
+      PROPERTY OUTPUT_NAME ${TU_EXECNAME_EDITOR}
+  )
+  target_link_libraries (teeuniverse_editor ${teeuniverse_editor_libraries})
 
   if("${CMAKE_SYSTEM_NAME}" MATCHES "Windows")
     set(EDITOR_WIN_ICON_PATH "${PROJECT_SOURCE_DIR}/datasrc/share/pixmaps/teeuniverse.ico")
     configure_file("src/editor.rc.in" "editor.rc" @ONLY)
-    target_sources(${TU_EXECNAME_EDITOR} PRIVATE "${CMAKE_CURRENT_BINARY_DIR}/editor.rc")
+    target_sources(teeuniverse_editor PRIVATE "${CMAKE_CURRENT_BINARY_DIR}/editor.rc")
 
-    set_target_properties(${TU_EXECNAME_EDITOR}
+    set_target_properties(teeuniverse_editor
         PROPERTIES
             WIN32_EXECUTABLE TRUE
     )
@@ -469,8 +472,8 @@ message(STATUS "******************************")
 set(PORTABLE_INSTALL TRUE)
 if(PORTABLE_INSTALL)
   install(DIRECTORY "${DATA_OUTPUT_DIRECTORY}" DESTINATION ".")
-  if(TARGET ${TU_EXECNAME_EDITOR})
-      install(TARGETS ${TU_EXECNAME_EDITOR} DESTINATION ".")
+  if(TARGET teeuniverse_editor)
+      install(TARGETS teeuniverse_editor DESTINATION ".")
   endif()
   if("${CMAKE_SYSTEM_NAME}" MATCHES "Windows")
     install(FILES "other/config_directory.bat" DESTINATION ".")
@@ -484,8 +487,8 @@ else()
   if(${PLATFORM} STREQUAL "linux")
     install(FILES "datasrc/share/pixmaps/teeuniverse.png" DESTINATION "share/pixmaps")
   endif()
-  if(TARGET ${TU_EXECNAME_EDITOR})
-    install(TARGETS ${TU_EXECNAME_EDITOR} DESTINATION bin)
+  if(TARGET teeuniverse_editor)
+    install(TARGETS teeuniverse_editor DESTINATION bin)
     if(${PLATFORM} STREQUAL "linux")
       install(FILES "datasrc/share/mime/packages/teeuniverse_editor.xml" DESTINATION "share/mime/packages")
       install(FILES "datasrc/share/applications/teeuniverse_editor.desktop" DESTINATION "share/applications" PERMISSIONS OWNER_READ OWNER_WRITE OWNER_EXECUTE GROUP_READ GROUP_EXECUTE WORLD_READ WORLD_EXECUTE)
