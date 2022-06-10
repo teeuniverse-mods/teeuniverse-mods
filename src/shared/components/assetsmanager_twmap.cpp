@@ -46,33 +46,22 @@ public:
 	CAssetPath m_SportPath;
 	CAssetPath m_UnknownPath;
 	
-	CAsset_MapZoneTiles* m_pTeeWorldsZone;
-	CAsset_MapZoneTiles* m_pDDGameZone;
-	CAsset_MapZoneTiles* m_pDDFrontZone;
-	CAsset_MapZoneTiles* m_pDDTeleZone;
-	CAsset_MapZoneTiles* m_pDDSwitchZone;
-	CAsset_MapZoneTiles* m_pDDTuneZone;
-	CAsset_MapZoneTiles* m_pOpenFNGZone;
-	CAsset_MapZoneTiles* m_pNinslashZone;
-	CAsset_MapZoneTiles* m_pSportZone;
-	CAsset_MapZoneTiles* m_pUnknownZone;
+	CAsset_MapZoneTiles *m_pTeeWorldsZone = nullptr;
+	CAsset_MapZoneTiles *m_pDDGameZone = nullptr;
+	CAsset_MapZoneTiles *m_pDDFrontZone = nullptr;
+	CAsset_MapZoneTiles *m_pDDTeleZone = nullptr;
+	CAsset_MapZoneTiles *m_pDDSwitchZone = nullptr;
+	CAsset_MapZoneTiles *m_pDDTuneZone = nullptr;
+	CAsset_MapZoneTiles *m_pOpenFNGZone = nullptr;
+	CAsset_MapZoneTiles *m_pNinslashZone = nullptr;
+	CAsset_MapZoneTiles *m_pSportZone = nullptr;
+	CAsset_MapZoneTiles *m_pUnknownZone = nullptr;
 	
 	CLoadMap_ZoneList(CAssetsManager* pAssetsManager, CAsset_Map* pMap, CAssetPath MapPath) :
 		m_pAssetsManager(pAssetsManager),
 		m_pMap(pMap),
-		m_MapPath(MapPath),
-		m_pTeeWorldsZone(nullptr),
-		m_pDDGameZone(nullptr),
-		m_pDDFrontZone(nullptr),
-		m_pDDTeleZone(nullptr),
-		m_pDDSwitchZone(nullptr),
-		m_pDDTuneZone(nullptr),
-		m_pOpenFNGZone(nullptr),
-		m_pNinslashZone(nullptr),
-		m_pSportZone(nullptr),
-		m_pUnknownZone(nullptr)
+		m_MapPath(MapPath)
 	{
-		
 	}
 	
 	void CreateZone(CAsset_MapZoneTiles** ppZone, CAssetPath& ZonePath, const char* pName, CAssetPath ZoneType, int Width, int Height)
