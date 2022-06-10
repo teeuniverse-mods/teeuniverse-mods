@@ -44,12 +44,12 @@ public:
 		
 	}
 
-	virtual void UpdateBoundingSize()
+	void UpdateBoundingSize() override
 	{
 		m_BoundingSizeRect.BSNoConstraint();
 	}
 
-	virtual void Render()
+	void Render() override
 	{
 		Graphics()->TextureClear();
 		Graphics()->QuadsBegin();
@@ -91,7 +91,7 @@ public:
 		
 	}
 	
-	virtual void UpdateBoundingSize()
+	void UpdateBoundingSize() override
 	{
 		m_BoundingSizeRect.BSNoConstraint();
 		m_BoundingSizeRect.BSAddSpacing(30, 30);
@@ -117,7 +117,7 @@ public:
 		Graphics()->LinesEnd();
 	}
 	
-	virtual void OnMouseMove()
+	void OnMouseMove() override
 	{
 		ivec2 MousePos = Context()->GetMousePos();
 		if(m_Clicked)
@@ -127,7 +127,7 @@ public:
 		}
 	}
 
-	virtual void OnButtonClick(int Button)
+	void OnButtonClick(int Button) override
 	{
 		if(Button != KEY_MOUSE_1)
 			return;
@@ -138,7 +138,7 @@ public:
 		}
 	}
 
-	virtual void OnButtonRelease(int Button)
+	void OnButtonRelease(int Button) override
 	{
 		if(Button != KEY_MOUSE_1)
 			return;
@@ -160,7 +160,7 @@ public:
 		
 	}
 	
-	virtual void Render()
+	void Render() override
 	{
 		Graphics()->TextureClear();
 		Graphics()->QuadsBegin();
@@ -186,7 +186,7 @@ public:
 		RenderLines(Cursor);
 	}
 
-	virtual vec4 GetSliderValue(float Value)
+	vec4 GetSliderValue(float Value) override
 	{
 		vec4 Color = m_pColorEdit->GetValue();
 		*(static_cast<float*>(&Color.r)+m_C) = Value;
@@ -204,7 +204,7 @@ public:
 	}
 	
 public:
-	virtual void Render()
+	void Render() override
 	{
 		Graphics()->TextureClear();
 		Graphics()->QuadsBegin();
@@ -257,7 +257,7 @@ public:
 		
 	}
 	
-	virtual void Render()
+	void Render() override
 	{
 		Graphics()->TextureClear();
 		Graphics()->QuadsBegin();
@@ -294,7 +294,7 @@ public:
 		RenderLines(Cursor);
 	}
 
-	virtual vec4 GetSliderValue(float Value)
+	vec4 GetSliderValue(float Value) override
 	{
 		vec4 Color = m_pColorEdit->GetValue();
 		vec3 HSV = RgbToHsv(vec3(Color.r, Color.g, Color.b));
@@ -319,7 +319,7 @@ public:
 		
 	}
 	
-	virtual void UpdateBoundingSize()
+	void UpdateBoundingSize() override
 	{
 		m_BoundingSizeRect.BSNoConstraint();
 		m_BoundingSizeRect.BSAddSpacing(30, 30);
@@ -343,7 +343,7 @@ public:
 		Graphics()->LinesEnd();
 	}
 	
-	virtual void Render()
+	void Render() override
 	{
 		Graphics()->TextureClear();
 		Graphics()->QuadsBegin();
@@ -383,7 +383,7 @@ public:
 		return vec4(RGB.r, RGB.g, RGB.b, Color.a);
 	}
 	
-	virtual void OnMouseMove()
+	void OnMouseMove() override
 	{
 		ivec2 MousePos = Context()->GetMousePos();
 		if(m_Clicked)
@@ -393,7 +393,7 @@ public:
 		}
 	}
 
-	virtual void OnButtonClick(int Button)
+	void OnButtonClick(int Button) override
 	{
 		if(Button != KEY_MOUSE_1)
 			return;
@@ -404,7 +404,7 @@ public:
 		}
 	}
 
-	virtual void OnButtonRelease(int Button)
+	void OnButtonRelease(int Button) override
 	{
 		if(Button != KEY_MOUSE_1)
 			return;
@@ -430,13 +430,13 @@ public:
 		
 	}
 	
-	virtual void UpdateBoundingSize()
+	void UpdateBoundingSize() override
 	{
 		m_BoundingSizeRect.BSNoConstraint();
 		m_BoundingSizeRect.BSAddSpacing(255, 255);
 	}
 
-	virtual void Render()
+	void Render() override
 	{
 		Graphics()->TextureClear();
 		Graphics()->QuadsBegin();
@@ -485,7 +485,7 @@ public:
 		Graphics()->LinesEnd();
 	}
 	
-	virtual void OnMouseMove()
+	void OnMouseMove() override
 	{
 		if(m_Clicked)
 		{
@@ -504,7 +504,7 @@ public:
 		}
 	}
 
-	virtual void OnButtonClick(int Button)
+	void OnButtonClick(int Button) override
 	{
 		if(Button != KEY_MOUSE_1)
 			return;
@@ -515,7 +515,7 @@ public:
 		}
 	}
 
-	virtual void OnButtonRelease(int Button)
+	void OnButtonRelease(int Button) override
 	{
 		if(Button != KEY_MOUSE_1)
 			return;
@@ -540,13 +540,13 @@ public:
 		
 	}
 	
-	virtual void UpdateBoundingSize()
+	void UpdateBoundingSize() override
 	{
 		m_BoundingSizeRect.BSNoConstraint();
 		m_BoundingSizeRect.BSAddSpacing(30, 30);
 	}
 		
-	virtual void Render()
+	void Render() override
 	{
 		Graphics()->TextureClear();
 
@@ -645,7 +645,7 @@ public:
 		Graphics()->LinesEnd();
 	}
 	
-	virtual void OnMouseMove()
+	void OnMouseMove() override
 	{
 		vec2 MousePos = vec2(Context()->GetMousePos().x, Context()->GetMousePos().y);
 		if(m_Clicked == 1)
@@ -705,7 +705,7 @@ public:
 		}
 	}
 
-	virtual void OnButtonClick(int Button)
+	void OnButtonClick(int Button) override
 	{
 		if(Button != KEY_MOUSE_1)
 			return;
@@ -756,7 +756,7 @@ public:
 		}
 	}
 
-	virtual void OnButtonRelease(int Button)
+	void OnButtonRelease(int Button) override
 	{
 		if(Button != KEY_MOUSE_1)
 			return;
@@ -774,14 +774,14 @@ protected:
 	int m_C;
 	
 protected:
-	virtual void SetValue(float Value)
+	void SetValue(float Value) override
 	{
 		vec4 Color = m_pColorEdit->GetValue();
 		*(static_cast<float*>(&Color.r)+m_C) = Value/255.0f;
 		m_pColorEdit->SetValue(Color);
 	}
 	
-	virtual float GetValue() const
+	float GetValue() const override
 	{
 		vec4 Color = m_pColorEdit->GetValue();
 		float Value = *(static_cast<float*>(&Color.r)+m_C);
@@ -805,14 +805,14 @@ protected:
 	int m_C;
 
 protected:
-	virtual void SetValue(float Value)
+	void SetValue(float Value) override
 	{
 		vec4 Color = m_pColorEdit->GetValue();
 		*(static_cast<float*>(&Color.r)+m_C) = Value;
 		m_pColorEdit->SetValue(Color);
 	}
 	
-	virtual float GetValue() const
+	float GetValue() const override
 	{
 		vec4 Color = m_pColorEdit->GetValue();
 		float Value = *(static_cast<float*>(&Color.r)+m_C);
@@ -835,7 +835,7 @@ protected:
 	CAbstractColorEdit* m_pColorEdit;
 	int m_C;
 	
-	virtual void SetValue(float Value)
+	void SetValue(float Value) override
 	{
 		vec4 Color = m_pColorEdit->GetValue();
 		vec3 ColorHSV = RgbToHsv(vec3(Color.r, Color.g, Color.b));
@@ -844,7 +844,7 @@ protected:
 		m_pColorEdit->SetValue(vec4(ColorRGB.r, ColorRGB.g, ColorRGB.b, Color.a));
 	}
 	
-	virtual float GetValue() const
+	float GetValue() const override
 	{
 		vec4 Color = m_pColorEdit->GetValue();
 		vec3 ColorHSV = RgbToHsv(vec3(Color.r, Color.g, Color.b));
@@ -868,7 +868,7 @@ protected:
 	CAbstractColorEdit* m_pColorEdit;
 	int m_C;
 	
-	virtual void SetValue(float Value)
+	void SetValue(float Value) override
 	{
 		vec4 Color = m_pColorEdit->GetValue();
 		vec3 ColorHSV = RgbToHsv(vec3(Color.r, Color.g, Color.b));
@@ -877,7 +877,7 @@ protected:
 		m_pColorEdit->SetValue(vec4(ColorRGB.r, ColorRGB.g, ColorRGB.b, Color.a));
 	}
 	
-	virtual float GetValue() const
+	float GetValue() const override
 	{
 		vec4 Color = m_pColorEdit->GetValue();
 		vec3 ColorHSV = RgbToHsv(vec3(Color.r, Color.g, Color.b));
@@ -901,7 +901,7 @@ protected:
 	CAbstractColorEdit* m_pColorEdit;
 	
 protected:
-	virtual void SaveFromTextBuffer()
+	void SaveFromTextBuffer() override
 	{
 		const char* pText = GetText();
 		pText = str_skip_whitespaces((char*) pText);
@@ -930,7 +930,7 @@ protected:
 		));
 	}
 	
-	virtual void CopyToTextBuffer()
+	void CopyToTextBuffer() override
 	{
 		vec4 Color = m_pColorEdit->GetValue();
 		uint32 Value = static_cast<uint32>(Color.a * 255.0f);
@@ -1167,7 +1167,7 @@ public:
 		Add(pTab);
 	}
 	
-	virtual int GetInputToBlock() { return CGui::BLOCKEDINPUT_ALL; }
+	int GetInputToBlock() override { return CGui::BLOCKEDINPUT_ALL; }
 };
 
 /* COLOR EDIT *********************************************************/

@@ -41,7 +41,7 @@ protected:
 		CCursorTool_MapFill* m_pCursorTool;
 		
 	protected:
-		virtual void OnZonePicked(CSubPath IndexPath)
+		void OnZonePicked(CSubPath IndexPath) override
 		{
 			m_pCursorTool->SetZoneIndex(m_ZoneTypePath, IndexPath.GetId(), m_DataInt);
 			m_pPopup->Close();
@@ -71,7 +71,7 @@ public:
 		Add(pImagePicker);
 	}
 	
-	virtual void OnButtonClick(int Button)
+	void OnButtonClick(int Button) override
 	{
 		if(m_DrawRect.IsInside(Context()->GetMousePos()) && m_VisibilityRect.IsInside(Context()->GetMousePos()) && Button == KEY_MOUSE_2)
 			Close();
@@ -79,7 +79,7 @@ public:
 		gui::CPopup::OnButtonClick(Button);
 	}
 
-	virtual void OnInputEvent(const CInput::CEvent& Event)
+	void OnInputEvent(const CInput::CEvent& Event) override
 	{
 		if((Event.m_Key == KEY_SPACE) && (Event.m_Flags & CInput::FLAG_PRESS) && !Input()->IsTextEdited())
 		{
@@ -90,7 +90,7 @@ public:
 			CPopup::OnInputEvent(Event);
 	}
 	
-	virtual int GetInputToBlock() { return CGui::BLOCKEDINPUT_ALL; }
+	int GetInputToBlock() override { return CGui::BLOCKEDINPUT_ALL; }
 };
 
 /* MATERIAL PALETTE ***************************************************/
@@ -105,7 +105,7 @@ protected:
 		CCursorTool_MapFill* m_pCursorTool;
 		
 	protected:
-		virtual void OnBrushPicked(CSubPath IndexPath)
+		void OnBrushPicked(CSubPath IndexPath) override
 		{
 			m_pCursorTool->SetIndex(IndexPath.GetId());
 			m_pPopup->Close();
@@ -135,7 +135,7 @@ public:
 		Add(pImagePicker);
 	}
 	
-	virtual void OnButtonClick(int Button)
+	void OnButtonClick(int Button) override
 	{
 		if(m_DrawRect.IsInside(Context()->GetMousePos()) && m_VisibilityRect.IsInside(Context()->GetMousePos()) && Button == KEY_MOUSE_2)
 			Close();
@@ -143,7 +143,7 @@ public:
 		gui::CPopup::OnButtonClick(Button);
 	}
 
-	virtual void OnInputEvent(const CInput::CEvent& Event)
+	void OnInputEvent(const CInput::CEvent& Event) override
 	{
 		if((Event.m_Key == KEY_SPACE) && (Event.m_Flags & CInput::FLAG_PRESS) && !Input()->IsTextEdited())
 		{
@@ -154,7 +154,7 @@ public:
 			CPopup::OnInputEvent(Event);
 	}
 	
-	virtual int GetInputToBlock() { return CGui::BLOCKEDINPUT_ALL; }
+	int GetInputToBlock() override { return CGui::BLOCKEDINPUT_ALL; }
 };
 
 /* IMAGE PALETTE ******************************************************/
@@ -169,7 +169,7 @@ protected:
 		CCursorTool_MapFill* m_pCursorTool;
 		
 	protected:
-		virtual void OnImagePicked(int MinX, int MinY, int MaxX, int MaxY)
+		void OnImagePicked(int MinX, int MinY, int MaxX, int MaxY) override
 		{
 			m_pCursorTool->SetIndex(MinY*16+MinX);
 			m_pPopup->Close();
@@ -202,7 +202,7 @@ public:
 		Add(pImagePicker);
 	}
 	
-	virtual void OnButtonClick(int Button)
+	void OnButtonClick(int Button) override
 	{
 		if(m_DrawRect.IsInside(Context()->GetMousePos()) && m_VisibilityRect.IsInside(Context()->GetMousePos()) && Button == KEY_MOUSE_2)
 			Close();
@@ -210,7 +210,7 @@ public:
 		gui::CPopup::OnButtonClick(Button);
 	}
 
-	virtual void OnInputEvent(const CInput::CEvent& Event)
+	void OnInputEvent(const CInput::CEvent& Event) override
 	{
 		if((Event.m_Key == KEY_SPACE) && (Event.m_Flags & CInput::FLAG_PRESS) && !Input()->IsTextEdited())
 		{
@@ -221,7 +221,7 @@ public:
 			CPopup::OnInputEvent(Event);
 	}
 	
-	virtual int GetInputToBlock() { return CGui::BLOCKEDINPUT_ALL; }
+	int GetInputToBlock() override { return CGui::BLOCKEDINPUT_ALL; }
 };
 
 }

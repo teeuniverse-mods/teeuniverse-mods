@@ -46,14 +46,15 @@ protected:
 	
 public:
 	CCursorTool_MapStamp(CViewMap* pViewMap);
-	virtual void UpdateToolbar();
-	virtual void OnViewButtonClick(int Button);
-	virtual void OnViewButtonRelease(int Button);
-	virtual void OnViewMouseMove();
-	virtual void RenderView();
-	virtual void Update(bool ParentEnabled);
-	virtual void OnMouseMove();
-	virtual void OnViewInputEvent(const CInput::CEvent& Event);
+	void UpdateToolbar() override;
+	void OnViewButtonClick(int Button) override;
+	void OnViewButtonRelease(int Button) override;
+	void OnViewMouseMove() override;
+	void RenderView() override;
+	void Update(bool ParentEnabled) override;
+	void OnMouseMove() override;
+	void OnViewInputEvent(const CInput::CEvent& Event) override;
+	
 	void PaletteCallback_SelectImage(CAssetPath ImagePath, int MinX, int MinY, int MaxX, int MaxY);
 	void PaletteCallback_SelectZoneType(CAssetPath ZoneTypePath, CSubPath Index, const std::vector<int>& DataInt);
 	void PaletteCallback_SelectBrushType(CAssetPath MaterialPath, CSubPath Index);

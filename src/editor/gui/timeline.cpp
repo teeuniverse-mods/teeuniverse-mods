@@ -40,7 +40,7 @@ protected:
 		CGuiEditor* m_pAssetsEditor;
 		CTimeLine* m_pTimeLine;
 		
-		virtual int64 GetValue() const
+		int64 GetValue() const override
 		{
 			CSubPath FramePath;
 			int Member = -1;
@@ -66,7 +66,7 @@ protected:
 				return 0;
 		}
 		
-		virtual void SetValue(int64 Value)
+		void SetValue(int64 Value) override
 		{
 			CAssetPath AnimationPath = m_pTimeLine->GetAnimationPath();
 			CSubPath FramePath;
@@ -139,7 +139,7 @@ public:
 		Add(new CValueEdit(m_pAssetsEditor, m_pTimeLine), true);
 	}
 	
-	virtual void Update(bool ParentEnabled)
+	void Update(bool ParentEnabled) override
 	{
 		if(ParentEnabled)
 		{
@@ -171,7 +171,7 @@ protected:
 		CGuiEditor* m_pAssetsEditor;
 		CTimeLine* m_pTimeLine;
 		
-		virtual vec4 GetValue() const
+		vec4 GetValue() const override
 		{
 			if(m_pTimeLine->GetEditedFrames().size())
 			{
@@ -190,7 +190,7 @@ protected:
 			return 0;
 		}
 		
-		virtual void SetValue(vec4 Value)
+		void SetValue(vec4 Value) override
 		{
 			CAssetPath AnimationPath = m_pTimeLine->GetAnimationPath();
 				
@@ -233,7 +233,7 @@ public:
 		Add(new CValueEdit(m_pAssetsEditor, m_pTimeLine), true);
 	}
 	
-	virtual void Update(bool ParentEnabled)
+	void Update(bool ParentEnabled) override
 	{
 		if(ParentEnabled)
 		{
@@ -262,7 +262,7 @@ protected:
 	int m_Member;
 	float m_Factor;
 	
-	virtual float GetValue() const
+	float GetValue() const override
 	{
 		if(m_pTimeLine->GetEditedFrames().size())
 		{
@@ -281,7 +281,7 @@ protected:
 		return 0.0f;
 	}
 	
-	virtual void SetValue(float Value)
+	void SetValue(float Value) override
 	{
 		CAssetPath AnimationPath = m_pTimeLine->GetAnimationPath();
 		int Token = AssetsManager()->GenerateToken();
@@ -330,7 +330,7 @@ public:
 		Add(new CBoneFrameFloatEdit(m_pAssetsEditor, m_pTimeLine, CAsset_SkeletonAnimation::BONEANIMATION_KEYFRAME_TRANSLATION_Y), true);
 	}
 	
-	virtual void Update(bool ParentEnabled)
+	void Update(bool ParentEnabled) override
 	{
 		if(ParentEnabled)
 		{
@@ -368,7 +368,7 @@ public:
 		Add(new CBoneFrameFloatEdit(m_pAssetsEditor, m_pTimeLine, CAsset_SkeletonAnimation::BONEANIMATION_KEYFRAME_SCALE_Y), true);
 	}
 	
-	virtual void Update(bool ParentEnabled)
+	void Update(bool ParentEnabled) override
 	{
 		if(ParentEnabled)
 		{
@@ -405,7 +405,7 @@ public:
 		Add(new CBoneFrameFloatEdit(m_pAssetsEditor, m_pTimeLine, CAsset_SkeletonAnimation::BONEANIMATION_KEYFRAME_ANGLE, 180.0f/Pi), true);
 	}
 	
-	virtual void Update(bool ParentEnabled)
+	void Update(bool ParentEnabled) override
 	{
 		if(ParentEnabled)
 		{
@@ -433,7 +433,7 @@ protected:
 	CTimeLine* m_pTimeLine;	
 	
 protected:
-	virtual void MouseClickAction()
+	void MouseClickAction() override
 	{
 		m_pTimeLine->SetZoomToUnit();
 	}
@@ -447,7 +447,7 @@ public:
 		
 	}
 
-	virtual void OnMouseMove()
+	void OnMouseMove() override
 	{
 		if(m_VisibilityRect.IsInside(Context()->GetMousePos()))
 			m_pAssetsEditor->SetHint(_LSTRING("Set the zoom to 100 %"));
@@ -463,12 +463,12 @@ protected:
 	CTimeLine* m_pTimeLine;
 
 protected:
-	virtual float GetValue() const
+	float GetValue() const override
 	{
 		return m_pTimeLine->GetPixelsPerMs();
 	}
 	
-	virtual void SetValue(float Value)
+	void SetValue(float Value) override
 	{
 		m_pTimeLine->SetPixelsPerMs(Value);
 	}
@@ -491,7 +491,7 @@ protected:
 	CGuiEditor* m_pAssetsEditor;
 
 protected:
-	virtual void MouseClickAction()
+	void MouseClickAction() override
 	{
 		m_pAssetsEditor->SetTime(0.0);
 	}
@@ -511,7 +511,7 @@ protected:
 	CGuiEditor* m_pAssetsEditor;
 
 protected:
-	virtual void MouseClickAction()
+	void MouseClickAction() override
 	{
 		m_pAssetsEditor->SetTimePaused(!m_pAssetsEditor->GetTimePaused());
 	}
@@ -524,7 +524,7 @@ public:
 		
 	}
 	
-	virtual void Update(bool ParentEnabled)
+	void Update(bool ParentEnabled) override
 	{
 		if(m_pAssetsEditor->GetTimePaused())
 			SetIcon(m_pAssetsEditor->m_Path_Sprite_IconPlay);
@@ -578,7 +578,7 @@ class CFrameList : public gui::CWidget
 	class CDeleteButton : public CMenuButton
 	{
 	protected:
-		virtual void MouseClickAction()
+		void MouseClickAction() override
 		{
 			AssetsManager()->DeleteSubItem(m_AssetPath, m_FramePath);
 			m_pContextMenu->Close();
@@ -596,7 +596,7 @@ class CFrameList : public gui::CWidget
 		int m_Value;
 		
 	protected:
-		virtual void MouseClickAction()
+		void MouseClickAction() override
 		{
 			int Member = -1;
 			if(m_FramePath.GetType() == CAsset_SkeletonAnimation::TYPE_BONEANIMATION_KEYFRAME)
@@ -772,13 +772,13 @@ public:
 			SetSkeletonLayerPath(SubPath);
 	}
 	
-	virtual void UpdateBoundingSize()
+	void UpdateBoundingSize() override
 	{
 		m_BoundingSizeRect.BSNoConstraint();
 		m_BoundingSizeRect.BSAddSpacing(0, 32);
 	}
 	
-	virtual void OnButtonClick(int Button)
+	void OnButtonClick(int Button) override
 	{
 		ivec2 MousePos = Context()->GetMousePos();
 		if(m_DrawRect.IsInside(MousePos))
@@ -928,7 +928,7 @@ public:
 		}
 	}
 	
-	virtual void OnButtonRelease(int Button)
+	void OnButtonRelease(int Button) override
 	{
 		if(Button == KEY_MOUSE_1 || Button == KEY_MOUSE_2 || Button == KEY_MOUSE_3)
 		{
@@ -938,7 +938,7 @@ public:
 		}
 	}
 	
-	virtual void OnMouseMove()
+	void OnMouseMove() override
 	{		
 		if(m_DragType == DRAGTYPE_TIMESCROLL)
 		{
@@ -1066,7 +1066,7 @@ public:
 		Graphics()->LinesEnd();
 	}
 	
-	virtual void Render()
+	void Render() override
 	{
 		gui::CRect TimelineRect = m_DrawRect;
 		
@@ -1385,7 +1385,7 @@ protected:
 		}
 	}
 
-	virtual void MouseClickAction()
+	void MouseClickAction() override
 	{
 		int Type = GetValue();
 		SetValue((Type+1)%CAsset_SkeletonAnimation::NUM_CYCLETYPES);
@@ -1401,7 +1401,7 @@ public:
 	{
 	}
 	
-	virtual void Update(bool ParentEnabled)
+	void Update(bool ParentEnabled) override
 	{
 		if(ParentEnabled && IsEnabled())
 		{
@@ -1509,7 +1509,7 @@ public:
 		
 	}
 	
-	virtual void Update(bool ParentEnabled)
+	void Update(bool ParentEnabled) override
 	{
 		if(m_pTimeLine->RefreshNeeded())
 			Refresh();

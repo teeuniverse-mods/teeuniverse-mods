@@ -200,9 +200,9 @@ public:
 	CTextRenderer(CClientKernel* pKernel);
 	virtual ~CTextRenderer();
 	
-	virtual bool Init();
-	virtual bool PreUpdate();
-	virtual void Shutdown();
+	bool Init() override;
+	bool PreUpdate() override;
+	void Shutdown() override;
 	
 	bool LoadFont(const char* pFilename);
 	

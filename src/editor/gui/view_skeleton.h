@@ -54,13 +54,13 @@ protected:
 public:
 	CViewSkeleton(CGuiEditor* pAssetsEditor);
 	
-	virtual void RenderView();
-	virtual void Update(bool ParentEnabled);
-	virtual void OnButtonClick(int Button);
-	virtual void OnButtonRelease(int Button);
-	virtual void OnMouseMove();
+	void RenderView() override;
+	void Update(bool ParentEnabled) override;
+	void OnButtonClick(int Button) override;
+	void OnButtonRelease(int Button) override;
+	void OnMouseMove() override;
 	
-	inline class CSkeletonRenderer* SkeletonRenderer() { return m_pSkeletonRenderer.get(); }
+	class CSkeletonRenderer* SkeletonRenderer() { return m_pSkeletonRenderer.get(); }
 	void RefreshSkeletonRenderer();
 	
 	float GetCameraZoom();

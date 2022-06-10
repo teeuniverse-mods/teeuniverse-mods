@@ -39,7 +39,7 @@ protected:
 		int m_PackageId;
 		
 	protected:
-		virtual void MouseClickAction()
+		void MouseClickAction() override
 		{
 			AssetsManager()->ClosePackage(m_PackageId);
 			m_pContextMenu->Close();
@@ -68,7 +68,7 @@ protected:
 		int m_PackageId;
 		
 	protected:
-		virtual void MouseClickAction()
+		void MouseClickAction() override
 		{
 			m_pAssetsEditor->DisplayPopup(new PackagePropertiesDialog(m_pAssetsEditor, m_PackageId));
 			m_pContextMenu->Close();
@@ -93,12 +93,12 @@ protected:
 		int m_PackageId;
 		
 	protected:
-		virtual bool GetValue()
+		bool GetValue() override
 		{
 			return !AssetsManager()->IsValidPackage(m_PackageId) || AssetsManager()->IsReadOnlyPackage(m_PackageId);
 		}
 		
-		virtual void SetValue(bool Value)
+		void SetValue(bool Value) override
 		{
 			if(AssetsManager()->IsValidPackage(m_PackageId))
 			{
@@ -123,7 +123,7 @@ protected:
 	int m_PackageId;
 	
 protected:
-	virtual void MouseClickAction()
+	void MouseClickAction() override
 	{
 		Action();
 	}
@@ -149,7 +149,7 @@ public:
 		SetButtonStyle(m_pAssetsEditor->m_Path_Button_ListItem);
 	}
 	
-	virtual void Update(bool ParentEnabled)
+	void Update(bool ParentEnabled) override
 	{
 		SetText(AssetsManager()->GetPackageName(m_PackageId));
 		
@@ -168,7 +168,7 @@ public:
 		gui::CButton::Update(ParentEnabled);
 	}
 	
-	virtual void OnButtonClick(int Button)
+	void OnButtonClick(int Button) override
 	{
 		if(Button == KEY_MOUSE_2)
 		{
@@ -222,7 +222,7 @@ public:
 		SetIcon(m_pAssetsEditor->GetItemIcon(m_AssetPath, m_SubPath));
 	}
 	
-	virtual void Update(bool ParentEnabled)
+	void Update(bool ParentEnabled) override
 	{
 		SetText(m_pAssetsEditor->GetItemName(m_AssetPath, m_SubPath));
 		
@@ -251,7 +251,7 @@ protected:
 	class CDuplicateButton : public CAssetMenuButton
 	{
 	protected:
-		virtual void MouseClickAction()
+		void MouseClickAction() override
 		{
 			int Token = AssetsManager()->GenerateToken();
 			
@@ -405,7 +405,7 @@ protected:
 	class CDeleteButton : public CAssetMenuButton
 	{
 	protected:
-		virtual void MouseClickAction()
+		void MouseClickAction() override
 		{
 			std::vector<CAssetPath> AssetsToDelete;
 			CAssetPath NextSelectedAsset = CAssetPath::Null();
@@ -534,7 +534,7 @@ protected:
 	class CAddSpriteButton : public CAssetMenuButton
 	{
 	protected:
-		virtual void MouseClickAction()
+		void MouseClickAction() override
 		{
 			CAssetPath SpritePath;
 			int Token = AssetsManager()->GenerateToken();
@@ -568,7 +568,7 @@ protected:
 	class CAddZoneTileLayerButton : public CAssetMenuButton
 	{
 	protected:
-		virtual void MouseClickAction()
+		void MouseClickAction() override
 		{
 			CAssetPath ZoneLayerPath;
 			int Token = AssetsManager()->GenerateToken();
@@ -640,7 +640,7 @@ protected:
 	class CAddZoneObjectLayerButton : public CAssetMenuButton
 	{
 	protected:
-		virtual void MouseClickAction()
+		void MouseClickAction() override
 		{
 			CAssetPath ZoneLayerPath;
 			int Token = AssetsManager()->GenerateToken();
@@ -676,7 +676,7 @@ protected:
 	class CAddEntityLayerButton : public CAssetMenuButton
 	{
 	protected:
-		virtual void MouseClickAction()
+		void MouseClickAction() override
 		{
 			CAssetPath EntityLayerPath;
 			int Token = AssetsManager()->GenerateToken();
@@ -712,7 +712,7 @@ protected:
 	class CAddBgGroupButton : public CAssetMenuButton
 	{
 	protected:
-		virtual void MouseClickAction()
+		void MouseClickAction() override
 		{
 			CAssetPath GroupPath;
 			int Token = AssetsManager()->GenerateToken();
@@ -749,7 +749,7 @@ protected:
 	class CAddFgGroupButton : public CAssetMenuButton
 	{
 	protected:
-		virtual void MouseClickAction()
+		void MouseClickAction() override
 		{
 			CAssetPath GroupPath;
 			int Token = AssetsManager()->GenerateToken();
@@ -788,7 +788,7 @@ protected:
 		int m_Shift;
 		
 	protected:
-		virtual void MouseClickAction()
+		void MouseClickAction() override
 		{
 			const CAsset_MapGroup* pGroup = AssetsManager()->GetAsset<CAsset_MapGroup>(m_AssetPath);
 			if(!pGroup)
@@ -884,7 +884,7 @@ protected:
 		int m_Shift;
 		
 	protected:
-		virtual void MouseClickAction()
+		void MouseClickAction() override
 		{
 			const CAsset_MapZoneTiles* pLayer = AssetsManager()->GetAsset<CAsset_MapZoneTiles>(m_AssetPath);
 			if(!pLayer)
@@ -947,7 +947,7 @@ protected:
 		int m_Shift;
 		
 	protected:
-		virtual void MouseClickAction()
+		void MouseClickAction() override
 		{
 			const CAsset_MapEntities* pLayer = AssetsManager()->GetAsset<CAsset_MapEntities>(m_AssetPath);
 			if(!pLayer)
@@ -993,7 +993,7 @@ protected:
 		int m_Shift;
 		
 	protected:
-		virtual void MouseClickAction()
+		void MouseClickAction() override
 		{
 			const T* pLayer = AssetsManager()->template GetAsset<T>(m_AssetPath);
 			if(!pLayer)
@@ -1139,7 +1139,7 @@ protected:
 	class CAddTileLayerButton : public CAssetMenuButton
 	{
 	protected:
-		virtual void MouseClickAction()
+		void MouseClickAction() override
 		{
 			CAssetPath LayerPath;
 			int Token = AssetsManager()->GenerateToken();
@@ -1213,7 +1213,7 @@ protected:
 	class CAddQuadLayerButton : public CAssetMenuButton
 	{
 	protected:
-		virtual void MouseClickAction()
+		void MouseClickAction() override
 		{
 			CAssetPath LayerPath;
 			int Token = AssetsManager()->GenerateToken();
@@ -1249,7 +1249,7 @@ protected:
 	class CAddObjectLayerButton : public CAssetMenuButton
 	{
 	protected:
-		virtual void MouseClickAction()
+		void MouseClickAction() override
 		{
 			CAssetPath LayerPath;
 			int Token = AssetsManager()->GenerateToken();
@@ -1285,7 +1285,7 @@ protected:
 	class CAddSkeletonSkinButton : public CAssetMenuButton
 	{
 	protected:
-		virtual void MouseClickAction()
+		void MouseClickAction() override
 		{
 			
 			const CAsset_Skeleton* pSkeleton = AssetsManager()->GetAsset<CAsset_Skeleton>(m_AssetPath);
@@ -1314,7 +1314,7 @@ protected:
 	class CAddSkeletonAnimationButton : public CAssetMenuButton
 	{
 	protected:
-		virtual void MouseClickAction()
+		void MouseClickAction() override
 		{
 			
 			const CAsset_Skeleton* pSkeleton = AssetsManager()->GetAsset<CAsset_Skeleton>(m_AssetPath);
@@ -1348,12 +1348,12 @@ protected:
 		int m_Member;
 	
 	protected:
-		virtual bool GetValue()
+		bool GetValue() override
 		{
 			return AssetsManager()->GetAssetValue<bool>(m_AssetPath, CSubPath::Null(), m_Member, true);
 		}
 		
-		virtual void SetValue(bool Value)
+		void SetValue(bool Value) override
 		{
 			AssetsManager()->SetAssetValue_Hard<bool>(m_AssetPath, CSubPath::Null(), m_Member, Value);
 		}
@@ -1377,7 +1377,7 @@ protected:
 		CSubPath m_SubPath;
 	
 	protected:
-		virtual void MouseClickAction() { Action(); }
+		void MouseClickAction() override { Action(); }
 
 	public:
 		CTitleButton(CGuiEditor* pAssetsEditor, const CAssetPath& AssetPath, CSubPath SubPath) :
@@ -1389,7 +1389,7 @@ protected:
 			
 		}
 	
-		virtual void Update(bool ParentEnabled)
+		void Update(bool ParentEnabled) override
 		{
 			if(m_AssetPath.GetType() == CAsset_Map::TypeId && !m_SubPath.IsNull())
 			{
@@ -1474,7 +1474,7 @@ public:
 		}
 	}
 	
-	virtual void OnButtonClick(int Button)
+	void OnButtonClick(int Button) override
 	{
 		if(Button == KEY_MOUSE_2 && AssetsManager()->IsValidPackage(m_AssetPath.GetPackageId()) && !AssetsManager()->IsReadOnlyPackage(m_AssetPath.GetPackageId()))
 		{

@@ -32,7 +32,7 @@ protected:
 	CPreferences* m_pPopup;
 	
 protected:
-	virtual void MouseClickAction() { m_pPopup->Close(); }
+	void MouseClickAction() override { m_pPopup->Close(); }
 	
 public:
 	CCloseButton(CPreferences* pPopup) :

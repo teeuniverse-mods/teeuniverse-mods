@@ -42,7 +42,7 @@ public:
 		m_File(File)
 	{ }
 	
-	virtual void Print(const char* pText, int Type = CLI_LINETYPE_NORMAL)
+	void Print(const char* pText, int Type = CLI_LINETYPE_NORMAL) override
 	{
 		io_write(m_File, pText, str_length(pText));
 		io_write(m_File, "\n", 1);
@@ -129,15 +129,15 @@ void CCommandLineInterpreter::CCommand::Help(CCLI_Output* pOutput)
 class CCommand_Echo : public CCommandLineInterpreter::CCommand
 {
 public:
-	virtual int Execute(const char* pArgs, CCLI_Output* pOutput)
+	int Execute(const char* pArgs, CCLI_Output* pOutput) override
 	{
 		if(pOutput)
 			pOutput->Print(pArgs, CLI_LINETYPE_NORMAL);
 		return CLI_SUCCESS;
 	}
 	
-	virtual const char* Usage() { return "echo \"Text\""; }
-	virtual const char* Description() { return "Print a text in the console"; }
+	const char* Usage() override { return "echo \"Text\""; }
+	const char* Description() override { return "Print a text in the console"; }
 };
 
 	//Help
@@ -151,14 +151,14 @@ public:
 		m_pCLI(pCLI)
 	{ }
 	
-	virtual int Execute(const char* pArgs, CCLI_Output* pOutput)
+	int Execute(const char* pArgs, CCLI_Output* pOutput) override
 	{
 		m_pCLI->Help(pArgs, pOutput);
 		return CLI_SUCCESS;
 	}
 	
-	virtual const char* Usage() { return "help \"Command\""; }
-	virtual const char* Description() { return "Print the help of a command"; }
+	const char* Usage() override { return "help \"Command\""; }
+	const char* Description() override { return "Print the help of a command"; }
 };
 
 	//Config Integer
@@ -184,7 +184,7 @@ public:
 		m_Usage.append(" Value");
 	}
 	
-	virtual int Execute(const char* pArgs, CCLI_Output* pOutput)
+	int Execute(const char* pArgs, CCLI_Output* pOutput) override
 	{
 		const char* pArgsIter = pArgs;
 		int Value;
@@ -203,8 +203,8 @@ public:
 		return CLI_SUCCESS;
 	}
 	
-	virtual const char* Usage() { return m_Usage.buffer(); }
-	virtual const char* Description() { return m_pDescription; }
+	const char* Usage() override { return m_Usage.buffer(); }
+	const char* Description() override { return m_pDescription; }
 };
 
 	//SaveOutput
@@ -218,7 +218,7 @@ public:
 		m_pCLI(pCLI)
 	{ }
 	
-	virtual int Execute(const char* pArgs, CCLI_Output* pOutput)
+	int Execute(const char* pArgs, CCLI_Output* pOutput) override
 	{
 		const char* pArgsIter = pArgs;
 		
@@ -252,8 +252,8 @@ public:
 		return CLI_SUCCESS;
 	}
 	
-	virtual const char* Usage() { return "save_output \"Filename\" \"Command\""; }
-	virtual const char* Description() { return "Write the output of \"Command\" in the file \"Filename\""; }
+	const char* Usage() override { return "save_output \"Filename\" \"Command\""; }
+	const char* Description() override { return "Write the output of \"Command\" in the file \"Filename\""; }
 };
 
 	//SaveConfig
@@ -267,7 +267,7 @@ public:
 		m_pKernel(pKernel)
 	{ }
 	
-	virtual int Execute(const char* pArgs, CCLI_Output* pOutput)
+	int Execute(const char* pArgs, CCLI_Output* pOutput) override
 	{
 		const char* pArgsIter = pArgs;
 		
@@ -300,8 +300,8 @@ public:
 		return CLI_SUCCESS;
 	}
 	
-	virtual const char* Usage() { return "save_config \"Filename\""; }
-	virtual const char* Description() { return "Write current configuration in the file \"Filename\""; }
+	const char* Usage() override { return "save_config \"Filename\""; }
+	const char* Description() override { return "Write current configuration in the file \"Filename\""; }
 };
 
 	//CmdList
@@ -315,7 +315,7 @@ public:
 		m_pCLI(pCLI)
 	{ }
 	
-	virtual int Execute(const char* pArgs, CCLI_Output* pOutput)
+	int Execute(const char* pArgs, CCLI_Output* pOutput) override
 	{
 		if(pOutput)
 		{
@@ -329,8 +329,8 @@ public:
 		return CLI_SUCCESS;
 	}
 	
-	virtual const char* Usage() { return "cmdlist"; }
-	virtual const char* Description() { return "List all available commands"; }
+	const char* Usage() override { return "cmdlist"; }
+	const char* Description() override { return "List all available commands"; }
 };
 
 /* COMMAND LINE INTERPRETER *******************************************/

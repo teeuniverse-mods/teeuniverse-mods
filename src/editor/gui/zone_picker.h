@@ -34,8 +34,8 @@ protected:
 public:
 	CZonePicker(CGuiEditor* pAssetsEditor, CAssetPath ZoneTypePath, const std::vector<int>* pDataInt);
 	
-	inline gui::CLabel* GetTitleLabel() { return m_pZoneTitle; }
-	inline gui::CLabel* GetDescriptionLabel() { return m_pZoneDescription; }
+	gui::CLabel* GetTitleLabel() { return m_pZoneTitle; }
+	gui::CLabel* GetDescriptionLabel() { return m_pZoneDescription; }
 	
 	virtual void OnZonePicked(CSubPath IndexPath) {}
 };

@@ -51,7 +51,7 @@ protected:
 	dynamic_string m_Filename;
 	
 protected:
-	virtual void OnConfirmation()
+	void OnConfirmation() override
 	{
 		if(!m_pAssetsEditor->AssetsManager()->Save_AssetsFile(m_PackageId, m_Filename.buffer()))
 			m_pAssetsEditor->DisplayPopup(new CErrorDialog(m_pAssetsEditor, _LSTRING("The package can't be saved")));
@@ -77,7 +77,7 @@ public:
 		m_pAssetsEditor(pAssetsEditor)
 	{ }
 
-	virtual int Execute(const char* pArgs, CCLI_Output* pOutput)
+	int Execute(const char* pArgs, CCLI_Output* pOutput) override
 	{
 		m_pAssetsEditor->AssetsManager()->Undo();
 		m_pAssetsEditor->RefreshPackageTree();
@@ -86,8 +86,8 @@ public:
 		return CLI_SUCCESS;
 	}
 	
-	virtual const char* Usage() { return "editor_undo"; }
-	virtual const char* Description() { return "Undo the last editing"; }
+	const char* Usage() override { return "editor_undo"; }
+	const char* Description() override { return "Undo the last editing"; }
 };
 
 	//editor_open
@@ -102,15 +102,15 @@ public:
 		m_pAssetsEditor(pAssetsEditor)
 	{ }
 
-	virtual int Execute(const char* pArgs, CCLI_Output* pOutput)
+	int Execute(const char* pArgs, CCLI_Output* pOutput) override
 	{
 		m_pAssetsEditor->DisplayPopup(new COpenSavePackageDialog(m_pAssetsEditor, COpenSavePackageDialog::MODE_OPEN, COpenSavePackageDialog::FORMAT_PACKAGE));
 		
 		return CLI_SUCCESS;
 	}
 	
-	virtual const char* Usage() { return "editor_open"; }
-	virtual const char* Description() { return "Open a package"; }
+	const char* Usage() override { return "editor_open"; }
+	const char* Description() override { return "Open a package"; }
 };
 
 	//editor_save
@@ -125,7 +125,7 @@ public:
 		m_pAssetsEditor(pAssetsEditor)
 	{ }
 
-	virtual int Execute(const char* pArgs, CCLI_Output* pOutput)
+	int Execute(const char* pArgs, CCLI_Output* pOutput) override
 	{
 		dynamic_string Filename;
 		
@@ -153,8 +153,8 @@ public:
 		return CLI_SUCCESS;
 	}
 	
-	virtual const char* Usage() { return "editor_save"; }
-	virtual const char* Description() { return "Save the current package"; }
+	const char* Usage() override { return "editor_save"; }
+	const char* Description() override { return "Save the current package"; }
 };
 
 	//editor_quit
@@ -169,15 +169,15 @@ public:
 		m_pAssetsEditor(pAssetsEditor)
 	{ }
 
-	virtual int Execute(const char* pArgs, CCLI_Output* pOutput)
+	int Execute(const char* pArgs, CCLI_Output* pOutput) override
 	{
 		m_pAssetsEditor->Quit();
 		
 		return CLI_SUCCESS;
 	}
 	
-	virtual const char* Usage() { return "editor_quit"; }
-	virtual const char* Description() { return "Quit the program"; }
+	const char* Usage() override { return "editor_quit"; }
+	const char* Description() override { return "Quit the program"; }
 };
 
 #define DEFINE_CMD_BINDCALL(className, bindCall, name, desc) class className : public CCommandLineInterpreter::CCommand \
@@ -230,10 +230,10 @@ protected:
 	int m_PackageId;
 
 protected:
-	virtual void SaveFromTextBuffer()
+	void SaveFromTextBuffer() override
 			{ AssetsManager()->SetPackageName(m_PackageId, GetText()); }
 	
-	virtual void CopyToTextBuffer()
+	void CopyToTextBuffer() override
 		{
 			const char* pName = AssetsManager()->GetPackageName(m_PackageId);
 			if(m_Text != pName)
@@ -260,7 +260,7 @@ public:
 		m_PackageId(PackageId)
 	{ }
 	
-	virtual void Update(bool ParentEnabled)
+	void Update(bool ParentEnabled) override
 	{
 		SetText(AssetsManager()->GetPackageDirectory(m_PackageId));
 		
@@ -275,10 +275,10 @@ protected:
 	int m_PackageId;
 
 protected:
-	virtual void SaveFromTextBuffer()
+	void SaveFromTextBuffer() override
 			{ AssetsManager()->SetPackageAuthor(m_PackageId, GetText()); }
 	
-	virtual void CopyToTextBuffer()
+	void CopyToTextBuffer() override
 		{
 			const char* pName = AssetsManager()->GetPackageAuthor(m_PackageId);
 			if(m_Text != pName)
@@ -301,10 +301,10 @@ protected:
 	int m_PackageId;
 
 protected:
-	virtual void SaveFromTextBuffer()
+	void SaveFromTextBuffer() override
 			{ AssetsManager()->SetPackageCredits(m_PackageId, GetText()); }
 	
-	virtual void CopyToTextBuffer()
+	void CopyToTextBuffer() override
 		{
 			const char* pName = AssetsManager()->GetPackageCredits(m_PackageId);
 			if(m_Text != pName)
@@ -327,10 +327,10 @@ protected:
 	int m_PackageId;
 
 protected:
-	virtual void SaveFromTextBuffer()
+	void SaveFromTextBuffer() override
 			{ AssetsManager()->SetPackageLicense(m_PackageId, GetText()); }
 	
-	virtual void CopyToTextBuffer()
+	void CopyToTextBuffer() override
 		{
 			const char* pName = AssetsManager()->GetPackageLicense(m_PackageId);
 			if(m_Text != pName)
@@ -353,10 +353,10 @@ protected:
 	int m_PackageId;
 
 protected:
-	virtual void SaveFromTextBuffer()
+	void SaveFromTextBuffer() override
 			{ AssetsManager()->SetPackageVersion(m_PackageId, GetText()); }
 	
-	virtual void CopyToTextBuffer()
+	void CopyToTextBuffer() override
 		{
 			const char* pName = AssetsManager()->GetPackageVersion(m_PackageId);
 			if(m_Text != pName)
@@ -547,7 +547,7 @@ protected:
 	bool m_ReadOnly;
 	
 protected:
-	virtual void MouseClickAction()
+	void MouseClickAction() override
 	{
 		m_pPopup->m_ReadOnly = m_ReadOnly;
 		m_pPopup->SelectDirectory(m_Directory.buffer());
@@ -583,7 +583,7 @@ protected:
 	dynamic_string m_Filename;
 	
 protected:
-	virtual void MouseClickAction()
+	void MouseClickAction() override
 	{
 		m_pPopup->SelectName(m_Filename.buffer());
 	}
@@ -612,7 +612,7 @@ public:
 		m_Filename = pFilename;
 	}
 	
-	virtual void Update(bool ParentEnabled)
+	void Update(bool ParentEnabled) override
 	{
 		if(m_Filename == m_pPopup->m_Filename)
 			SetButtonStyle(m_pAssetsEditor->m_Path_Button_ListItemHL);
@@ -627,7 +627,7 @@ protected:
 	COpenSavePackageDialog* m_pPopup;
 	
 protected:
-	virtual void MouseClickAction()
+	void MouseClickAction() override
 	{
 		m_pPopup->Open();
 	}
@@ -640,7 +640,7 @@ public:
 		SetButtonStyle(pPopup->m_pAssetsEditor->m_Path_Button_Dialog);
 	}
 	
-	virtual void Update(bool ParentEnabled)
+	void Update(bool ParentEnabled) override
 	{
 		if(ParentEnabled)
 		{
@@ -660,7 +660,7 @@ protected:
 	COpenSavePackageDialog* m_pPopup;
 	
 protected:
-	virtual void MouseClickAction()
+	void MouseClickAction() override
 	{
 		m_pPopup->Save();
 	}
@@ -680,7 +680,7 @@ protected:
 	COpenSavePackageDialog* m_pPopup;
 	
 protected:
-	virtual void MouseClickAction()
+	void MouseClickAction() override
 	{
 		m_pPopup->Close();
 	}
@@ -700,12 +700,12 @@ protected:
 	int* m_pValueContainer;
 	
 protected:
-	virtual int GetValue() const
+	int GetValue() const override
 	{
 		return *m_pValueContainer;
 	}
 	
-	virtual void SetValue(int Value)
+	void SetValue(int Value) override
 	{
 		*m_pValueContainer = Value;
 	}
@@ -726,12 +726,12 @@ protected:
 	bool* m_pValueContainer;
 	
 protected:
-	virtual bool GetValue()
+	bool GetValue() override
 	{
 		return *m_pValueContainer;
 	}
 	
-	virtual void SetValue(bool Value)
+	void SetValue(bool Value) override
 	{
 		*m_pValueContainer = Value;
 		m_pDialog->ListFiles();
@@ -763,12 +763,12 @@ public:
 protected:
 	std::function<void(const char *)> m_TextChangedCallback = nullptr;
 
-	void SaveFromTextBuffer()
+	void SaveFromTextBuffer() override
 	{
 		m_TextChangedCallback(GetText());
 	}
 
-	void CopyToTextBuffer() { }
+	void CopyToTextBuffer() override { }
 };
 
 COpenSavePackageDialog::COpenSavePackageDialog(CGuiEditor* pAssetsEditor, int Mode, int Format) :
@@ -1362,7 +1362,7 @@ public:
 		Add(m_pList);
 	}
 	
-	virtual int GetInputToBlock() { return CGui::BLOCKEDINPUT_ALL; }
+	int GetInputToBlock() override { return CGui::BLOCKEDINPUT_ALL; }
 	
 	gui::CVListLayout* List() { return m_pList; }
 };
@@ -1376,7 +1376,7 @@ protected:
 	CPopup_Menu* m_pPopupMenu;
 	
 protected:
-	virtual void MouseClickAction()
+	void MouseClickAction() override
 	{
 		int PackageId = AssetsManager()->NewPackage("mypackage");
 		AssetsManager()->SetPackageReadOnly(PackageId, false);
@@ -1409,7 +1409,7 @@ protected:
 	CPopup_Menu* m_pPopupMenu;
 	
 protected:
-	virtual void MouseClickAction()
+	void MouseClickAction() override
 	{
 		m_pAssetsEditor->DisplayPopup(new COpenSavePackageDialog(m_pAssetsEditor, COpenSavePackageDialog::MODE_OPEN, COpenSavePackageDialog::FORMAT_PACKAGE));
 		m_pPopupMenu->Close();
@@ -1434,7 +1434,7 @@ protected:
 	int m_Format;
 	
 protected:
-	virtual void MouseClickAction()
+	void MouseClickAction() override
 	{
 		m_pAssetsEditor->DisplayPopup(new COpenSavePackageDialog(m_pAssetsEditor, COpenSavePackageDialog::MODE_OPEN, m_Format));
 		m_pPopupMenu->Close();
@@ -1461,7 +1461,7 @@ public:
 		SetButtonStyle(m_pAssetsEditor->m_Path_Button_Menu);
 	}
 	
-	virtual void Update(bool ParentEnabled)
+	void Update(bool ParentEnabled) override
 	{
 		if(m_Format == COpenSavePackageDialog::FORMAT_IMAGE)
 		{
@@ -1483,7 +1483,7 @@ protected:
 	int m_Format;
 	
 protected:
-	virtual void MouseClickAction()
+	void MouseClickAction() override
 	{
 		m_pAssetsEditor->DisplayPopup(new COpenSavePackageDialog(m_pAssetsEditor, COpenSavePackageDialog::MODE_SAVE, m_Format));
 		m_pPopupMenu->Close();
@@ -1517,7 +1517,7 @@ protected:
 	CPopup_Menu* m_pPopupMenu;
 	
 protected:
-	virtual void MouseClickAction()
+	void MouseClickAction() override
 	{
 		dynamic_string Filename;
 		if(AssetsManager()->GetPackageSaveFilename(m_pAssetsEditor->GetEditedPackageId(), Filename))
@@ -1546,7 +1546,7 @@ protected:
 	CPopup_Menu* m_pPopupMenu;
 	
 protected:
-	virtual void MouseClickAction()
+	void MouseClickAction() override
 	{
 		dynamic_string Filename;
 		if(AssetsManager()->GetPackageSaveFilename(m_pAssetsEditor->GetEditedPackageId(), Filename))
@@ -1576,7 +1576,7 @@ protected:
 	CPopup_Menu* m_pPopupMenu;
 	
 protected:
-	virtual void MouseClickAction()
+	void MouseClickAction() override
 	{
 		m_pAssetsEditor->Quit();
 		m_pPopupMenu->Close();
@@ -1600,7 +1600,7 @@ protected:
 	CPopup_Menu* m_pPopupMenu;
 	
 protected:
-	virtual void MouseClickAction()
+	void MouseClickAction() override
 	{
 		CLI()->Execute("editor_undo");
 	}
@@ -1615,7 +1615,7 @@ public:
 		SetIcon(m_pAssetsEditor->m_Path_Sprite_IconErase);
 	}
 	
-	virtual void Update(bool ParentEnabled)
+	void Update(bool ParentEnabled) override
 	{
 		if(AssetsManager()->GetHistorySize())
 			Editable(true);
@@ -1633,7 +1633,7 @@ protected:
 	CPopup_Menu* m_pPopupMenu;
 	
 protected:
-	virtual void MouseClickAction()
+	void MouseClickAction() override
 	{
 		m_pAssetsEditor->DisplayPopup(new CPreferences(m_pAssetsEditor));
 		m_pPopupMenu->Close();
@@ -1657,7 +1657,7 @@ protected:
 	int m_AssetType;
 	
 protected:
-	virtual void MouseClickAction()
+	void MouseClickAction() override
 	{
 		CAssetPath AssetPath;
 		switch(m_AssetType)
@@ -1874,7 +1874,7 @@ public:
 		}
 	}
 	
-	virtual void Update(bool ParentEnabled)
+	void Update(bool ParentEnabled) override
 	{
 		if(!AssetsManager()->IsValidPackage(m_pAssetsEditor->GetEditedPackageId()) || AssetsManager()->IsReadOnlyPackage(m_pAssetsEditor->GetEditedPackageId()))
 			Editable(false);
@@ -1892,12 +1892,12 @@ protected:
 	CPopup_Menu* m_pPopupMenu;
 	
 protected:
-	virtual bool GetValue()
+	bool GetValue() override
 	{
 		return Graphics()->m_Cfg_Fullscreen;
 	}
 	
-	virtual void SetValue(bool Value)
+	void SetValue(bool Value) override
 	{
 		if(Value != (Graphics()->m_Cfg_Fullscreen > 0))
 		{
@@ -1922,7 +1922,7 @@ protected:
 	CGuiEditor* m_pAssetsEditor;
 	
 protected:
-	virtual void MouseClickAction()
+	void MouseClickAction() override
 	{
 		CPopup_Menu* pMenu = new CPopup_Menu(m_pAssetsEditor, m_DrawRect);
 		pMenu->List()->Add(new CNewPackageButton(m_pAssetsEditor, pMenu));
@@ -1955,7 +1955,7 @@ protected:
 	CGuiEditor* m_pAssetsEditor;
 	
 protected:
-	virtual void MouseClickAction()
+	void MouseClickAction() override
 	{
 		CPopup_Menu* pMenu = new CPopup_Menu(m_pAssetsEditor, m_DrawRect);
 		
@@ -1989,7 +1989,7 @@ protected:
 	CGuiEditor* m_pAssetsEditor;
 	
 protected:
-	virtual void MouseClickAction()
+	void MouseClickAction() override
 	{
 		CPopup_Menu* pMenu = new CPopup_Menu(m_pAssetsEditor, m_DrawRect);
 		
@@ -2062,7 +2062,7 @@ public:
 		CPopup_Menu* m_pPopupMenu;
 		
 	protected:
-		virtual void MouseClickAction()
+		void MouseClickAction() override
 		{
 			m_pAssetsEditor->DisplayPopup(new AboutDialog(m_pAssetsEditor));
 			m_pPopupMenu->Close();
@@ -2082,7 +2082,7 @@ protected:
 	CGuiEditor* m_pAssetsEditor;
 	
 protected:
-	virtual void MouseClickAction()
+	void MouseClickAction() override
 	{
 		CPopup_Menu* pMenu = new CPopup_Menu(m_pAssetsEditor, m_DrawRect);
 		

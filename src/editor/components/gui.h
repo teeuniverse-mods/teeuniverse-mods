@@ -41,8 +41,8 @@ public:
 	public:
 		CMainWidget(CGuiEditor* pAssetsEditor);
 		
-		virtual void Render();
-		virtual void OnInputEvent(const CInput::CEvent& Event);
+		void Render() override;
+		void OnInputEvent(const CInput::CEvent& Event) override;
 	};
 	
 private:
@@ -310,14 +310,14 @@ public:
 	CGuiEditor(CEditorKernel* pKernel);
 	virtual ~CGuiEditor();
 	
-	virtual bool InitConfig(int argc, const char** argv);
-	virtual bool Init();
-	virtual void SaveConfig(class CCLI_Output* pOutput);
-	virtual bool PreUpdate();
-	virtual bool PostUpdate();
+	bool InitConfig(int argc, const char** argv) override;
+	bool Init() override;
+	void SaveConfig(class CCLI_Output* pOutput) override;
+	bool PreUpdate() override;
+	bool PostUpdate() override;
 	
-	virtual void LoadAssets();
-	virtual gui::CWidget* CreateMainWidget();
+	void LoadAssets() override;
+	gui::CWidget* CreateMainWidget() override;
 	
 	CAssetPath GetItemIcon(const CAssetPath& AssetPath, const CSubPath& SubPath);
 	const char* GetItemName(const CAssetPath& AssetPath, const CSubPath& SubPath);
@@ -364,7 +364,7 @@ protected:
 public:
 	CContextMenu(CGuiEditor* pAssetsEditor);
 	
-	virtual int GetInputToBlock() { return CGui::BLOCKEDINPUT_ALL; }
+	int GetInputToBlock() override { return CGui::BLOCKEDINPUT_ALL; }
 	inline gui::CVListLayout* List() { return m_pList; }
 };
 
@@ -424,8 +424,8 @@ public:
 	void Save();
 	void Open();
 	
-	virtual void Update(bool ParentEnabled);
-	virtual int GetInputToBlock() { return CGui::BLOCKEDINPUT_ALL; }
+	void Update(bool ParentEnabled) override;
+	int GetInputToBlock() override { return CGui::BLOCKEDINPUT_ALL; }
 
 protected:
 	void SetDirectory(const char *pDirectory);
@@ -440,7 +440,7 @@ protected:
 		CMessageDialog* m_pPopup;
 		
 	protected:
-		virtual void MouseClickAction() { m_pPopup->Close(); }
+		void MouseClickAction() override { m_pPopup->Close(); }
 		
 	public:
 		CClose(CMessageDialog* pPopup) :
@@ -456,7 +456,7 @@ protected:
 	
 public:
 	CMessageDialog(CGuiEditor* pAssetsEditor);
-	virtual int GetInputToBlock() { return CGui::BLOCKEDINPUT_ALL; }
+	int GetInputToBlock() override { return CGui::BLOCKEDINPUT_ALL; }
 };
 
 class PackagePropertiesDialog : public CMessageDialog
@@ -484,7 +484,7 @@ protected:
 		CConfirmationDialog* m_pPopup;
 		
 	protected:
-		virtual void MouseClickAction() { m_pPopup->Close(); m_pPopup->OnConfirmation(); }
+		void MouseClickAction() override { m_pPopup->Close(); m_pPopup->OnConfirmation(); }
 		
 	public:
 		CConfirm(CConfirmationDialog* pPopup) :
@@ -501,7 +501,7 @@ protected:
 		CConfirmationDialog* m_pPopup;
 		
 	protected:
-		virtual void MouseClickAction() { m_pPopup->Close(); }
+		void MouseClickAction() override { m_pPopup->Close(); }
 		
 	public:
 		CCancel(CConfirmationDialog* pPopup) :
@@ -520,7 +520,7 @@ protected:
 	
 public:
 	CConfirmationDialog(CGuiEditor* pAssetsEditor, const CLocalizableString& LString);
-	virtual int GetInputToBlock() { return CGui::BLOCKEDINPUT_ALL; }
+	int GetInputToBlock() override { return CGui::BLOCKEDINPUT_ALL; }
 };
 
 #endif

@@ -29,7 +29,7 @@ protected:
 	CViewSkeleton* m_pViewSkeleton;	
 	
 protected:
-	virtual void MouseClickAction()
+	void MouseClickAction() override
 	{
 		m_pViewSkeleton->SetCameraZoomToUnit();
 	}
@@ -42,7 +42,7 @@ public:
 		
 	}
 
-	virtual void OnMouseMove()
+	void OnMouseMove() override
 	{
 		if(m_VisibilityRect.IsInside(Context()->GetMousePos()))
 			m_pViewSkeleton->AssetsEditor()->SetHint(_LSTRING("Set the zoom to 100 %"));
@@ -57,12 +57,12 @@ protected:
 	CViewSkeleton* m_pViewSkeleton;	
 
 protected:
-	virtual float GetValue() const
+	float GetValue() const override
 	{
 		return m_pViewSkeleton->GetCameraZoom();
 	}
 	
-	virtual void SetValue(float Value)
+	void SetValue(float Value) override
 	{
 		m_pViewSkeleton->SetCameraZoom(Value);
 	}

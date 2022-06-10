@@ -132,10 +132,11 @@ public:
 	CGui(CClientKernel* pKernel);
 	virtual ~CGui();
 	
-	virtual bool InitConfig(int argc, const char** argv);
-	virtual void SaveConfig(class CCLI_Output* pOutput);
-	virtual bool Init();
-	virtual bool PreUpdate();
+	bool InitConfig(int argc, const char** argv) override;
+	void SaveConfig(class CCLI_Output* pOutput) override;
+	bool Init() override;
+	bool PreUpdate() override;
+
 	virtual void Render();
 	
 	inline void Quit() { m_Quit = true; }
@@ -143,7 +144,7 @@ public:
 	virtual void LoadAssets() = 0;
 	virtual gui::CWidget* CreateMainWidget() = 0;
 	
-	virtual void OnLocalizationModified();
+	void OnLocalizationModified() override;
 	inline bool LocalizationUpdated() const { return m_LocalizationUpdated; }
 	
 	//Widget management

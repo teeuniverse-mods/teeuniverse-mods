@@ -38,11 +38,11 @@ protected:
 	
 public:
 	CCursorTool_SkeletonBoneEditor(CViewSkeleton* pViewSkeleton);
-	virtual void RenderView();
-	virtual void OnViewButtonClick(int Button);
-	virtual void OnViewButtonRelease(int Button);
-	virtual void OnViewMouseMove();
-	virtual void OnMouseMove();
+	void RenderView() override;
+	void OnViewButtonClick(int Button) override;
+	void OnViewButtonRelease(int Button) override;
+	void OnViewMouseMove() override;
+	void OnMouseMove() override;
 };
 
 #endif

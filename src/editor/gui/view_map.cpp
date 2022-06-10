@@ -42,12 +42,12 @@ protected:
 	CViewMap* m_pViewMap;
 	
 protected:
-	virtual bool GetValue()
+	bool GetValue() override
 	{
 		return m_pViewMap->GetGridAlign();
 	}
 
-	virtual void SetValue(bool Value)
+	void SetValue(bool Value) override
 	{
 		m_pViewMap->SetGridAlign(Value);
 	}
@@ -60,7 +60,7 @@ public:
 		SetToggleStyle(pViewMap->AssetsEditor()->m_Path_Toggle_Toolbar);
 	}
 
-	virtual void OnMouseMove()
+	void OnMouseMove() override
 	{
 		if(m_VisibilityRect.IsInside(Context()->GetMousePos()))
 			m_pViewMap->AssetsEditor()->SetHint(_LSTRING("Align to the grid"));
@@ -75,7 +75,7 @@ protected:
 	CViewMap* m_pViewMap;	
 	
 protected:
-	virtual void MouseClickAction()
+	void MouseClickAction() override
 	{
 		m_pViewMap->SetCameraZoomToUnit();
 	}
@@ -88,7 +88,7 @@ public:
 		
 	}
 
-	virtual void OnMouseMove()
+	void OnMouseMove() override
 	{
 		if(m_VisibilityRect.IsInside(Context()->GetMousePos()))
 			m_pViewMap->AssetsEditor()->SetHint(_LSTRING("Set the zoom to 100 %"));
@@ -104,12 +104,12 @@ protected:
 	CViewMap* m_pMapView;
 
 protected:
-	virtual float GetValue() const
+	float GetValue() const override
 	{
 		return m_pMapView->GetCameraZoom();
 	}
 	
-	virtual void SetValue(float Value)
+	void SetValue(float Value) override
 	{
 		m_pMapView->SetCameraZoom(Value);
 	}
@@ -132,12 +132,12 @@ protected:
 	CLocalizableString m_LHint;
 	
 protected:
-	virtual bool GetValue()
+	bool GetValue() override
 	{
 		return *m_pBoolean;
 	}
 
-	virtual void SetValue(bool Value)
+	void SetValue(bool Value) override
 	{
 		*m_pBoolean = Value;
 	}
@@ -152,7 +152,7 @@ public:
 		m_LHint = LHint;
 	}
 
-	virtual void OnMouseMove()
+	void OnMouseMove() override
 	{
 		if(m_VisibilityRect.IsInside(Context()->GetMousePos()))
 			m_pAssetsEditor->SetHint(m_LHint);
@@ -167,12 +167,12 @@ protected:
 	CViewMap* m_pView;
 	
 protected:
-	virtual bool GetValue()
+	bool GetValue() override
 	{
 		return m_pView->GetLoD() > 0;
 	}
 
-	virtual void SetValue(bool Value)
+	void SetValue(bool Value) override
 	{
 		m_pView->SetLoD(Value ? 1 : 0);
 	}
@@ -196,7 +196,7 @@ protected:
 		float m_Opacity;
 	
 	protected:
-		virtual void MouseClickAction()
+		void MouseClickAction() override
 		{
 			m_pViewMap->SetZoneOpacity(m_Opacity);
 		}
@@ -216,7 +216,7 @@ protected:
 		int m_Value;
 	
 	protected:
-		virtual void MouseClickAction()
+		void MouseClickAction() override
 		{
 			m_pViewMap->SetShowEntites(m_Value);
 		}
@@ -303,14 +303,14 @@ protected:
 			}
 		}
 	
-		virtual int GetInputToBlock() { return CGui::BLOCKEDINPUT_ALL; }
+		int GetInputToBlock() override { return CGui::BLOCKEDINPUT_ALL; }
 	};
 	
 protected:
 	CViewMap* m_pViewMap;	
 	
 protected:
-	virtual void MouseClickAction()
+	void MouseClickAction() override
 	{
 		Context()->DisplayPopup(new CPopup(m_pViewMap, m_DrawRect));
 	}
@@ -323,7 +323,7 @@ public:
 		
 	}
 
-	virtual void OnMouseMove()
+	void OnMouseMove() override
 	{
 		if(m_VisibilityRect.IsInside(Context()->GetMousePos()))
 			m_pViewMap->AssetsEditor()->SetHint(_LSTRING("Show map view options"));

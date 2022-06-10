@@ -44,7 +44,7 @@ protected:
 	CGuiEditor* m_pAssetsEditor;
 	int m_Member;
 	
-	virtual int GetValue() const
+	int GetValue() const override
 	{
 		return m_pAssetsEditor->AssetsManager()->GetAssetValue<int>(
 			m_pAssetsEditor->GetEditedAssetPath(),
@@ -54,7 +54,7 @@ protected:
 		);
 	}
 	
-	virtual void SetValue(int Value)
+	void SetValue(int Value) override
 	{
 		int Token = AssetsManager()->GenerateToken();
 		for(unsigned int i=0; i<m_pAssetsEditor->GetEditedSubPathes().size(); i++)
@@ -78,7 +78,7 @@ public:
 		
 	}
 	
-	virtual void Update(bool ParentEnabled)
+	void Update(bool ParentEnabled) override
 	{
 		if(IsEnabled() && ParentEnabled)
 		{
@@ -107,7 +107,7 @@ public:
 		
 	}
 	
-	virtual void Update(bool ParentEnabled)
+	void Update(bool ParentEnabled) override
 	{
 		if(ParentEnabled)
 		{
@@ -148,7 +148,7 @@ public:
 		
 	}
 	
-	virtual void Update(bool ParentEnabled)
+	void Update(bool ParentEnabled) override
 	{
 		if(ParentEnabled)
 		{
@@ -185,7 +185,7 @@ protected:
 		CContextMenu* m_pContextMenu;
 		
 	protected:
-		virtual void MouseClickAction()
+		void MouseClickAction() override
 		{
 			int Token = AssetsManager()->GenerateToken();
 			for(unsigned int i=0; i<m_pAssetsEditor->GetEditedSubPathes().size(); i++)
@@ -220,7 +220,7 @@ protected:
 		int m_Shift;
 		
 	protected:
-		virtual void MouseClickAction()
+		void MouseClickAction() override
 		{
 			CSubPath NewSubPath = m_pAssetsEditor->GetUniqueEditedSubPath();
 			AssetsManager()->RelMoveSubItem(m_pAssetsEditor->GetEditedAssetPath(), NewSubPath, m_Shift);
@@ -251,7 +251,7 @@ protected:
 	CSubPath m_SubPath;
 	
 protected:
-	virtual void MouseClickAction() { Action(); }
+	void MouseClickAction() override { Action(); }
 	
 	void Action()
 	{
@@ -340,7 +340,7 @@ public:
 		SetButtonStyle(m_pAssetsEditor->m_Path_Button_ListItem);
 	}
 	
-	virtual void Update(bool ParentEnabled)
+	void Update(bool ParentEnabled) override
 	{
 		bool Found = false;
 		for(unsigned int i=0; i<m_pAssetsEditor->GetEditedSubPathes().size(); i++)
@@ -360,7 +360,7 @@ public:
 		gui::CButton::Update(ParentEnabled);
 	}
 	
-	virtual void OnButtonClick(int Button)
+	void OnButtonClick(int Button) override
 	{
 		if(Button == KEY_MOUSE_2 && m_DrawRect.IsInside(Context()->GetMousePos()) && m_VisibilityRect.IsInside(Context()->GetMousePos()))
 		{
@@ -406,7 +406,7 @@ public:
 		SetBoxStyle(m_pAssetsEditor->m_Path_Box_SubList);
 	}
 	
-	virtual void Update(bool ParentEnabled)
+	void Update(bool ParentEnabled) override
 	{
 		if(ParentEnabled && IsEnabled())
 		{
@@ -604,7 +604,7 @@ class CImageTilingToggle : public gui::CAbstractToggle
 protected:
 	CGuiEditor* m_pAssetsEditor;
 	
-	virtual bool GetValue()
+	bool GetValue() override
 	{
 		return m_pAssetsEditor->AssetsManager()->GetAssetValue<bool>(
 			m_pAssetsEditor->GetEditedAssetPath(),
@@ -614,7 +614,7 @@ protected:
 		);
 	}
 	
-	virtual void SetValue(bool Value)
+	void SetValue(bool Value) override
 	{
 		m_pAssetsEditor->AssetsManager()->SetAssetValue<bool>(
 			m_pAssetsEditor->GetEditedAssetPath(),
@@ -653,7 +653,7 @@ protected:
 	CGuiEditor* m_pAssetsEditor;
 	
 protected:
-	virtual void MouseClickAction()
+	void MouseClickAction() override
 	{
 		m_pAssetsEditor->DisplayPopup(new COpenSavePackageDialog(m_pAssetsEditor, COpenSavePackageDialog::MODE_REPLACE, COpenSavePackageDialog::FORMAT_IMAGE));
 	}
@@ -673,7 +673,7 @@ protected:
 	CGuiEditor* m_pAssetsEditor;
 	
 protected:
-	virtual void MouseClickAction()
+	void MouseClickAction() override
 	{
 		m_pAssetsEditor->DisplayPopup(new COpenSavePackageDialog(m_pAssetsEditor, COpenSavePackageDialog::MODE_SAVE, COpenSavePackageDialog::FORMAT_IMAGE));
 	}
@@ -693,7 +693,7 @@ protected:
 	CGuiEditor* m_pAssetsEditor;
 	
 protected:
-	virtual void MouseClickAction()
+	void MouseClickAction() override
 	{
 		CAsset_Image* pImage = AssetsManager()->GetAsset_Hard<CAsset_Image>(m_pAssetsEditor->GetEditedAssetPath());
 		if(!pImage)
@@ -722,7 +722,7 @@ protected:
 	CGuiEditor* m_pAssetsEditor;
 	
 protected:
-	virtual void MouseClickAction()
+	void MouseClickAction() override
 	{
 		CAsset_Image* pImage = AssetsManager()->GetAsset_Hard<CAsset_Image>(m_pAssetsEditor->GetEditedAssetPath());
 		if(!pImage)
@@ -833,7 +833,7 @@ class CMapLayerTilesButton_ApplyStyle : public gui::CButton
 protected:
 	CGuiEditor* m_pAssetsEditor;
 	
-	virtual void MouseClickAction()
+	void MouseClickAction() override
 	{
 		int Token = AssetsManager()->GenerateToken();
 		ApplyTilingMaterials_FullLayer(AssetsManager(), m_pAssetsEditor->GetEditedAssetPath(), Token);
@@ -851,7 +851,7 @@ class CMapLayerTilesButton_HFlip : public gui::CButton
 protected:
 	CGuiEditor* m_pAssetsEditor;
 	
-	virtual void MouseClickAction()
+	void MouseClickAction() override
 	{
 		int Token = AssetsManager()->GenerateToken();
 		AssetsManager()->MapLayerTiles_HFlip(m_pAssetsEditor->GetEditedAssetPath(), Token);
@@ -869,7 +869,7 @@ class CMapLayerTilesButton_VFlip : public gui::CButton
 protected:
 	CGuiEditor* m_pAssetsEditor;
 	
-	virtual void MouseClickAction()
+	void MouseClickAction() override
 	{
 		int Token = AssetsManager()->GenerateToken();
 		AssetsManager()->MapLayerTiles_VFlip(m_pAssetsEditor->GetEditedAssetPath(), Token);
@@ -938,7 +938,7 @@ public:
 		
 	}
 	
-	virtual void Update(bool ParentEnabled)
+	void Update(bool ParentEnabled) override
 	{
 		if(ParentEnabled)
 		{
@@ -970,7 +970,7 @@ public:
 		
 	}
 	
-	virtual void Update(bool ParentEnabled)
+	void Update(bool ParentEnabled) override
 	{
 		if(ParentEnabled)
 		{
@@ -990,7 +990,7 @@ public:
 class CSubItemList_MapLayerQuads_Quad : public CSubItemList
 {
 protected:
-	virtual void GenerateList()
+	void GenerateList() override
 	{
 		Clear();
 		const CAsset_MapLayerQuads* pLayer = AssetsManager()->GetAsset<CAsset_MapLayerQuads>(m_pAssetsEditor->GetEditedAssetPath());
@@ -1095,7 +1095,7 @@ template<typename ASSET>
 class CSubItemList_Object : public CSubItemList
 {
 protected:
-	virtual void GenerateList()
+	void GenerateList() override
 	{
 		Clear();
 		const ASSET* pLayer = AssetsManager()->template GetAsset< ASSET >(m_pAssetsEditor->GetEditedAssetPath());
@@ -1134,7 +1134,7 @@ protected:
 			
 		}
 		
-		virtual void Update(bool ParentEnabled)
+		void Update(bool ParentEnabled) override
 		{
 			const ASSET* pLayer = AssetsManager()->template GetAsset<ASSET>(m_pAssetsEditor->GetEditedAssetPath());
 			if(pLayer)
@@ -1179,7 +1179,7 @@ public:
 		SetBoxStyle(m_pAssetsEditor->m_Path_Box_SubList);
 	}
 	
-	virtual void Update(bool ParentEnabled)
+	void Update(bool ParentEnabled) override
 	{
 		if(ParentEnabled && IsEnabled())
 		{
@@ -1393,7 +1393,7 @@ protected:
 	bool m_UpdateNeeded;
 	
 protected:
-	virtual void GenerateList()
+	void GenerateList() override
 	{
 		Clear();
 		const CAsset_MapEntities* pEntities = AssetsManager()->GetAsset<CAsset_MapEntities>(m_pAssetsEditor->GetEditedAssetPath());
@@ -1451,7 +1451,7 @@ public:
 		SetBoxStyle(m_pAssetsEditor->m_Path_Box_SubList);
 	}
 	
-	virtual void Update(bool ParentEnabled)
+	void Update(bool ParentEnabled) override
 	{
 		if(ParentEnabled && IsEnabled())
 		{
@@ -1569,7 +1569,7 @@ protected:
 	int m_Type;
 	
 protected:
-	virtual void MouseClickAction()
+	void MouseClickAction() override
 	{
 		int Token = AssetsManager()->GenerateToken();
 		int Id = AssetsManager()->AddSubItem(m_pAssetsEditor->GetEditedAssetPath(), m_SubPath, m_Type, Token);
@@ -1597,7 +1597,7 @@ protected:
 	CGuiEditor* m_pAssetsEditor;
 	
 protected:
-	virtual void MouseClickAction()
+	void MouseClickAction() override
 	{
 		const CAsset_PathMaterial* pMaterial = AssetsManager()->GetAsset<CAsset_PathMaterial>(m_pAssetsEditor->GetEditedAssetPath());
 		if(pMaterial && pMaterial->IsValidLayer(m_pAssetsEditor->GetUniqueEditedSubPath()))
@@ -1622,7 +1622,7 @@ public:
 class CSubItemList_Material_Layer : public CSubItemList
 {
 protected:
-	virtual void GenerateList()
+	void GenerateList() override
 	{
 		Clear();
 		const CAsset_PathMaterial* pLayer = AssetsManager()->GetAsset<CAsset_PathMaterial>(m_pAssetsEditor->GetEditedAssetPath());
@@ -1689,13 +1689,13 @@ public:
 		
 	}
 	
-	virtual void UpdateBoundingSize()
+	void UpdateBoundingSize() override
 	{		
 		m_BoundingSizeRect.BSNoConstraint();
 		m_BoundingSizeRect.BSMinimum(256, 256);
 	}
 	
-	virtual void Render()
+	void Render() override
 	{
 		gui::CRect SpriteRect = m_DrawRect;
 		SpriteRect.RemoveMargin(2);
@@ -1957,7 +1957,7 @@ protected:
 	int m_Type;
 	
 protected:
-	virtual void MouseClickAction()
+	void MouseClickAction() override
 	{
 		int Token = AssetsManager()->GenerateToken();
 		int Id = AssetsManager()->AddSubItem(m_pAssetsEditor->GetEditedAssetPath(), m_SubPath, m_Type, Token);
@@ -1987,7 +1987,7 @@ protected:
 	int m_Type;
 	
 protected:
-	virtual void MouseClickAction()
+	void MouseClickAction() override
 	{
 		int Token = AssetsManager()->GenerateToken();
 		int Id = AssetsManager()->AddSubItem(m_pAssetsEditor->GetEditedAssetPath(), m_SubPath, m_Type, Token);
@@ -2017,7 +2017,7 @@ protected:
 	int m_Type;
 	
 protected:
-	virtual void MouseClickAction()
+	void MouseClickAction() override
 	{
 		int Token = AssetsManager()->GenerateToken();
 		int Id = AssetsManager()->AddSubItem(m_pAssetsEditor->GetEditedAssetPath(), m_SubPath, m_Type, Token);
@@ -2047,7 +2047,7 @@ protected:
 	int m_Type;
 	
 protected:
-	virtual void MouseClickAction()
+	void MouseClickAction() override
 	{
 		int Token = AssetsManager()->GenerateToken();
 		int Id = AssetsManager()->AddSubItem(m_pAssetsEditor->GetEditedAssetPath(), m_SubPath, m_Type, Token);
@@ -2078,7 +2078,7 @@ public:
 		CGuiEditor* m_pAssetsEditor;
 		gui::CPopup* m_pPopup;
 	protected:
-		virtual void OnImagePicked(int MinX, int MinY, int MaxX, int MaxY)
+		void OnImagePicked(int MinX, int MinY, int MaxX, int MaxY) override
 		{
 			int Index = MinY*16 + MinX;
 			int Token = AssetsManager()->GenerateToken();
@@ -2120,7 +2120,7 @@ public:
 			Add(new CTilePicker(pAssetsEditor, this, ImagePath));
 		}
 		
-		virtual int GetInputToBlock() { return CGui::BLOCKEDINPUT_ALL; }
+		int GetInputToBlock() override { return CGui::BLOCKEDINPUT_ALL; }
 	};
 
 protected:
@@ -2128,7 +2128,7 @@ protected:
 	int m_Index;
 	
 protected:
-	virtual void MouseClickAction()
+	void MouseClickAction() override
 	{
 		Context()->DisplayPopup(new CTileChooserPopup(m_pAssetsEditor, m_DrawRect));
 	}
@@ -2142,7 +2142,7 @@ public:
 		
 	}
 	
-	virtual void Update(bool ParentEnabled)
+	void Update(bool ParentEnabled) override
 	{
 		if(IsEnabled() && ParentEnabled)
 		{
@@ -2175,7 +2175,7 @@ public:
 class CSubItemList_TilingMaterial_Rule : public CSubItemList
 {
 protected:
-	virtual void GenerateList()
+	void GenerateList() override
 	{
 		Clear();
 		const CAsset_TilingMaterial* pMaterial = AssetsManager()->GetAsset<CAsset_TilingMaterial>(m_pAssetsEditor->GetEditedAssetPath());
@@ -2273,7 +2273,7 @@ public:
 		SetBoxStyle(m_pAssetsEditor->m_Path_Box_SubList);
 	}
 	
-	virtual void Update(bool ParentEnabled)
+	void Update(bool ParentEnabled) override
 	{
 		if(ParentEnabled && IsEnabled())
 		{
@@ -2372,7 +2372,7 @@ public:
 		SetBoxStyle(m_pAssetsEditor->m_Path_Box_SubList);
 	}
 	
-	virtual void Update(bool ParentEnabled)
+	void Update(bool ParentEnabled) override
 	{
 		if(ParentEnabled && IsEnabled())
 		{
@@ -2456,7 +2456,7 @@ protected:
 	CGuiEditor* m_pAssetsEditor;
 	
 protected:
-	virtual void MouseClickAction()
+	void MouseClickAction() override
 	{
 		const CAsset_TilingMaterial* pMaterial = AssetsManager()->GetAsset<CAsset_TilingMaterial>(m_pAssetsEditor->GetEditedAssetPath());
 		if(pMaterial && pMaterial->IsValidLabel(m_pAssetsEditor->GetUniqueEditedSubPath()))
@@ -2484,7 +2484,7 @@ protected:
 	CGuiEditor* m_pAssetsEditor;
 	
 protected:
-	virtual void MouseClickAction()
+	void MouseClickAction() override
 	{
 		const CAsset_TilingMaterial* pMaterial = AssetsManager()->GetAsset<CAsset_TilingMaterial>(m_pAssetsEditor->GetEditedAssetPath());
 		if(pMaterial && pMaterial->IsValidRule(m_pAssetsEditor->GetUniqueEditedSubPath()))
@@ -2596,7 +2596,7 @@ protected:
 	CGuiEditor* m_pAssetsEditor;
 	
 protected:
-	virtual void MouseClickAction()
+	void MouseClickAction() override
 	{
 		int Token = AssetsManager()->GenerateToken();
 		int Id = AssetsManager()->AddSubItem(m_pAssetsEditor->GetEditedAssetPath(), CSubPath::Null(), CAsset_Skeleton::TYPE_BONE, Token);
@@ -2626,7 +2626,7 @@ protected:
 	CGuiEditor* m_pAssetsEditor;
 	
 protected:
-	virtual void MouseClickAction()
+	void MouseClickAction() override
 	{
 		int Token = AssetsManager()->GenerateToken();
 		int Id = AssetsManager()->AddSubItem(m_pAssetsEditor->GetEditedAssetPath(), CSubPath::Null(), CAsset_Skeleton::TYPE_LAYER, Token);
@@ -2657,7 +2657,7 @@ public:
 		CSubItem(pAssetsEditor, SubPath, "", pAssetsEditor->m_Path_Sprite_IconBone)
 	{ }
 	
-	virtual void Update(bool ParentEnabled)
+	void Update(bool ParentEnabled) override
 	{
 		const CAsset_Skeleton* pSkeleton = AssetsManager()->GetAsset<CAsset_Skeleton>(m_pAssetsEditor->GetEditedAssetPath());
 		if(pSkeleton && pSkeleton->IsValidBone(m_SubPath))
@@ -2674,7 +2674,7 @@ public:
 		CSubItem(pAssetsEditor, SubPath, "", pAssetsEditor->m_Path_Sprite_IconLayer)
 	{ }
 	
-	virtual void Update(bool ParentEnabled)
+	void Update(bool ParentEnabled) override
 	{
 		const CAsset_Skeleton* pSkeleton = AssetsManager()->GetAsset<CAsset_Skeleton>(m_pAssetsEditor->GetEditedAssetPath());
 		if(pSkeleton && pSkeleton->IsValidLayer(m_SubPath))
@@ -2687,7 +2687,7 @@ public:
 class CSubItemList_Skeleton : public CSubItemList
 {
 protected:
-	virtual void GenerateList()
+	void GenerateList() override
 	{
 		Clear();
 		const CAsset_Skeleton* pSkeleton = AssetsManager()->GetAsset<CAsset_Skeleton>(m_pAssetsEditor->GetEditedAssetPath());
@@ -2762,7 +2762,7 @@ protected:
 	CGuiEditor* m_pAssetsEditor;
 	
 protected:
-	virtual void MouseClickAction()
+	void MouseClickAction() override
 	{
 		int Token = AssetsManager()->GenerateToken();
 		int Id = AssetsManager()->AddSubItem(m_pAssetsEditor->GetEditedAssetPath(), CSubPath::Null(), CAsset_SkeletonSkin::TYPE_SPRITE, Token);
@@ -2789,7 +2789,7 @@ public:
 		CSubItem(pAssetsEditor, SubPath, "", pAssetsEditor->m_Path_Sprite_IconSprite)
 	{ }
 	
-	virtual void Update(bool ParentEnabled)
+	void Update(bool ParentEnabled) override
 	{
 		const CAsset_SkeletonSkin* pSkeletonSkin = AssetsManager()->GetAsset<CAsset_SkeletonSkin>(m_pAssetsEditor->GetEditedAssetPath());
 		if(pSkeletonSkin && pSkeletonSkin->IsValidSprite(m_SubPath))
@@ -2804,7 +2804,7 @@ public:
 class CSubItemList_SkeletonSkin : public CSubItemList
 {
 protected:
-	virtual void GenerateList()
+	void GenerateList() override
 	{
 		Clear();
 		const CAsset_SkeletonSkin* pSkeletonSkin = AssetsManager()->GetAsset<CAsset_SkeletonSkin>(m_pAssetsEditor->GetEditedAssetPath());

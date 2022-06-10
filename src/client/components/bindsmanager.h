@@ -52,9 +52,9 @@ protected:
 public:
 	CBindsManager(CClientKernel* pKernel);
 	
-	virtual bool InitConfig(int argc, const char** argv);
-	virtual void SaveConfig(class CCLI_Output* pOutput);
-	virtual bool PreUpdate();
+	bool InitConfig(int argc, const char** argv) override;
+	void SaveConfig(class CCLI_Output* pOutput) override;
+	bool PreUpdate() override;
 	
 	void Bind(int Key, int Modifier, const char* pCommand, int BindNum = 0);
 	void UnbindKey(int Key, int Modifier);

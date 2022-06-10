@@ -34,12 +34,12 @@ protected:
 	CLocalizableString m_LHint;
 	
 protected:
-	virtual bool GetValue()
+	bool GetValue() override
 	{
 		return *m_pBoolean;
 	}
 
-	virtual void SetValue(bool Value)
+	void SetValue(bool Value) override
 	{
 		*m_pBoolean = Value;
 	}
@@ -54,7 +54,7 @@ public:
 		m_LHint = LHint;
 	}
 
-	virtual void OnMouseMove()
+	void OnMouseMove() override
 	{
 		if(m_VisibilityRect.IsInside(Context()->GetMousePos()))
 			m_pAssetsEditor->SetHint(m_LHint);
@@ -69,12 +69,12 @@ protected:
 	int* m_pInteger;
 
 protected:
-	virtual int GetValue() const
+	int GetValue() const override
 	{
 		return *m_pInteger;
 	}
 	
-	virtual void SetValue(int Value)
+	void SetValue(int Value) override
 	{
 		*m_pInteger = Value;
 	}

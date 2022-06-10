@@ -32,7 +32,7 @@ protected:
 	
 public:
 	CViewMaterial(CGuiEditor* pAssetsEditor);
-	virtual void RenderView();
+	void RenderView() override;
 	
 	inline class CMapRenderer* MapRenderer() { return m_pMapRenderer.get(); }
 };

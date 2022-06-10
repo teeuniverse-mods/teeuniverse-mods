@@ -34,7 +34,7 @@ protected:
 	CComboBox* m_pComboBox;
 	
 protected:
-	virtual void MouseClickAction()
+	void MouseClickAction() override
 	{
 		m_pComboBox->SetValue(m_Value);
 		m_pPopup->Close();
@@ -70,7 +70,7 @@ public:
 		}
 	}
 	
-	virtual int GetInputToBlock() { return CGui::BLOCKEDINPUT_ALL; }
+	int GetInputToBlock() override { return CGui::BLOCKEDINPUT_ALL; }
 };
 
 /* COMBOBOX ***********************************************************/

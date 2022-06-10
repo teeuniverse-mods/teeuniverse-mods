@@ -30,7 +30,7 @@ protected:
 	CViewImage* m_pImageView;
 	
 protected:
-	void OnImagePicked(int MinX, int MinY, int MaxX, int MaxY)
+	void OnImagePicked(int MinX, int MinY, int MaxX, int MaxY) override
 	{
 		if(m_pImageView->GetCursorTool() == m_pImageView->m_pCursorTool_SpriteCreator)
 			m_pImageView->m_pCursorTool_SpriteCreator->OnImagePicked(MinX, MinY, MaxX, MaxY);

@@ -26,7 +26,7 @@ class CViewSprite : public CViewManager::CView
 {
 public:
 	CViewSprite(CGuiEditor* pAssetsEditor);
-	virtual void RenderView();
+	void RenderView() override;
 };
 
 #endif

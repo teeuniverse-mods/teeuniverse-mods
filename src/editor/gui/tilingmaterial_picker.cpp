@@ -74,12 +74,12 @@ public:
 		ApplyTilingMaterials_Tiles(AssetsManager(), m_Tiles, m_MaterialPath, 0, 0, m_Tiles.get_width(), m_Tiles.get_height(), 0);
 	}
 	
-	virtual void UpdateBoundingSize()
+	void UpdateBoundingSize() override
 	{
 		m_BoundingSizeRect.BSMinimum(32.0f*3, 32.0f*3);
 	}
 	
-	virtual void Render()
+	void Render() override
 	{
 		Graphics()->ClipPush(m_DrawRect.x, m_DrawRect.y, m_DrawRect.w, m_DrawRect.h);
 		
@@ -113,12 +113,12 @@ public:
 		SetIconWidget(new CBrushIcon(pAssetsEditor, m_MaterialPath, m_IndexSubPath));
 	}
 	
-	virtual void MouseClickAction()
+	void MouseClickAction() override
 	{
 		m_pPicker->OnBrushPicked(m_IndexSubPath);
 	}
 	
-	virtual void OnMouseMove()
+	void OnMouseMove() override
 	{
 		if(m_pPicker->GetTitleLabel() && m_VisibilityRect.IsInside(Context()->GetMousePos()))
 		{

@@ -30,7 +30,7 @@ protected:
 	CViewTilingMaterial* m_pView;
 	
 protected:
-	virtual void MouseClickAction()
+	void MouseClickAction() override
 	{
 		m_pView->GenerateMapPreview();
 		m_pView->RefreshMapPreview();
@@ -51,7 +51,7 @@ protected:
 	CViewTilingMaterial* m_pView;
 	
 protected:
-	virtual void MouseClickAction()
+	void MouseClickAction() override
 	{
 		m_pView->RefreshMapPreview();
 	}

@@ -37,7 +37,7 @@ public:
 		m_pAssetsManager(pAssetsManager)
 	{ }
 
-	virtual int Execute(const char* pArgs, CCLI_Output* pOutput)
+	int Execute(const char* pArgs, CCLI_Output* pOutput) override
 	{
 		dynamic_string Buffer;
 		if(!GetString(&pArgs, Buffer))
@@ -53,8 +53,8 @@ public:
 		return CLI_SUCCESS;
 	}
 	
-	virtual const char* Usage() { return "add_package_dir \"Directory\""; }
-	virtual const char* Description() { return "Add \"Directory\" as a source of package"; }
+	const char* Usage() override { return "add_package_dir \"Directory\""; }
+	const char* Description() override { return "Add \"Directory\" as a source of package"; }
 };
 
 /* ASSETS MANAGER *****************************************************/

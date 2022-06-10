@@ -45,12 +45,12 @@ protected:
 	
 public:
 	CCursorTool_MapVertexEditor(CViewMap* pViewMap);
-	virtual void OnViewButtonClick(int Button);
-	virtual void OnViewButtonRelease(int Button);
-	virtual void OnViewMouseMove();
-	virtual void RenderView();
-	virtual void Update(bool ParentEnabled);
-	virtual void OnMouseMove();
+	void OnViewButtonClick(int Button) override;
+	void OnViewButtonRelease(int Button) override;
+	void OnViewMouseMove() override;
+	void RenderView() override;
+	void Update(bool ParentEnabled) override;
+	void OnMouseMove() override;
 };
 
 #endif

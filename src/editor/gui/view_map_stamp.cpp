@@ -56,12 +56,12 @@ protected:
 			
 		}
 		
-		virtual void UpdateBoundingSize()
+		void UpdateBoundingSize() override
 		{
 			m_BoundingSizeRect.BSMinimum(32.0f*4, 32.0f*3);
 		}
 		
-		virtual void Render()
+		void Render() override
 		{
 			Graphics()->ClipPush(m_DrawRect.x, m_DrawRect.y, m_DrawRect.w, m_DrawRect.h);
 			
@@ -99,7 +99,7 @@ protected:
 			SetIconWidget(new CEntityIcon(pAssetsEditor, EntityTypePath));
 		}
 		
-		virtual void MouseClickAction()
+		void MouseClickAction() override
 		{
 			m_pCursorTool->PaletteCallback_SelectEntityType(m_EntityTypePath);
 			m_pPopup->Close();
@@ -128,7 +128,7 @@ public:
 		}
 	}
 	
-	virtual void OnButtonClick(int Button)
+	void OnButtonClick(int Button) override
 	{
 		if(m_DrawRect.IsInside(Context()->GetMousePos()) && m_VisibilityRect.IsInside(Context()->GetMousePos()) && Button == KEY_MOUSE_2)
 			Close();
@@ -136,7 +136,7 @@ public:
 		gui::CPopup::OnButtonClick(Button);
 	}
 
-	virtual void OnInputEvent(const CInput::CEvent& Event)
+	void OnInputEvent(const CInput::CEvent& Event) override
 	{
 		if((Event.m_Key == KEY_SPACE) && (Event.m_Flags & CInput::FLAG_PRESS) && !Input()->IsTextEdited())
 		{
@@ -147,7 +147,7 @@ public:
 			CPopup::OnInputEvent(Event);
 	}
 	
-	virtual int GetInputToBlock() { return CGui::BLOCKEDINPUT_ALL; }
+	int GetInputToBlock() override { return CGui::BLOCKEDINPUT_ALL; }
 };
 
 /* ZONE PALETTE *******************************************************/
@@ -162,7 +162,7 @@ protected:
 		CCursorTool_MapStamp* m_pCursorTool;
 		
 	protected:
-		virtual void OnZonePicked(CSubPath IndexPath)
+		void OnZonePicked(CSubPath IndexPath) override
 		{
 			m_pCursorTool->PaletteCallback_SelectZoneType(m_ZoneTypePath, IndexPath, m_DataInt);
 			m_pPopup->Close();
@@ -192,7 +192,7 @@ public:
 		Add(pPicker);
 	}
 	
-	virtual void OnButtonClick(int Button)
+	void OnButtonClick(int Button) override
 	{
 		if(m_DrawRect.IsInside(Context()->GetMousePos()) && m_VisibilityRect.IsInside(Context()->GetMousePos()) && Button == KEY_MOUSE_2)
 			Close();
@@ -200,7 +200,7 @@ public:
 		gui::CPopup::OnButtonClick(Button);
 	}
 
-	virtual void OnInputEvent(const CInput::CEvent& Event)
+	void OnInputEvent(const CInput::CEvent& Event) override
 	{
 		if((Event.m_Key == KEY_SPACE) && (Event.m_Flags & CInput::FLAG_PRESS) && !Input()->IsTextEdited())
 		{
@@ -211,7 +211,7 @@ public:
 			CPopup::OnInputEvent(Event);
 	}
 	
-	virtual int GetInputToBlock() { return CGui::BLOCKEDINPUT_ALL; }
+	int GetInputToBlock() override { return CGui::BLOCKEDINPUT_ALL; }
 };
 
 /* MATERIAL PALETTE ***************************************************/
@@ -226,7 +226,7 @@ protected:
 		CCursorTool_MapStamp* m_pCursorTool;
 		
 	protected:
-		virtual void OnBrushPicked(CSubPath IndexPath)
+		void OnBrushPicked(CSubPath IndexPath) override
 		{
 			m_pCursorTool->PaletteCallback_SelectBrushType(m_MaterialPath, IndexPath);
 			m_pPopup->Close();
@@ -256,7 +256,7 @@ public:
 		Add(pImagePicker);
 	}
 	
-	virtual void OnButtonClick(int Button)
+	void OnButtonClick(int Button) override
 	{
 		if(m_DrawRect.IsInside(Context()->GetMousePos()) && m_VisibilityRect.IsInside(Context()->GetMousePos()) && Button == KEY_MOUSE_2)
 			Close();
@@ -264,7 +264,7 @@ public:
 		gui::CPopup::OnButtonClick(Button);
 	}
 
-	virtual void OnInputEvent(const CInput::CEvent& Event)
+	void OnInputEvent(const CInput::CEvent& Event) override
 	{
 		if((Event.m_Key == KEY_SPACE) && (Event.m_Flags & CInput::FLAG_PRESS) && !Input()->IsTextEdited())
 		{
@@ -275,7 +275,7 @@ public:
 			CPopup::OnInputEvent(Event);
 	}
 	
-	virtual int GetInputToBlock() { return CGui::BLOCKEDINPUT_ALL; }
+	int GetInputToBlock() override { return CGui::BLOCKEDINPUT_ALL; }
 };
 
 /* IMAGE PALETTE ******************************************************/
@@ -290,7 +290,7 @@ protected:
 		CCursorTool_MapStamp* m_pCursorTool;
 		
 	protected:
-		virtual void OnImagePicked(int MinX, int MinY, int MaxX, int MaxY)
+		void OnImagePicked(int MinX, int MinY, int MaxX, int MaxY) override
 		{
 			m_pCursorTool->PaletteCallback_SelectImage(m_ImagePath, MinX, MinY, MaxX, MaxY);
 			m_pPopup->Close();
@@ -323,7 +323,7 @@ public:
 		Add(pImagePicker);
 	}
 	
-	virtual void OnButtonClick(int Button)
+	void OnButtonClick(int Button) override
 	{
 		if(m_DrawRect.IsInside(Context()->GetMousePos()) && m_VisibilityRect.IsInside(Context()->GetMousePos()) && Button == KEY_MOUSE_2)
 			Close();
@@ -331,7 +331,7 @@ public:
 		gui::CPopup::OnButtonClick(Button);
 	}
 
-	virtual void OnInputEvent(const CInput::CEvent& Event)
+	void OnInputEvent(const CInput::CEvent& Event) override
 	{
 		if((Event.m_Key == KEY_SPACE) && (Event.m_Flags & CInput::FLAG_PRESS) && !Input()->IsTextEdited())
 		{
@@ -342,7 +342,7 @@ public:
 			CPopup::OnInputEvent(Event);
 	}
 	
-	virtual int GetInputToBlock() { return CGui::BLOCKEDINPUT_ALL; }
+	int GetInputToBlock() override { return CGui::BLOCKEDINPUT_ALL; }
 };
 
 /* FLIP AND ROTATE BUTTON *********************************************/
@@ -354,7 +354,7 @@ protected:
 	CCursorTool_MapStamp* m_pCursorTool;
 	
 protected:
-	virtual void MouseClickAction() { m_pCursorTool->VFlipSelection(); }
+	void MouseClickAction() override { m_pCursorTool->VFlipSelection(); }
 
 public:
 	CVFlipButton(CGuiEditor* pAssetsEditor, CCursorTool_MapStamp* pCursorTool) :
@@ -365,7 +365,7 @@ public:
 		
 	}
 
-	virtual void OnMouseMove()
+	void OnMouseMove() override
 	{
 		if(m_VisibilityRect.IsInside(Context()->GetMousePos()))
 			m_pAssetsEditor->SetHint(_LSTRING("Flip vertically the current stamp selection"));
@@ -381,7 +381,7 @@ protected:
 	CCursorTool_MapStamp* m_pCursorTool;
 	
 protected:
-	virtual void MouseClickAction() { m_pCursorTool->HFlipSelection(); }
+	void MouseClickAction() override { m_pCursorTool->HFlipSelection(); }
 
 public:
 	CHFlipButton(CGuiEditor* pAssetsEditor, CCursorTool_MapStamp* pCursorTool) :
@@ -392,7 +392,7 @@ public:
 		
 	}
 
-	virtual void OnMouseMove()
+	void OnMouseMove() override
 	{
 		if(m_VisibilityRect.IsInside(Context()->GetMousePos()))
 			m_pAssetsEditor->SetHint(_LSTRING("Flip horizontally the current stamp selection"));
@@ -408,7 +408,7 @@ protected:
 	CCursorTool_MapStamp* m_pCursorTool;
 	
 protected:
-	virtual void MouseClickAction() { m_pCursorTool->RotateCCWSelection(); }
+	void MouseClickAction() override { m_pCursorTool->RotateCCWSelection(); }
 
 public:
 	CRotateCCWButton(CGuiEditor* pAssetsEditor, CCursorTool_MapStamp* pCursorTool) :
@@ -419,7 +419,7 @@ public:
 		
 	}
 
-	virtual void OnMouseMove()
+	void OnMouseMove() override
 	{
 		if(m_VisibilityRect.IsInside(Context()->GetMousePos()))
 			m_pAssetsEditor->SetHint(_LSTRING("Rotate counter-clockwise the current stamp selection"));
@@ -435,7 +435,7 @@ protected:
 	CCursorTool_MapStamp* m_pCursorTool;
 	
 protected:
-	virtual void MouseClickAction() { m_pCursorTool->RotateCWSelection(); }
+	void MouseClickAction() override { m_pCursorTool->RotateCWSelection(); }
 
 public:
 	CRotateCWButton(CGuiEditor* pAssetsEditor, CCursorTool_MapStamp* pCursorTool) :
@@ -446,7 +446,7 @@ public:
 		
 	}
 
-	virtual void OnMouseMove()
+	void OnMouseMove() override
 	{
 		if(m_VisibilityRect.IsInside(Context()->GetMousePos()))
 			m_pAssetsEditor->SetHint(_LSTRING("Rotate clockwise the current stamp selection"));

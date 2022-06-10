@@ -224,13 +224,13 @@ public:
 	dynamic_string m_Path;
 	
 public:
-	virtual ~fs_listdir_iterator_impl()
+	~fs_listdir_iterator_impl() override
 	{
 		if(m_pDir)
 			closedir(m_pDir);
 	}
 	
-	virtual bool next()
+	bool next() override
 	{
 		if(!m_pDir)
 			return false;
@@ -239,7 +239,7 @@ public:
 		return (m_DirEntry != nullptr);
 	}
 	
-	virtual const char* get_filename()
+	const char* get_filename() override
 	{
 		m_Path.buffer()[m_PathLength] = 0;
 		m_Path.append((const char*) m_DirEntry->d_name);

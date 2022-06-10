@@ -35,7 +35,7 @@ public:
 		
 	}
 	
-	virtual int Execute(const char* pArgs, CCLI_Output* pOutput)
+	int Execute(const char* pArgs, CCLI_Output* pOutput) override
 	{
 		dynamic_string Buffer;
 		if(!GetString(&pArgs, Buffer))
@@ -75,8 +75,8 @@ public:
 		return CLI_SUCCESS;
 	}
 	
-	virtual const char* Usage() { return "bind \"Key\" \"Command\""; }
-	virtual const char* Description() { return "Associate a command to a key"; }
+	const char* Usage() override { return "bind \"Key\" \"Command\""; }
+	const char* Description() override { return "Associate a command to a key"; }
 };
 
 	//UnbindCmd
@@ -92,7 +92,7 @@ public:
 		
 	}
 	
-	virtual int Execute(const char* pArgs, CCLI_Output* pOutput)
+	int Execute(const char* pArgs, CCLI_Output* pOutput) override
 	{
 		dynamic_string Buffer;		
 		if(!GetString(&pArgs, Buffer))
@@ -108,8 +108,8 @@ public:
 		return CLI_SUCCESS;
 	}
 	
-	virtual const char* Usage() { return "unbind_cmd \"Command\""; }
-	virtual const char* Description() { return "Remove all binds associated with a given command"; }
+	const char* Usage() override { return "unbind_cmd \"Command\""; }
+	const char* Description() override { return "Remove all binds associated with a given command"; }
 };
 
 	//UnbindAll
@@ -125,15 +125,15 @@ public:
 		
 	}
 	
-	virtual int Execute(const char* pArgs, CCLI_Output* pOutput)
+	int Execute(const char* pArgs, CCLI_Output* pOutput) override
 	{
 		m_pBindManager->UnbindAll();
 		
 		return CLI_SUCCESS;
 	}
 	
-	virtual const char* Usage() { return "unbind_all"; }
-	virtual const char* Description() { return "Remove all binds"; }
+	const char* Usage() override { return "unbind_all"; }
+	const char* Description() override { return "Remove all binds"; }
 };
 
 /* BINDS MANAGER ******************************************************/

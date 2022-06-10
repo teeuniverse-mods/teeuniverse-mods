@@ -46,11 +46,11 @@ protected:
 public:
 	CImagePicker(CGuiEditor* pAssetsEditor, CAssetPath ImagePath);
 	
-	virtual void UpdateBoundingSize();
-	virtual void Render();
+	void UpdateBoundingSize() override;
+	void Render() override;
 	
-	virtual void OnButtonClick(int Button);
-	virtual void OnButtonRelease(int Button);
+	void OnButtonClick(int Button) override;
+	void OnButtonRelease(int Button) override;
 	
 	inline void SetImage(const CAssetPath& ImagePath) { m_ImagePath = ImagePath; }
 	inline void SetSelectionType(int Type) { m_SelectionType = Type; }

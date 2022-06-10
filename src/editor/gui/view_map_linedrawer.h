@@ -37,15 +37,15 @@ protected:
 	template<typename ASSET> void OnViewButtonClick_Objects_Impl(int Button);
 	template<typename ASSET> void RenderView_Objects_Impl();
 	
-	void Reset();
+	void Reset() override;
 	
 public:
 	CCursorTool_MapLineDrawer(CViewMap* pViewMap);
-	virtual void OnViewButtonClick(int Button);
-	virtual void RenderView();
-	virtual void Update(bool ParentEnabled);
-	virtual void OnMouseMove();
-	virtual void OnInputEvent(const CInput::CEvent& Event);
+	void OnViewButtonClick(int Button) override;
+	void RenderView() override;
+	void Update(bool ParentEnabled) override;
+	void OnMouseMove() override;
+	void OnInputEvent(const CInput::CEvent& Event) override;
 };
 
 #endif

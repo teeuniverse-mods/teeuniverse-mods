@@ -57,12 +57,12 @@ class CAssetNameEdit : public gui::CAbstractTextEdit
 protected:
 	CGuiEditor* m_pAssetsEditor;
 	
-	virtual void SaveFromTextBuffer()
+	void SaveFromTextBuffer() override
 	{
 		AssetsManager()->TryChangeAssetName(m_pAssetsEditor->GetEditedAssetPath(), GetText(), -1);
 	}
 	
-	virtual void CopyToTextBuffer()
+	void CopyToTextBuffer() override
 	{
 		const char* pName = AssetsManager()->GetAssetValue<const char*>(
 			m_pAssetsEditor->GetEditedAssetPath(),
@@ -86,7 +86,7 @@ public:
 		m_pAssetsEditor(pAssetsEditor)
 	{ }
 	
-	virtual void Update(bool ParentEnabled)
+	void Update(bool ParentEnabled) override
 	{
 		if(IsEnabled() && ParentEnabled)
 		{
@@ -115,7 +115,7 @@ protected:
 	CGuiEditor* m_pAssetsEditor;
 	int m_Member;
 	
-	virtual void SaveFromTextBuffer()
+	void SaveFromTextBuffer() override
 	{
 		int Token = AssetsManager()->GenerateToken();
 		for(unsigned int i = 0; i<m_pAssetsEditor->GetEditedSubPathes().size(); i++)
@@ -130,7 +130,7 @@ protected:
 		}
 	}
 	
-	virtual void CopyToTextBuffer()
+	void CopyToTextBuffer() override
 	{
 		const char* pName = AssetsManager()->GetAssetValue<const char*>(
 			m_pAssetsEditor->GetEditedAssetPath(),
@@ -155,7 +155,7 @@ public:
 		m_Member(Member)
 	{ }
 	
-	virtual void Update(bool ParentEnabled)
+	void Update(bool ParentEnabled) override
 	{
 		if(IsEnabled() && ParentEnabled)
 		{
@@ -188,7 +188,7 @@ protected:
 	int m_Member;
 	bool m_NoEdit;
 	
-	virtual int GetValue() const
+	int GetValue() const override
 	{
 		return m_pAssetsEditor->AssetsManager()->GetAssetValue<int>(
 			m_pAssetsEditor->GetEditedAssetPath(),
@@ -198,7 +198,7 @@ protected:
 		);
 	}
 	
-	virtual void SetValue(int Value)
+	void SetValue(int Value) override
 	{
 		int Token = AssetsManager()->GenerateToken();
 		for(unsigned int i = 0; i<m_pAssetsEditor->GetEditedSubPathes().size(); i++)
@@ -224,7 +224,7 @@ public:
 			Editable(false);
 	}
 	
-	virtual void Update(bool ParentEnabled)
+	void Update(bool ParentEnabled) override
 	{
 		if(!m_NoEdit && IsEnabled() && ParentEnabled)
 		{
@@ -247,7 +247,7 @@ public:
 		
 	}
 	
-	virtual void Update(bool ParentEnabled)
+	void Update(bool ParentEnabled) override
 	{
 		if(!m_NoEdit && IsEnabled() && ParentEnabled)
 		{
@@ -315,7 +315,7 @@ public:
 		int m_Member;
 	
 	protected:
-		virtual void MouseClickAction()
+		void MouseClickAction() override
 		{
 			int Token = AssetsManager()->GenerateToken();
 			for(unsigned int i = 0; i<m_pAssetsEditor->GetEditedSubPathes().size(); i++)
@@ -347,7 +347,7 @@ public:
 		int m_Member;
 		
 	protected:
-		virtual void SaveFromTextBuffer()
+		void SaveFromTextBuffer() override
 		{
 			const char* pText = GetText();
 			pText = str_skip_whitespaces((char*) pText);
@@ -367,7 +367,7 @@ public:
 			}
 		}
 		
-		virtual void CopyToTextBuffer()
+		void CopyToTextBuffer() override
 		{
 			uint32 Value = m_pAssetsEditor->AssetsManager()->GetAssetValue<int>(
 				m_pAssetsEditor->GetEditedAssetPath(),
@@ -381,7 +381,7 @@ public:
 			SetText(aBuf);
 		}
 		
-		virtual void Update(bool ParentEnabled)
+		void Update(bool ParentEnabled) override
 		{
 			if(IsEnabled() && ParentEnabled)
 			{
@@ -433,7 +433,7 @@ protected:
 	CGuiEditor* m_pAssetsEditor;
 	int m_Member;
 	
-	virtual bool GetValue()
+	bool GetValue() override
 	{
 		return m_pAssetsEditor->AssetsManager()->GetAssetValue<bool>(
 			m_pAssetsEditor->GetEditedAssetPath(),
@@ -443,7 +443,7 @@ protected:
 		);
 	}
 	
-	virtual void SetValue(bool Value)
+	void SetValue(bool Value) override
 	{
 		int Token = AssetsManager()->GenerateToken();
 		for(unsigned int i = 0; i<m_pAssetsEditor->GetEditedSubPathes().size(); i++)
@@ -485,7 +485,7 @@ protected:
 	int m_Member;
 	int m_Mask;
 	
-	virtual bool GetValue()
+	bool GetValue() override
 	{
 		return m_pAssetsEditor->AssetsManager()->GetAssetValue<int>(
 			m_pAssetsEditor->GetEditedAssetPath(),
@@ -495,7 +495,7 @@ protected:
 		) & m_Mask;
 	}
 	
-	virtual void SetValue(bool Value)
+	void SetValue(bool Value) override
 	{
 		int Token = AssetsManager()->GenerateToken();
 		for(unsigned int i = 0; i<m_pAssetsEditor->GetEditedSubPathes().size(); i++)
@@ -550,7 +550,7 @@ protected:
 	CGuiEditor* m_pAssetsEditor;
 	int m_Member;
 	
-	virtual float GetValue() const
+	float GetValue() const override
 	{
 		return m_pAssetsEditor->AssetsManager()->GetAssetValue<float>(
 			m_pAssetsEditor->GetEditedAssetPath(),
@@ -560,7 +560,7 @@ protected:
 		);
 	}
 	
-	virtual void SetValue(float Value)
+	void SetValue(float Value) override
 	{
 		int Token = AssetsManager()->GenerateToken();
 		for(unsigned int i = 0; i<m_pAssetsEditor->GetEditedSubPathes().size(); i++)
@@ -582,7 +582,7 @@ public:
 		m_Member(Member)
 	{ }
 	
-	virtual void Update(bool ParentEnabled)
+	void Update(bool ParentEnabled) override
 	{
 		if(IsEnabled() && ParentEnabled)
 		{
@@ -630,7 +630,7 @@ protected:
 	CGuiEditor* m_pAssetsEditor;
 	int m_Member;
 	
-	virtual float GetValue() const
+	float GetValue() const override
 	{
 		return 180.0f*m_pAssetsEditor->AssetsManager()->GetAssetValue<float>(
 			m_pAssetsEditor->GetEditedAssetPath(),
@@ -640,7 +640,7 @@ protected:
 		)/Pi;
 	}
 	
-	virtual void SetValue(float Value)
+	void SetValue(float Value) override
 	{
 		int Token = AssetsManager()->GenerateToken();
 		for(unsigned int i = 0; i<m_pAssetsEditor->GetEditedSubPathes().size(); i++)
@@ -681,7 +681,7 @@ protected:
 	CGuiEditor* m_pAssetsEditor;
 	int m_Member;
 	
-	virtual int64 GetValue() const
+	int64 GetValue() const override
 	{
 		return m_pAssetsEditor->AssetsManager()->GetAssetValue<int64>(
 			m_pAssetsEditor->GetEditedAssetPath(),
@@ -691,7 +691,7 @@ protected:
 		);
 	}
 	
-	virtual void SetValue(int64 Value)
+	void SetValue(int64 Value) override
 	{
 		int Token = AssetsManager()->GenerateToken();
 		for(unsigned int i = 0; i<m_pAssetsEditor->GetEditedSubPathes().size(); i++)
@@ -732,7 +732,7 @@ protected:
 	CGuiEditor* m_pAssetsEditor;
 	int m_Member;
 	
-	virtual vec4 GetValue() const
+	vec4 GetValue() const override
 	{
 		return m_pAssetsEditor->AssetsManager()->GetAssetValue<vec4>(
 			m_pAssetsEditor->GetEditedAssetPath(),
@@ -742,7 +742,7 @@ protected:
 		);
 	}
 	
-	virtual void SetValue(vec4 Value)
+	void SetValue(vec4 Value) override
 	{
 		int Token = AssetsManager()->GenerateToken();
 		for(unsigned int i = 0; i<m_pAssetsEditor->GetEditedSubPathes().size(); i++)
@@ -800,7 +800,7 @@ public:
 			CPopup* m_pPopup;
 		
 		protected:
-			virtual void MouseClickAction()
+			void MouseClickAction() override
 			{
 				m_pPopup->SetValue(m_AssetPath);
 			}
@@ -830,7 +830,7 @@ public:
 				}
 			}
 			
-			virtual void Update(bool ParentEnabled)
+			void Update(bool ParentEnabled) override
 			{
 				if(ParentEnabled)
 				{
@@ -992,7 +992,7 @@ public:
 			}
 		}
 	
-		virtual int GetInputToBlock() { return CGui::BLOCKEDINPUT_ALL; }
+		int GetInputToBlock() override { return CGui::BLOCKEDINPUT_ALL; }
 	};
 
 protected:
@@ -1002,7 +1002,7 @@ protected:
 	int m_Mode;
 	
 protected:
-	virtual void MouseClickAction()
+	void MouseClickAction() override
 	{
 		Context()->DisplayPopup(new CPopup(m_pAssetsEditor, m_Member, m_AssetType, m_DrawRect, m_Mode));
 	}
@@ -1018,7 +1018,7 @@ public:
 		
 	}
 	
-	virtual void Update(bool ParentEnabled)
+	void Update(bool ParentEnabled) override
 	{
 		if(IsEnabled() && ParentEnabled)
 		{
@@ -1126,7 +1126,7 @@ public:
 			CPopup* m_pPopup;
 		
 		protected:
-			virtual void MouseClickAction()
+			void MouseClickAction() override
 			{
 				m_pPopup->SetValue(m_BonePath);
 			}
@@ -1150,7 +1150,7 @@ public:
 				}
 			}
 			
-			virtual void Update(bool ParentEnabled)
+			void Update(bool ParentEnabled) override
 			{
 				if(ParentEnabled)
 				{
@@ -1226,7 +1226,7 @@ public:
 			}
 		}
 	
-		virtual int GetInputToBlock() { return CGui::BLOCKEDINPUT_ALL; }
+		int GetInputToBlock() override { return CGui::BLOCKEDINPUT_ALL; }
 	};
 
 protected:
@@ -1235,7 +1235,7 @@ protected:
 	int m_MemberBone;
 	
 protected:
-	virtual void MouseClickAction()
+	void MouseClickAction() override
 	{
 		Context()->DisplayPopup(new CPopup(m_pAssetsEditor, m_MemberSkeleton, m_MemberBone, m_DrawRect));
 	}
@@ -1250,7 +1250,7 @@ public:
 		
 	}
 	
-	virtual void Update(bool ParentEnabled)
+	void Update(bool ParentEnabled) override
 	{
 		if(IsEnabled() && ParentEnabled)
 		{
@@ -1323,7 +1323,7 @@ public:
 			CPopup* m_pPopup;
 		
 		protected:
-			virtual void MouseClickAction()
+			void MouseClickAction() override
 			{
 				m_pPopup->SetValue(m_LayerPath);
 			}
@@ -1347,7 +1347,7 @@ public:
 				}
 			}
 			
-			virtual void Update(bool ParentEnabled)
+			void Update(bool ParentEnabled) override
 			{
 				if(ParentEnabled)
 				{
@@ -1423,7 +1423,7 @@ public:
 			}
 		}
 	
-		virtual int GetInputToBlock() { return CGui::BLOCKEDINPUT_ALL; }
+		int GetInputToBlock() override { return CGui::BLOCKEDINPUT_ALL; }
 	};
 
 protected:
@@ -1432,7 +1432,7 @@ protected:
 	int m_MemberLayer;
 	
 protected:
-	virtual void MouseClickAction()
+	void MouseClickAction() override
 	{
 		Context()->DisplayPopup(new CPopup(m_pAssetsEditor, m_MemberSkeleton, m_MemberLayer, m_DrawRect));
 	}
@@ -1447,7 +1447,7 @@ public:
 		
 	}
 	
-	virtual void Update(bool ParentEnabled)
+	void Update(bool ParentEnabled) override
 	{
 		if(IsEnabled() && ParentEnabled)
 		{

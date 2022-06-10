@@ -80,12 +80,12 @@ public:
 		m_Tiles.get_clamp(4, 4).SetIndex(0);
 	}
 	
-	virtual void UpdateBoundingSize()
+	void UpdateBoundingSize() override
 	{
 		m_BoundingSizeRect.BSMinimum(32.0f*3, 32.0f*3);
 	}
 	
-	virtual void Render()
+	void Render() override
 	{
 		Graphics()->ClipPush(m_DrawRect.x, m_DrawRect.y, m_DrawRect.w, m_DrawRect.h);
 		
@@ -119,12 +119,12 @@ public:
 		SetIconWidget(new CZoneIcon(pAssetsEditor, m_ZoneTypePath, m_IndexSubPath));
 	}
 	
-	virtual void MouseClickAction()
+	void MouseClickAction() override
 	{
 		m_pPicker->OnZonePicked(m_IndexSubPath);
 	}
 	
-	virtual void OnMouseMove()
+	void OnMouseMove() override
 	{
 		if(m_pPicker->GetTitleLabel() && m_VisibilityRect.IsInside(Context()->GetMousePos()))
 		{

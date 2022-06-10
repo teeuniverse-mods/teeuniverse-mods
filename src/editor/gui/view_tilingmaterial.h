@@ -33,10 +33,10 @@ protected:
 	
 public:
 	CViewTilingMaterial(CGuiEditor* pAssetsEditor);
-	virtual void OnButtonClick(int Button);
-	virtual void RenderView();
+	void OnButtonClick(int Button) override;
+	void RenderView() override;
 	
-	inline class CMapRenderer* MapRenderer() { return m_pMapRenderer.get(); }
+	class CMapRenderer* MapRenderer() { return m_pMapRenderer.get(); }
 	
 	void GenerateMapPreview();
 	void RefreshMapPreview();

@@ -117,8 +117,8 @@ protected:
 public:
 	CStorage(CSharedKernel* pKernel);
 	
-	virtual bool InitConfig(int argc, const char** argv);
-	virtual bool Init();
+	bool InitConfig(int argc, const char** argv) override;
+	bool Init() override;
 	
 	IOHANDLE OpenFile(const char *pFilename, int Flags, int Type);
 	IOHANDLE OpenFile(const char *pFilename, int Flags, int Type, dynamic_string& Path);

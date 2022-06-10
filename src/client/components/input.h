@@ -142,12 +142,12 @@ public:
 public:
 	CInput(CClientKernel* pKernel);
 
-	virtual bool InitConfig(int argc, const char** argv);
-	virtual void SaveConfig(class CCLI_Output* pOutput);
-	virtual bool Init();
-	virtual void Shutdown();
-	virtual bool PreUpdate();
-	virtual bool PostUpdate();
+	bool InitConfig(int argc, const char** argv) override;
+	void SaveConfig(class CCLI_Output* pOutput) override;
+	bool Init() override;
+	void Shutdown() override;
+	bool PreUpdate() override;
+	bool PostUpdate() override;
 
 	bool KeyIsPressed(int Key) const { return KeyState(Key); }
 	bool KeyPress(int Key, bool CheckCounter) const { return CheckCounter ? (m_aInputCount[Key] == m_InputCounter) : m_aInputCount[Key]; }
