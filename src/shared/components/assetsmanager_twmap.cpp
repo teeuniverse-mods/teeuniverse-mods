@@ -2935,7 +2935,7 @@ bool CAssetsManager::Save_Map(const char* pFileName, int StorageType, int Packag
 					std::vector<CQuad> ObjectQuads;
 					
 					GenerateZoneCurve_Object(this, 0.0f, LineVertices, Object);
-					PolygonQuadrangulation(LineVertices, ObjectQuads);
+					PolygonQuadrangulation(LineVertices, &ObjectQuads);
 					
 					for(unsigned int i=0; i<ObjectQuads.size(); i++)
 					{

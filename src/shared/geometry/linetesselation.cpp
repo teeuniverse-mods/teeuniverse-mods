@@ -83,7 +83,7 @@ void TesselateBezierCurve(std::vector<CBezierVertex>& BezierVertices, std::vecto
 	}
 }
 
-void PolygonQuadrangulation(const std::vector<CLineVertex>& Vertices, std::vector<CQuad>& OutputQuads)
+void PolygonQuadrangulation(const std::vector<CLineVertex>& Vertices, std::vector<CQuad> *pOutputQuads)
 {
 	if(Vertices.size() < 3)
 		return;
@@ -100,8 +100,8 @@ void PolygonQuadrangulation(const std::vector<CLineVertex>& Vertices, std::vecto
 		int V1 = i+1;
 		int V2 = min(i+2, static_cast<int>(Vertices.size())-1);
 		
-		OutputQuads.emplace_back();
-		CQuad& Quad = OutputQuads.back();
+		pOutputQuads->emplace_back();
+		CQuad& Quad = pOutputQuads->back();
 		
 		Quad.m_Position[0] = Vertices[V0].m_Position;
 		Quad.m_Position[1] = Vertices[V1].m_Position;

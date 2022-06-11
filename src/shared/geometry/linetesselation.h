@@ -28,7 +28,7 @@
 
 void TesselateBezierCurve(const std::vector<CBezierVertex>& BezierVertices, std::vector<CLineVertex>& OutputVertices, float MinWidth);
 
-void PolygonQuadrangulation(const std::vector<CLineVertex>& Vertices, std::vector<CQuad>& OutputQuads);
+void PolygonQuadrangulation(const std::vector<CLineVertex> &Vertices, std::vector<CQuad> *pOutputQuads);
 
 class CSpriteInfo
 {
