@@ -192,7 +192,7 @@ void CCursorTool_MapPicker::RenderPivots_Objects_Impl()
 	if(!pMapLayer)
 		return;
 		
-	ViewMap()->MapRenderer()->SetGroup(ViewMap()->GetMapGroupPath());
+	CViewMap::ScopedGroupSetter GroupSetter(ViewMap());
 	
 	typename ASSET::CIteratorObject Iter;
 	
@@ -238,8 +238,6 @@ void CCursorTool_MapPicker::RenderPivots_Objects_Impl()
 			1.0f, 0.0f, 0x0, 1.0f
 		);
 	}
-	
-	ViewMap()->MapRenderer()->UnsetGroup();
 }
 
 void CCursorTool_MapPicker::RenderPivots()
@@ -282,7 +280,7 @@ void CCursorTool_MapPicker::RenderVertices_Objects_Impl()
 	if(!pMapLayer)
 		return;
 		
-	ViewMap()->MapRenderer()->SetGroup(ViewMap()->GetMapGroupPath());
+	CViewMap::ScopedGroupSetter GroupSetter(ViewMap());
 	
 	typename ASSET::CIteratorObject Iter;
 	for(Iter = pMapLayer->BeginObject(); Iter != pMapLayer->EndObject(); ++Iter)
@@ -343,8 +341,6 @@ void CCursorTool_MapPicker::RenderVertices_Objects_Impl()
 			}
 		}
 	}
-	
-	ViewMap()->MapRenderer()->UnsetGroup();
 }
 
 void CCursorTool_MapPicker::RenderVertices()

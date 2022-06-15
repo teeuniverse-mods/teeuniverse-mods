@@ -241,7 +241,7 @@ void CCursorTool_MapFill::OnViewButtonClick(int Button)
 	if(!ViewMap()->GetViewRect().IsInside(Context()->GetMousePos()))
 		return;
 	
-	ViewMap()->MapRenderer()->SetGroup(ViewMap()->GetMapGroupPath());
+	CViewMap::ScopedGroupSetter GroupSetter(ViewMap());
 	
 	if(Button == KEY_MOUSE_1)
 	{
@@ -254,8 +254,6 @@ void CCursorTool_MapFill::OnViewButtonClick(int Button)
 	{
 		AltButtonAction();
 	}
-	
-	ViewMap()->MapRenderer()->UnsetGroup();
 }
 
 void CCursorTool_MapFill::OnViewInputEvent(const CInput::CEvent& Event)
@@ -299,7 +297,7 @@ void CCursorTool_MapFill::OnViewButtonRelease(int Button)
 	if(!ViewMap()->GetViewRect().IsInside(Context()->GetMousePos()))
 		return;
 	
-	ViewMap()->MapRenderer()->SetGroup(ViewMap()->GetMapGroupPath());
+	CViewMap::ScopedGroupSetter GroupSetter(ViewMap());
 	
 	if(m_DragEnabled)
 	{
@@ -467,8 +465,6 @@ void CCursorTool_MapFill::OnViewButtonRelease(int Button)
 			}
 		}
 	}
-	
-	ViewMap()->MapRenderer()->UnsetGroup();
 }
 	
 void CCursorTool_MapFill::RenderView()
@@ -485,7 +481,7 @@ void CCursorTool_MapFill::RenderView()
 		Color = pLayer->GetColor();
 	}
 	
-	ViewMap()->MapRenderer()->SetGroup(ViewMap()->GetMapGroupPath());
+	CViewMap::ScopedGroupSetter GroupSetter(ViewMap());
 	
 	double Time = Graphics()->GetFrameTime()/1000.0;
 	Color.a *= 0.3f + 0.7f*(1.0f+cos(2.0f*Pi*Time))/2.0f;
@@ -518,8 +514,6 @@ void CCursorTool_MapFill::RenderView()
 	
 		AssetsRenderer()->DrawGuiRect(&Rect, AssetsEditor()->m_Path_Rect_Selection);
 	}
-	
-	ViewMap()->MapRenderer()->UnsetGroup();
 }
 
 void CCursorTool_MapFill::Update(bool ParentEnabled)

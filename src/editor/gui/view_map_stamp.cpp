@@ -486,7 +486,7 @@ void CCursorTool_MapStamp::OnViewButtonClick(int Button)
 	if(!ViewMap()->GetViewRect().IsInside(Context()->GetMousePos()))
 		return;
 	
-	ViewMap()->MapRenderer()->SetGroup(ViewMap()->GetMapGroupPath());
+	CViewMap::ScopedGroupSetter GroupSetter(ViewMap());
 	
 	if(Button == KEY_MOUSE_1)
 	{
@@ -655,8 +655,6 @@ void CCursorTool_MapStamp::OnViewButtonClick(int Button)
 	{
 		AltButtonAction();
 	}
-	
-	ViewMap()->MapRenderer()->UnsetGroup();
 }
 
 void CCursorTool_MapStamp::OnViewInputEvent(const CInput::CEvent& Event)
@@ -737,7 +735,7 @@ void CCursorTool_MapStamp::OnViewButtonRelease(int Button)
 	if(!ViewMap()->GetViewRect().IsInside(Context()->GetMousePos()))
 		return;
 	
-	ViewMap()->MapRenderer()->SetGroup(ViewMap()->GetMapGroupPath());
+	CViewMap::ScopedGroupSetter GroupSetter(ViewMap());
 	
 	if(m_DragEnabled)
 	{
@@ -1102,9 +1100,7 @@ void CCursorTool_MapStamp::OnViewButtonRelease(int Button)
 			}
 		}
 	}
-	
-	ViewMap()->MapRenderer()->UnsetGroup();
-	
+
 	m_Token = CAssetsHistory::NEW_TOKEN;
 }
 	
@@ -1116,7 +1112,7 @@ void CCursorTool_MapStamp::OnViewMouseMove()
 	if(!m_SelectionEnabled || !m_DragEnabled)
 		return;
 	
-	ViewMap()->MapRenderer()->SetGroup(ViewMap()->GetMapGroupPath());
+	CViewMap::ScopedGroupSetter GroupSetter(ViewMap());
 	
 	vec2 CursorPos = vec2(Context()->GetMousePos().x, Context()->GetMousePos().y);
 	vec2 CursorMapPos = ViewMap()->MapRenderer()->ScreenPosToMapPos(CursorPos);
@@ -1213,8 +1209,6 @@ void CCursorTool_MapStamp::OnViewMouseMove()
 			}
 		}
 	}
-	
-	ViewMap()->MapRenderer()->UnsetGroup();
 }
 	
 void CCursorTool_MapStamp::RenderView()
@@ -1231,7 +1225,7 @@ void CCursorTool_MapStamp::RenderView()
 		Color = pLayer->GetColor();
 	}
 	
-	ViewMap()->MapRenderer()->SetGroup(ViewMap()->GetMapGroupPath());
+	CViewMap::ScopedGroupSetter GroupSetter(ViewMap());
 	
 	double Time = Graphics()->GetFrameTime()/1000.0;
 	Color.a *= 0.3f + 0.7f*(1.0f+cos(2.0f*Pi*Time))/2.0f;
@@ -1248,7 +1242,6 @@ void CCursorTool_MapStamp::RenderView()
 			const CAsset_MapLayerTiles* pLayer = AssetsManager()->GetAsset<CAsset_MapLayerTiles>(AssetsEditor()->GetEditedAssetPath());
 			if(!pLayer || pLayer->GetSourcePath().IsNotNull())
 			{
-				ViewMap()->MapRenderer()->UnsetGroup();
 				return;
 			}
 			
@@ -1273,7 +1266,6 @@ void CCursorTool_MapStamp::RenderView()
 			const CAsset_MapZoneTiles* pZone = AssetsManager()->GetAsset<CAsset_MapZoneTiles>(AssetsEditor()->GetEditedAssetPath());
 			if(!pZone)
 			{
-				ViewMap()->MapRenderer()->UnsetGroup();
 				return;
 			}
 				
@@ -1305,7 +1297,6 @@ void CCursorTool_MapStamp::RenderView()
 			const CAsset_MapLayerQuads* pLayer = AssetsManager()->GetAsset<CAsset_MapLayerQuads>(AssetsEditor()->GetEditedAssetPath());
 			if(!pLayer)
 			{
-				ViewMap()->MapRenderer()->UnsetGroup();
 				return;
 			}
 			
@@ -1328,7 +1319,6 @@ void CCursorTool_MapStamp::RenderView()
 			const CAsset_MapLayerObjects* pLayer = AssetsManager()->GetAsset<CAsset_MapLayerObjects>(AssetsEditor()->GetEditedAssetPath());
 			if(!pLayer)
 			{
-				ViewMap()->MapRenderer()->UnsetGroup();
 				return;
 			}
 			
@@ -1353,7 +1343,6 @@ void CCursorTool_MapStamp::RenderView()
 			const CAsset_MapZoneObjects* pLayer = AssetsManager()->GetAsset<CAsset_MapZoneObjects>(AssetsEditor()->GetEditedAssetPath());
 			if(!pLayer)
 			{
-				ViewMap()->MapRenderer()->UnsetGroup();
 				return;
 			}
 			
@@ -1368,7 +1357,6 @@ void CCursorTool_MapStamp::RenderView()
 			const CAsset_MapEntities* pLayer = AssetsManager()->GetAsset<CAsset_MapEntities>(AssetsEditor()->GetEditedAssetPath());
 			if(!pLayer)
 			{
-				ViewMap()->MapRenderer()->UnsetGroup();
 				return;
 			}
 			
@@ -1440,8 +1428,6 @@ void CCursorTool_MapStamp::RenderView()
 			AssetsRenderer()->DrawGuiRect(&Rect, AssetsEditor()->m_Path_Rect_Selection);
 		}
 	}
-	
-	ViewMap()->MapRenderer()->UnsetGroup();
 }
 	
 void CCursorTool_MapStamp::Update(bool ParentEnabled)

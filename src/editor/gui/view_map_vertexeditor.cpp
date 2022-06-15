@@ -347,7 +347,7 @@ void CCursorTool_MapVertexEditor::OnViewButtonClick(int Button)
 	if(Button != KEY_MOUSE_1)
 		return;
 	
-	ViewMap()->MapRenderer()->SetGroup(ViewMap()->GetMapGroupPath());
+	CViewMap::ScopedGroupSetter GroupSetter(ViewMap());
 
 	if(AssetsEditor()->GetEditedAssetPath().GetType() == CAsset_MapLayerQuads::TypeId)
 		OnViewButtonClick_Quads_Impl(Button);
@@ -355,8 +355,6 @@ void CCursorTool_MapVertexEditor::OnViewButtonClick(int Button)
 		OnViewButtonClick_Objects_Impl<CAsset_MapLayerObjects>(Button);
 	else if(AssetsEditor()->GetEditedAssetPath().GetType() == CAsset_MapZoneObjects::TypeId)
 		OnViewButtonClick_Objects_Impl<CAsset_MapZoneObjects>(Button);
-
-	ViewMap()->MapRenderer()->UnsetGroup();
 }
 	
 void CCursorTool_MapVertexEditor::OnViewButtonRelease(int Button)
@@ -388,7 +386,7 @@ void CCursorTool_MapVertexEditor::OnViewMouseMove_Objects_Impl()
 	Object.GetTransform(AssetsManager(), ViewMap()->MapRenderer()->GetTime(), &Transform, &Position);
 	matrix2x2 InvTransform = matrix2x2::inverse(Transform);
 	
-	ViewMap()->MapRenderer()->SetGroup(ViewMap()->GetMapGroupPath());
+	CViewMap::ScopedGroupSetter GroupSetter(ViewMap());
 	
 	vec2 CursorPos = vec2(Context()->GetMousePos().x, Context()->GetMousePos().y);
 	vec2 CursorMapPos = ViewMap()->MapRenderer()->ScreenPosToMapPos(CursorPos - m_ClickDiff);
@@ -407,8 +405,6 @@ void CCursorTool_MapVertexEditor::OnViewMouseMove_Objects_Impl()
 		vec2 VertexPos = AssetsManager()->GetAssetValue<vec2>(AssetsEditor()->GetEditedAssetPath(), m_CurrentVertex, ASSET::OBJECT_VERTEX_POSITION, 0.0f);
 		AssetsManager()->SetAssetValue<vec2>(AssetsEditor()->GetEditedAssetPath(), m_CurrentVertex, ASSET::OBJECT_VERTEX_CONTROLPOINT1, NewPos - VertexPos, m_Token);
 	}
-	
-	ViewMap()->MapRenderer()->UnsetGroup();
 }
 
 void CCursorTool_MapVertexEditor::OnViewMouseMove()
@@ -426,7 +422,7 @@ void CCursorTool_MapVertexEditor::OnViewMouseMove()
 		if(SelectedQuad.GetType() != CAsset_MapLayerQuads::TYPE_QUAD || !pMapLayer->IsValidQuad(SelectedQuad))
 			return;
 		
-		ViewMap()->MapRenderer()->SetGroup(ViewMap()->GetMapGroupPath());
+		CViewMap::ScopedGroupSetter GroupSetter(ViewMap());
 		
 		vec2 CursorPos = vec2(Context()->GetMousePos().x, Context()->GetMousePos().y);
 		vec2 CursorMapPos = ViewMap()->MapRenderer()->ScreenPosToMapPos(CursorPos - m_ClickDiff);
@@ -467,8 +463,6 @@ void CCursorTool_MapVertexEditor::OnViewMouseMove()
 			}
 			
 		}
-		
-		ViewMap()->MapRenderer()->UnsetGroup();
 	}
 	else if(AssetsEditor()->GetEditedAssetPath().GetType() == CAsset_MapLayerObjects::TypeId)
 		OnViewMouseMove_Objects_Impl<CAsset_MapLayerObjects>();

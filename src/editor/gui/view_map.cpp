@@ -606,11 +606,10 @@ void CViewMap::RenderView()
 		float Frac = Log - Int;
 		float Alpha = 1.f-Frac;
 		float Step = pow(2.0, Int);
-		
-		MapRenderer()->SetGroup(GetMapGroupPath());
+
+		ScopedGroupSetter GroupSetter(this);
 		MapRenderer()->RenderGrid(Step, vec4(1.0f, 1.0f, 1.0f, 0.5f*(Alpha)));
 		MapRenderer()->RenderGrid(Step*2.0f, vec4(1.0f, 1.0f, 1.0f, 0.5f*(1.0f-Alpha)));
-		MapRenderer()->UnsetGroup();
 	}
 	
 	//Draw entities
@@ -711,7 +710,7 @@ void CViewMap::RenderView()
 		const CAsset_MapLayerTiles* pLayer = AssetsManager()->GetAsset<CAsset_MapLayerTiles>(AssetsEditor()->GetEditedAssetPath());
 		if(pLayer)
 		{
-			MapRenderer()->SetGroup(GetMapGroupPath());
+			ScopedGroupSetter GroupSetter(this);
 			
 			vec2 MinCorner = MapRenderer()->TilePosToScreenPos(vec2(pLayer->GetPositionX(), pLayer->GetPositionY()));
 			vec2 MaxCorner = MapRenderer()->TilePosToScreenPos(vec2(pLayer->GetPositionX() + pLayer->GetTileWidth(), pLayer->GetPositionY() + pLayer->GetTileHeight()));
@@ -722,8 +721,6 @@ void CViewMap::RenderView()
 			Rect.w = MaxCorner.x - MinCorner.x;
 			Rect.h = MaxCorner.y - MinCorner.y;
 			AssetsRenderer()->DrawGuiRect(&Rect, AssetsEditor()->m_Path_Rect_Border);
-			
-			MapRenderer()->UnsetGroup();
 		}
 	}
 	else if(AssetsEditor()->GetEditedAssetPath().GetType() == CAsset_MapZoneTiles::TypeId)
@@ -731,7 +728,7 @@ void CViewMap::RenderView()
 		const CAsset_MapZoneTiles* pLayer = AssetsManager()->GetAsset<CAsset_MapZoneTiles>(AssetsEditor()->GetEditedAssetPath());
 		if(pLayer)
 		{
-			MapRenderer()->SetGroup(GetMapGroupPath());
+			ScopedGroupSetter GroupSetter(this);
 			
 			vec2 MinCorner = MapRenderer()->TilePosToScreenPos(vec2(pLayer->GetPositionX(), pLayer->GetPositionY()));
 			vec2 MaxCorner = MapRenderer()->TilePosToScreenPos(vec2(pLayer->GetPositionX() + pLayer->GetTileWidth(), pLayer->GetPositionY() + pLayer->GetTileHeight()));
@@ -742,8 +739,6 @@ void CViewMap::RenderView()
 			Rect.w = MaxCorner.x - MinCorner.x;
 			Rect.h = MaxCorner.y - MinCorner.y;
 			AssetsRenderer()->DrawGuiRect(&Rect, AssetsEditor()->m_Path_Rect_Border);
-			
-			MapRenderer()->UnsetGroup();
 		}
 	}
 	else if(AssetsEditor()->GetEditedAssetPath().GetType() == CAsset_MapGroup::TypeId)

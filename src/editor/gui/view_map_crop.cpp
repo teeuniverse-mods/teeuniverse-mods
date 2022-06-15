@@ -345,7 +345,7 @@ void CCursorTool_MapCrop::OnViewMouseMove()
 			if(!pLayer)
 				return;
 			
-			ViewMap()->MapRenderer()->SetGroup(ViewMap()->GetMapGroupPath());
+			CViewMap::ScopedGroupSetter GroupSetter(ViewMap());
 			vec2 GizmoMapPos = ViewMap()->MapRenderer()->ScreenPosToMapPos(GizmoPos);
 			
 			if(m_DragType == DRAGTYPE_TOP)
@@ -456,8 +456,6 @@ void CCursorTool_MapCrop::OnViewMouseMove()
 				AssetsManager()->SetAssetValue<int>(AssetsEditor()->GetEditedAssetPath(), CSubPath::Null(), CAsset_MapZoneTiles::TILE_WIDTH, ClipSizeX, m_Token);
 				AssetsManager()->SetAssetValue<int>(AssetsEditor()->GetEditedAssetPath(), CSubPath::Null(), CAsset_MapZoneTiles::TILE_HEIGHT, ClipSizeY, m_Token);
 			}
-			
-			ViewMap()->MapRenderer()->UnsetGroup();
 		}
 		else
 			return;

@@ -96,7 +96,7 @@ void CCursorTool_MapLineDrawer::OnViewButtonClick_Objects_Impl(int Button)
 	if(!pMapLayer)
 		return;
 	
-	ViewMap()->MapRenderer()->SetGroup(ViewMap()->GetMapGroupPath());
+	CViewMap::ScopedGroupSetter GroupSetter(ViewMap());
 	
 	vec2 MousePos = vec2(Context()->GetMousePos().x, Context()->GetMousePos().y);
 	
@@ -148,8 +148,6 @@ void CCursorTool_MapLineDrawer::OnViewButtonClick_Objects_Impl(int Button)
 		CAssetState* pState = AssetsManager()->GetAssetState(AssetsEditor()->GetEditedAssetPath());
 		pState->m_NumUpdates++;
 	}
-
-	ViewMap()->MapRenderer()->UnsetGroup();
 }
 
 void CCursorTool_MapLineDrawer::OnViewButtonClick(int Button)
@@ -167,7 +165,7 @@ void CCursorTool_MapLineDrawer::RenderView_Objects_Impl()
 	if(!pMapLayer)
 		return;
 	
-	ViewMap()->MapRenderer()->SetGroup(ViewMap()->GetMapGroupPath());
+	CViewMap::ScopedGroupSetter GroupSetter(ViewMap());
 	
 	if(m_CurrentObject.IsNotNull() && pMapLayer->IsValidObject(m_CurrentObject))
 	{
@@ -189,8 +187,6 @@ void CCursorTool_MapLineDrawer::RenderView_Objects_Impl()
 		
 		Graphics()->LinesEnd();
 	}
-	
-	ViewMap()->MapRenderer()->UnsetGroup();
 
 	RenderPivots();
 	RenderVertices();

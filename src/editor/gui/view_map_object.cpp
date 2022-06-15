@@ -70,7 +70,7 @@ void CCursorTool_MapObjectWeightVertex::OnViewButtonClick(int Button)
 	if(!pMapLayer)
 		return;
 	
-	ViewMap()->MapRenderer()->SetGroup(ViewMap()->GetMapGroupPath());
+	CViewMap::ScopedGroupSetter GroupSetter(ViewMap());
 	
 	if(m_CurrentVertex.IsNotNull())
 	{
@@ -78,8 +78,6 @@ void CCursorTool_MapObjectWeightVertex::OnViewButtonClick(int Button)
 		m_Token = AssetsManager()->GenerateToken();
 		m_Drag = true;
 	}
-	
-	ViewMap()->MapRenderer()->UnsetGroup();
 }
 	
 void CCursorTool_MapObjectWeightVertex::OnViewButtonRelease(int Button)
@@ -103,7 +101,7 @@ void CCursorTool_MapObjectWeightVertex::OnViewMouseMove()
 	if(!pMapLayer)
 		return;
 	
-	ViewMap()->MapRenderer()->SetGroup(ViewMap()->GetMapGroupPath());
+	CViewMap::ScopedGroupSetter GroupSetter(ViewMap());
 	
 	float Weight = AssetsManager()->SetAssetValue<float>(AssetsEditor()->GetEditedAssetPath(), m_CurrentVertex, CAsset_MapLayerObjects::OBJECT_VERTEX_WEIGHT, 1.0f);
 	
@@ -112,8 +110,6 @@ void CCursorTool_MapObjectWeightVertex::OnViewMouseMove()
 	float NewWeight = max(Weight + Diff/30.0f, 0.01f);
 	
 	AssetsManager()->SetAssetValue<float>(AssetsEditor()->GetEditedAssetPath(), m_CurrentVertex, CAsset_MapLayerObjects::OBJECT_VERTEX_WEIGHT, NewWeight, m_Token);
-	
-	ViewMap()->MapRenderer()->UnsetGroup();
 }
 
 void CCursorTool_MapObjectWeightVertex::OnMouseMove()

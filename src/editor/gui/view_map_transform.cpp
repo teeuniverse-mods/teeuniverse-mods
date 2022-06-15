@@ -42,7 +42,7 @@ void CCursorTool_MapTransform::OnViewButtonClick_Objects_Impl(int Button)
 	if(!pMapLayer)
 		return;
 		
-	ViewMap()->MapRenderer()->SetGroup(ViewMap()->GetMapGroupPath());
+	CViewMap::ScopedGroupSetter GroupSetter(ViewMap());
 	
 	//Find gizmo
 	float GizmoSize = 16.0f;
@@ -82,8 +82,7 @@ void CCursorTool_MapTransform::OnViewButtonClick_Objects_Impl(int Button)
 					m_ClickDiff = CursorPos - GizmosPos[i];
 					m_SelectedGizmo = i;
 					m_DragType = DRAGTYPE_GIZMO;
-			
-					ViewMap()->MapRenderer()->UnsetGroup();
+
 					return;
 				}
 			}
@@ -118,9 +117,9 @@ void CCursorTool_MapTransform::OnViewButtonClick_Objects_Impl(int Button)
 		);
 	}
 	else
+	{
 		AssetsEditor()->SetEditedAsset(AssetsEditor()->GetEditedAssetPath(), CSubPath::Null());
-		
-	ViewMap()->MapRenderer()->UnsetGroup();
+	}
 }
 
 void CCursorTool_MapTransform::OnViewButtonClick(int Button)
@@ -137,7 +136,7 @@ void CCursorTool_MapTransform::OnViewButtonClick(int Button)
 		if(!pMapLayer)
 			return;
 		
-		ViewMap()->MapRenderer()->SetGroup(ViewMap()->GetMapGroupPath());
+		CViewMap::ScopedGroupSetter GroupSetter(ViewMap());
 		
 		//Find gizmo
 		float GizmoSize = 16.0f;
@@ -176,8 +175,7 @@ void CCursorTool_MapTransform::OnViewButtonClick(int Button)
 					m_ClickDiff = CursorPos - GizmosPos[i];
 					m_SelectedGizmo = i;
 					m_DragType = DRAGTYPE_GIZMO;
-			
-					ViewMap()->MapRenderer()->UnsetGroup();
+
 					return;
 				}
 			}
@@ -213,7 +211,6 @@ void CCursorTool_MapTransform::OnViewButtonClick(int Button)
 		else
 			AssetsEditor()->SetEditedAsset(AssetsEditor()->GetEditedAssetPath(), CSubPath::Null());
 			
-		ViewMap()->MapRenderer()->UnsetGroup();
 		return;
 	}
 	else if(AssetsEditor()->GetEditedAssetPath().GetType() == CAsset_MapZoneObjects::TypeId)
@@ -290,7 +287,7 @@ void CCursorTool_MapTransform::OnViewMouseMove_Objects_Impl()
 	if(SelectedObject.GetType() != ASSET::TYPE_OBJECT || !pMapLayer->IsValidObject(SelectedObject))
 		return;
 	
-	ViewMap()->MapRenderer()->SetGroup(ViewMap()->GetMapGroupPath());
+	CViewMap::ScopedGroupSetter GroupSetter(ViewMap());
 	
 	const typename ASSET::CObject& Object = pMapLayer->GetObject(SelectedObject);
 	vec2 Position;
@@ -321,7 +318,6 @@ void CCursorTool_MapTransform::OnViewMouseMove_Objects_Impl()
 	{
 		if(m_SelectedGizmo < 0)
 		{
-			ViewMap()->MapRenderer()->UnsetGroup();
 			return;
 		}
 		
@@ -375,8 +371,6 @@ void CCursorTool_MapTransform::OnViewMouseMove_Objects_Impl()
 		m_Transformed = true;
 	}
 	
-	ViewMap()->MapRenderer()->UnsetGroup();
-	
 	return;
 }
 	
@@ -394,8 +388,8 @@ void CCursorTool_MapTransform::OnViewMouseMove()
 		CSubPath SelectedQuad = AssetsEditor()->GetFirstEditedSubPath();
 		if(SelectedQuad.GetType() != CAsset_MapLayerQuads::TYPE_QUAD || !pMapLayer->IsValidQuad(SelectedQuad))
 			return;
-		
-		ViewMap()->MapRenderer()->SetGroup(ViewMap()->GetMapGroupPath());
+
+		CViewMap::ScopedGroupSetter GroupSetter(ViewMap());
 		
 		vec2 Position;
 		matrix2x2 Transform;
@@ -424,7 +418,6 @@ void CCursorTool_MapTransform::OnViewMouseMove()
 		{
 			if(m_SelectedGizmo < 0)
 			{
-				ViewMap()->MapRenderer()->UnsetGroup();
 				return;
 			}
 			
@@ -478,9 +471,7 @@ void CCursorTool_MapTransform::OnViewMouseMove()
 			
 			m_Transformed = true;
 		}
-		
-		ViewMap()->MapRenderer()->UnsetGroup();
-		
+
 		return;
 	}
 	else if(AssetsEditor()->GetEditedAssetPath().GetType() == CAsset_MapZoneObjects::TypeId)
@@ -515,15 +506,13 @@ void CCursorTool_MapTransform::OnViewMouseMove()
 		const CAsset_MapGroup* pMapGroup = AssetsManager()->GetAsset<CAsset_MapGroup>(AssetsEditor()->GetEditedAssetPath());
 		if(pMapGroup && m_DragType == DRAGTYPE_TRANSLATION)
 		{
-			ViewMap()->MapRenderer()->SetGroup(ViewMap()->GetMapGroupPath());
+			CViewMap::ScopedGroupSetter GroupSetter(ViewMap());
 			
 			vec2 CursorRelPos = vec2(Context()->GetMouseRelPos().x, Context()->GetMouseRelPos().y);
 			vec2 ScreenPos = ViewMap()->MapRenderer()->MapPosToScreenPos(pMapGroup->GetPosition());
 			vec2 NewPosition = ViewMap()->MapRenderer()->ScreenPosToMapPos(ScreenPos - CursorRelPos);
 			
 			AssetsManager()->SetAssetValue<vec2>(AssetsEditor()->GetEditedAssetPath(), CSubPath::Null(), CAsset_MapGroup::POSITION, NewPosition, m_Token);
-			
-			ViewMap()->MapRenderer()->UnsetGroup();
 		}
 	}
 }
@@ -535,7 +524,7 @@ void CCursorTool_MapTransform::RenderView_Objects_Impl()
 	if(!pMapLayer)
 		return;
 	
-	ViewMap()->MapRenderer()->SetGroup(ViewMap()->GetMapGroupPath());
+	CViewMap::ScopedGroupSetter GroupSetter(ViewMap());
 	
 	CSubPath SelectedObject = AssetsEditor()->GetFirstEditedSubPath();
 	if(SelectedObject.GetType() == ASSET::TYPE_OBJECT && pMapLayer->IsValidObject(SelectedObject) && pMapLayer->GetObjectVertexArraySize(SelectedObject) > 0)
@@ -573,8 +562,6 @@ void CCursorTool_MapTransform::RenderView_Objects_Impl()
 		AssetsRenderer()->DrawSprite(GizmoPath, vec2(Vertex2Pos.x, Vertex2Pos.y), 1.0f, GizmoAngle-Pi/2.0f, 0x0, 1.0f);
 		AssetsRenderer()->DrawSprite(GizmoPath, vec2(Vertex3Pos.x, Vertex3Pos.y), 1.0f, GizmoAngle+Pi, 0x0, 1.0f);
 	}
-	
-	ViewMap()->MapRenderer()->UnsetGroup();
 }
 	
 void CCursorTool_MapTransform::RenderView()
@@ -587,7 +574,7 @@ void CCursorTool_MapTransform::RenderView()
 		if(!pMapLayer)
 			return;
 			
-		ViewMap()->MapRenderer()->SetGroup(ViewMap()->GetMapGroupPath());
+		CViewMap::ScopedGroupSetter GroupSetter(ViewMap());
 		
 		CSubPath SelectedQuad = AssetsEditor()->GetFirstEditedSubPath();
 		if(SelectedQuad.GetType() == CAsset_MapLayerQuads::TYPE_QUAD && pMapLayer->IsValidQuad(SelectedQuad))
@@ -628,8 +615,6 @@ void CCursorTool_MapTransform::RenderView()
 			AssetsRenderer()->DrawSprite(GizmoPath, vec2(Vertex2Pos.x, Vertex2Pos.y), 1.0f, GizmoAngle-Pi/2.0f, 0x0, 1.0f);
 			AssetsRenderer()->DrawSprite(GizmoPath, vec2(Vertex3Pos.x, Vertex3Pos.y), 1.0f, GizmoAngle+Pi, 0x0, 1.0f);
 		}
-		
-		ViewMap()->MapRenderer()->UnsetGroup();
 	}
 	else if(AssetsEditor()->GetEditedAssetPath().GetType() == CAsset_MapLayerObjects::TypeId)
 		RenderView_Objects_Impl<CAsset_MapLayerObjects>();

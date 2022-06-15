@@ -40,7 +40,7 @@ void CCursorTool_MapEraser::OnViewButtonClick(int Button)
 	if(Button != KEY_MOUSE_1)
 		return;
 	
-	ViewMap()->MapRenderer()->SetGroup(ViewMap()->GetMapGroupPath());
+	CViewMap::ScopedGroupSetter GroupSetter(ViewMap());
 	
 	vec2 CursorPos = vec2(Context()->GetMousePos().x, Context()->GetMousePos().y);
 	CSubPath ItemFound = Pick(CursorPos);
@@ -53,18 +53,16 @@ void CCursorTool_MapEraser::OnViewButtonClick(int Button)
 		AssetsManager()->DeleteSubItem(AssetsEditor()->GetEditedAssetPath(), ItemFound);
 		AssetsEditor()->SetEditedAsset(AssetsEditor()->GetEditedAssetPath(), CSubPath::Null());
 	}
-	
-	ViewMap()->MapRenderer()->UnsetGroup();
 }
 	
 void CCursorTool_MapEraser::RenderView()
 {
-	ViewMap()->MapRenderer()->SetGroup(ViewMap()->GetMapGroupPath());
+	CViewMap::ScopedGroupSetter GroupSetter(ViewMap());
 	
 	if(AssetsEditor()->GetEditedAssetPath().GetType() == CAsset_MapLayerQuads::TypeId || AssetsEditor()->GetEditedAssetPath().GetType() == CAsset_MapLayerObjects::TypeId)
+	{
 		RenderPivots();
-	
-	ViewMap()->MapRenderer()->UnsetGroup();
+	}
 }
 	
 void CCursorTool_MapEraser::Update(bool ParentEnabled)
