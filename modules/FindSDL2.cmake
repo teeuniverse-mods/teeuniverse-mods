@@ -385,8 +385,10 @@ if(SDL2_FOUND)
     endif()
 
     # compatibility targets
-    add_library(SDL2::SDL2 ALIAS SDL2::Core)
-    add_library(SDL2::SDL2main ALIAS SDL2::Main)
+    add_library(SDL2::SDL2 INTERFACE IMPORTED)
+    target_link_libraries(SDL2::SDL2 INTERFACE SDL2::Core)
+    add_library(SDL2::SDL2main INTERFACE IMPORTED)
+    target_link_libraries(SDL2::SDL2main INTERFACE SDL2::Main)
 
   endif()
 endif()
