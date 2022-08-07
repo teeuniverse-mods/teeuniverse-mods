@@ -96,7 +96,7 @@ int main(int argc, char* argv[])
 		int GroupId_State = pAsset->AddGroup();
 		
 		pAsset->SetGroup(CAsset_ZoneType::SubPath_Group(GroupId_Death), "Xole Panic");
-		pAsset->SetGroup(CAsset_ZoneType::SubPath_Group(GroupId_State), "Don't Panic");
+		pAsset->SetGroup(CAsset_ZoneType::SubPath_Group(GroupId_State), "Don't Panic!This is a game!");
 		
 		SubPath = CAsset_ZoneType::SubPath_Index(pAsset->AddIndex());
 		pAsset->SetIndexTitle(SubPath, "Air");
