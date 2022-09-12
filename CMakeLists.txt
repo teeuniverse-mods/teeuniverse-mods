@@ -444,10 +444,11 @@ make_assets(gui_editor)
 make_assets(teeworlds)
 make_assets(ddnet)
 make_assets(infclass)
-make_assets(xolepanic)
+make_assets(lastday)
 make_assets(openfng)
 make_assets(ninslash)
 make_assets(sport)
+make_assets(xolepanic)
 
 message(STATUS " * tools ready for compilation")
 
