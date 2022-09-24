@@ -37,6 +37,16 @@
 	pAsset->SetIndexUsed(SubPath, false);\
 }
 
+#define CREATE_SPRITE_PATH(path, packageid, name, image, x, y, w, h) {\
+	CAsset_Sprite* pSprite = pKernel->AssetsManager()->NewAsset_Hard<CAsset_Sprite>(&path, packageid);\
+	pSprite->SetName(name);\
+	pSprite->SetImagePath(image);\
+	pSprite->SetX(x);\
+	pSprite->SetY(y);\
+	pSprite->SetWidth(w);\
+	pSprite->SetHeight(h);\
+}
+
 int main(int argc, char* argv[])
 {
 	{
@@ -55,7 +65,8 @@ int main(int argc, char* argv[])
 		pKernel->AssetsManager()->SetPackageVersion(PackageId, "0.0.1");
 		
 		CAssetPath ImageZonesPath = CreateNewImage(pKernel.get(), PackageId, "zones", "images/univ_lastday/zones.png", CStorage::TYPE_ALL, 16, 16, true, 0);
-
+		CAssetPath ImageEntitiesPath = CreateNewImage(pKernel.get(), PackageId, "entities", "images/univ_lastday/entities.png", CStorage::TYPE_ALL, 4, 4);
+	
 		//Zone, damage
 		{
 			CAssetPath AssetPath;
@@ -111,6 +122,45 @@ int main(int argc, char* argv[])
 			pAsset->SetIndexBorderColor(SubPath, vec4(0.0f, 0.0f, 0.0f, 0.0f));
 			pAsset->SetIndexGroup(SubPath, GroupId_Freeze);
 		}	
+		
+		//EntityType, Human Spawn
+		{
+			CAssetPath GizmoPath;
+			CAssetPath AssetPath;
+			
+			CREATE_SPRITE_PATH(GizmoPath, PackageId, "gizmoHumanSpawn", ImageEntitiesPath, 0, 3, 1, 1);
+			
+			CAsset_EntityType* pAsset = pKernel->AssetsManager()->NewAsset_Hard<CAsset_EntityType>(&AssetPath, PackageId);
+			pAsset->SetName("ldHuman");
+			pAsset->SetCollisionRadius(64.0f);
+			pAsset->SetGizmoPath(GizmoPath);
+		}
+		
+		//EntityType, Zombie Spawn
+		{
+			CAssetPath GizmoPath;
+			CAssetPath AssetPath;
+			
+			CREATE_SPRITE_PATH(GizmoPath, PackageId, "gizmoZombieSpawn", ImageEntitiesPath, 1, 3, 1, 1);
+			
+			CAsset_EntityType* pAsset = pKernel->AssetsManager()->NewAsset_Hard<CAsset_EntityType>(&AssetPath, PackageId);
+			pAsset->SetName("ldZombie");
+			pAsset->SetCollisionRadius(64.0f);
+			pAsset->SetGizmoPath(GizmoPath);
+		}
+
+		//EntityType, Rain Spawn
+		{
+			CAssetPath GizmoPath;
+			CAssetPath AssetPath;
+			
+			CREATE_SPRITE_PATH(GizmoPath, PackageId, "gizmoRainSpawn", ImageEntitiesPath, 0, 0, 1, 1);
+			
+			CAsset_EntityType* pAsset = pKernel->AssetsManager()->NewAsset_Hard<CAsset_EntityType>(&AssetPath, PackageId);
+			pAsset->SetName("ldRain");
+			pAsset->SetCollisionRadius(64.0f);
+			pAsset->SetGizmoPath(GizmoPath);
+		}
 
 		pKernel->AssetsManager()->Save_AssetsFile_SaveDir(PackageId);
 		
